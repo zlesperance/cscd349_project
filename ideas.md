@@ -11,3 +11,6 @@
 * how many gears / items?
 * hunger system?
 * sleep system?
+* different places on the map could have bonuses, armor increase, health increase, etc
+* heros/monsters could have a set of unique abilities
+* every time fight a monster, as game progresses, monsters get harder
