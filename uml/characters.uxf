@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>190</y>
+      <x>160</x>
+      <y>370</y>
       <w>230</w>
-      <h>120</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Character
@@ -16,14 +16,15 @@ Character
 #skills: SkillSet
 --
 +receiveDamage(int damage): void
+#getHealthModifier(): int
 -die()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>30</y>
+      <x>450</x>
+      <y>250</y>
       <w>290</w>
       <h>210</h>
     </coordinates>
@@ -37,19 +38,19 @@ Protagonist
 +equipWeapon(Weapon weapon): Weapon
 +equipOffhand(Offhand offhand): Offhand
 +attack(Antagonist enemy): void
-+receiveDamage(int damage): void
 +useItem(Consumable item): void
 +levelUp(): void
-+getName(): String</panel_attributes>
++getName(): String
+#isValidTarget(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>430</y>
+      <x>450</x>
+      <y>600</y>
       <w>290</w>
-      <h>160</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Antagonist
@@ -58,17 +59,16 @@ Antagonist
 -description: String
 --
 +attack(Protagonist enemy): void
-+receiveDamage(int damage): void
 +examine(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>360</y>
+      <x>180</x>
+      <y>580</y>
       <w>180</w>
-      <h>230</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>SkillSet
 --
@@ -85,102 +85,97 @@ Antagonist
 +raiseIntelligence(): void
 +raiseDexterity(): void
 +raiseLuck(): void
++getBaseHP(): int
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>0</y>
+      <x>800</x>
+      <y>230</y>
       <w>230</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Fighter
 --
 +attack(Antagonist enemy): void
-+receiveDamage(int damage): void
 +toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>200</y>
+      <x>800</x>
+      <y>410</y>
       <w>230</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Fencer
 --
 +attack(Antagonist enemy): void
-+receiveDamage(int damage): void
 +toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>100</y>
+      <x>800</x>
+      <y>320</y>
       <w>230</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Mancer
 --
 +attack(Antagonist enemy): void
-+receiveDamage(int damage): void
 +toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>300</y>
+      <x>800</x>
+      <y>500</y>
       <w>230</w>
-      <h>80</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Hunter
 --
 +attack(Antagonist enemy): void
-+receiveDamage(int damage): void
 +toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>430</y>
+      <x>800</x>
+      <y>600</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>Slime
 --
-+attack(Protagonist enemy): void
-+receiveDamage(int damage): void</panel_attributes>
++attack(Protagonist enemy): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>510</y>
+      <x>800</x>
+      <y>690</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>Slime
+    <panel_attributes>Goblin
 --
-+attack(Protagonist enemy): void
-+receiveDamage(int damage): void</panel_attributes>
++attack(Protagonist enemy): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>30</y>
+      <x>730</x>
+      <y>250</y>
       <w>90</w>
       <h>130</h>
     </coordinates>
@@ -190,8 +185,8 @@ Antagonist
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>130</y>
+      <x>730</x>
+      <y>350</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
@@ -201,56 +196,125 @@ Antagonist
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>130</y>
+      <x>730</x>
+      <y>350</y>
       <w>90</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;100.0;70.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>730</x>
+      <y>350</y>
+      <w>90</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;190.0;70.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>340</y>
+      <w>90</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;50.0;90.0;50.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>420</y>
+      <w>90</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;250.0;70.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>500</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>230</y>
+      <w>190</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Party
+--
+-members: Character
+--
++peekAtNext(): Character
++getNext(): Character
++size(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>70</y>
+      <w>220</w>
       <h>130</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0;40.0;110.0;70.0;110.0</additional_attributes>
+    <panel_attributes>Engagement
+--
+-partyA: Party
+-partyB: Party
+-actionOrder: Character[]
+-actionIndex: int
+--
++refreshEngagement(): void
++performNextAction(): void</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>130</y>
-      <w>90</w>
-      <h>230</h>
+      <x>260</x>
+      <y>190</y>
+      <w>30</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0;40.0;210.0;70.0;210.0</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>120</y>
-      <w>100</w>
-      <h>150</h>
+      <x>260</x>
+      <y>320</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;60.0;130.0;60.0;10.0;80.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>220</x>
-      <y>240</y>
-      <w>100</w>
-      <h>280</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0;60.0;260.0;80.0;260.0</additional_attributes>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>110</x>
-      <y>300</y>
-      <w>30</w>
-      <h>80</h>
+      <y>120</y>
+      <w>70</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>50.0;320.0;10.0;320.0;10.0;10.0;50.0;10.0</additional_attributes>
   </element>
 </diagram>
