@@ -42,18 +42,24 @@ public abstract class Character {
 	}
 	
 	public void healDamage(int healAmount) {
-		this.healthPoints = Math.min(this.healthPoints + healAmount, this.skills.getBaseHP(this.getHealthModifier()));
+		this.healthPoints = Math.min(this.healthPoints + healAmount, this.getBaseHP());
 	}
 	
-	public abstract int getHealthModifier();
+	public int getBaseHP() {
+		return this.skills.getBaseHP(0);
+	}
 	
-	public abstract int getStrengthModifier();
+	public abstract int getStrength();
 	
-	public abstract int getAgilityModifier();
+	public abstract int getAgility();
 	
-	public abstract int getLuckModifier();
+	public abstract int getVitality();
 	
-	public abstract int getVitalityModifier();
+	public abstract int getDexterity();
+	
+	public abstract int getIntelligence();
+	
+	public abstract int getLuck();
 	
 	private void die() {
 		// Do something with game logic

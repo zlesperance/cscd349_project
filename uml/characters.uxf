@@ -5,9 +5,9 @@
     <id>UMLClass</id>
     <coordinates>
       <x>160</x>
-      <y>370</y>
+      <y>300</y>
       <w>230</w>
-      <h>140</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Character
@@ -16,7 +16,13 @@ Character
 #skills: SkillSet
 --
 +receiveDamage(int damage): void
-#getHealthModifier(): int
++getBaseHP(): int
+#getStrength(): int
+#getDexterity(): int
+#getIntelligence(): int
+#getVitality(): int
+#getAgility(): int
+#getLuck(): int
 -die()</panel_attributes>
     <additional_attributes/>
   </element>
@@ -24,9 +30,9 @@ Character
     <id>UMLClass</id>
     <coordinates>
       <x>450</x>
-      <y>250</y>
+      <y>180</y>
       <w>290</w>
-      <h>210</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Protagonist
@@ -41,16 +47,30 @@ Protagonist
 +useItem(Consumable item): void
 +levelUp(): void
 +getName(): String
-#isValidTarget(): boolean</panel_attributes>
+#isValidTarget(): boolean
++getBaseHP(): int
++getStrength(): int
++getDexterity(): int
++getIntelligence(): int
++getVitality(): int
++getAgility(): int
++getLuck(): int
+#getHealthModifier(): int
+#getStrengthModifier(): int
+#getDexterityModifier(): int
+#getIntelligenceModifier(): int
+#getVitalityModifier(): int
+#getAgilityModifier(): int
+#getLuckModifier(): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>450</x>
-      <y>600</y>
+      <y>640</y>
       <w>290</w>
-      <h>120</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Antagonist
@@ -59,14 +79,20 @@ Antagonist
 -description: String
 --
 +attack(Protagonist enemy): void
-+examine(): String</panel_attributes>
++examine(): String
++getStrength(): int
++getDexterity(): int
++getIntelligence(): int
++getVitality(): int
++getAgility(): int
++getLuck(): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>180</x>
-      <y>580</y>
+      <y>560</y>
       <w>180</w>
       <h>260</h>
     </coordinates>
@@ -93,7 +119,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>230</y>
+      <y>160</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
@@ -107,7 +133,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>410</y>
+      <y>340</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
@@ -121,7 +147,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>320</y>
+      <y>250</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
@@ -135,7 +161,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>500</y>
+      <y>430</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
@@ -149,7 +175,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>600</y>
+      <y>620</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
@@ -162,7 +188,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>800</x>
-      <y>690</y>
+      <y>710</y>
       <w>230</w>
       <h>60</h>
     </coordinates>
@@ -175,7 +201,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>250</y>
+      <y>180</y>
       <w>90</w>
       <h>130</h>
     </coordinates>
@@ -186,7 +212,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>350</y>
+      <y>280</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
@@ -197,7 +223,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>350</y>
+      <y>280</y>
       <w>90</w>
       <h>120</h>
     </coordinates>
@@ -208,7 +234,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>730</x>
-      <y>350</y>
+      <y>280</y>
       <w>90</w>
       <h>210</h>
     </coordinates>
@@ -219,7 +245,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>340</y>
+      <y>270</y>
       <w>90</w>
       <h>110</h>
     </coordinates>
@@ -230,29 +256,29 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>380</x>
-      <y>420</y>
+      <y>350</y>
       <w>90</w>
-      <h>270</h>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;250.0;70.0;250.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;360.0;70.0;360.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>270</x>
-      <y>500</y>
+      <y>520</y>
       <w>30</w>
-      <h>100</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>170</x>
-      <y>230</y>
+      <y>160</y>
       <w>190</w>
       <h>100</h>
     </coordinates>
@@ -269,7 +295,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>160</x>
-      <y>70</y>
+      <y>0</y>
       <w>220</w>
       <h>130</h>
     </coordinates>
@@ -288,7 +314,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>260</x>
-      <y>190</y>
+      <y>120</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -299,7 +325,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>260</x>
-      <y>320</y>
+      <y>250</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -310,7 +336,7 @@ Antagonist
     <id>Relation</id>
     <coordinates>
       <x>110</x>
-      <y>120</y>
+      <y>50</y>
       <w>70</w>
       <h>340</h>
     </coordinates>
