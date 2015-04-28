@@ -2,20 +2,54 @@ package cscd349_project;
 
 public abstract class Protagonist extends Character {
 	private String name;
-	// private Weapon weapon;
-	// private Offhand offhand;
-	
+	// protected Weapon weapon;
+	// protected Offhand offhand;
+	protected int energy;
 
 	protected Protagonist(String name, String skills) {
 		super(skills);
 		this.name = name;
 	}
-
-	@Override
-	public int getHealthModifier() {
-		return 0;
+	
+	protected abstract void refresh();
+	
+	public int getBaseHP() {
+		return this.skills.getBaseHP() + this.getHealthModifier();
+	}
+	
+	public int getStrength() {
+		return this.skills.getStrength() + this.getStrengthModifier();
+	}
+	
+	public int getDexterity() {
+		return this.skills.getDexterity() + this.getDexterityModifier();
+	}
+	
+	public int getIntelligence() {
+		return this.skills.getIntelligence() + this.getIntelligenceModifier();
+	}
+	
+	public int getAgility() {
+		return this.skills.getAgility() + this.getAgilityModifier();
+	}
+	
+	public int getLuck() {
+		return this.skills.getLuck() + this.getLuckModifier();
 	}
 
+	public abstract int getHealthModifier();
+
+	public abstract int getStrengthModifier();
+	
+	public abstract int getDexterityModifier();
+	
+	public abstract int getIntelligenceModifier();
+	
+	public abstract int getVitalityModifier();
+	
+	public abstract int getAgilityModifier();
+	
+	public abstract int getLuckModifier();
 
 	@Override
 	public abstract void attack(Character foe);
@@ -23,5 +57,11 @@ public abstract class Protagonist extends Character {
 	protected boolean isValidTarget(Character foe) {
 		return !(foe instanceof Protagonist);
 	}
+	
+	public void levelUp() {
+		// prompt for what to level up & level up skills
+	}
+	
+	//public void useItem(Item)
 
 }

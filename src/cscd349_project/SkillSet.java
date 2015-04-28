@@ -19,7 +19,7 @@ public class SkillSet {
 		this.luck = luck;
 	}
 	
-	public int getBaseHP(int healthModifier) {
+	public int getBaseHP() {
 		return vitality * 10;
 	}
 	

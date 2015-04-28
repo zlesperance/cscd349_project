@@ -6,7 +6,7 @@ public abstract class Character {
 	
 	protected Character(String skills) {
 		this.skills = SkillSet.buildSkills(skills);
-		this.healthPoints = this.skills.getBaseHP(0);
+		this.healthPoints = this.skills.getBaseHP();
 	}
 	
 	public void receiveDamage(int damage) {
@@ -26,8 +26,8 @@ public abstract class Character {
 	}
 	
 	private boolean tryDodge() {
-		int agility = this.skills.getAgility() + this.getAgilityModifier();
-		int luck = this.skills.getLuck() + this.getLuckModifier();
+		int agility = this.skills.getAgility();
+		int luck = this.skills.getLuck();
 		
 		
 		
@@ -35,8 +35,8 @@ public abstract class Character {
 	}
 	
 	private boolean tryBlock() {
-		int vitality = this.skills.getVitality() + this.getVitalityModifier();
-		int strength = this.skills.getStrength() + this.getStrengthModifier();
+		int vitality = this.skills.getVitality();
+		int strength = this.skills.getStrength();
 		
 		return false;
 	}
@@ -46,7 +46,7 @@ public abstract class Character {
 	}
 	
 	public int getBaseHP() {
-		return this.skills.getBaseHP(0);
+		return this.skills.getBaseHP();
 	}
 	
 	public abstract int getStrength();
