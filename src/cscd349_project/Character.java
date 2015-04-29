@@ -9,6 +9,8 @@ public abstract class Character {
 		this.healthPoints = this.skills.getBaseHP();
 	}
 	
+	public abstract void selectAction(Party allies, Party enemies, Engagement engagement);
+	
 	public void receiveDamage(int damage) {
 		if (tryDodge()) {
 			// report to game logic that dodge succeeded
@@ -61,8 +63,16 @@ public abstract class Character {
 	
 	public abstract int getLuck();
 	
+	public int getSpeed() {
+		return (int)((this.getDexterity() * .6) + (this.getAgility() * .4));
+	}
+	
 	private void die() {
 		// Do something with game logic
+	}
+	
+	public boolean isDead() {
+		return this.healthPoints <= 0;
 	}
 	
 	public abstract void attack(Character foe);
