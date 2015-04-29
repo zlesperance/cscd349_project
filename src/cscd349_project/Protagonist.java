@@ -11,7 +11,9 @@ public abstract class Protagonist extends Character {
 		this.name = name;
 	}
 	
-	protected abstract void refresh();
+	protected void refresh() {
+		this.energy = this.getVitality();
+	}
 	
 	public int getBaseHP() {
 		return this.skills.getBaseHP() + this.getHealthModifier();
@@ -64,6 +66,10 @@ public abstract class Protagonist extends Character {
 	
 	public void levelUp() {
 		// prompt for what to level up & level up skills
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	//public void useItem(Item)

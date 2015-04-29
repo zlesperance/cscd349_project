@@ -1,10 +1,10 @@
 package cscd349_project;
 
 public class Fighter extends Protagonist {
-
-	@Override
-	protected void refresh() {
-		
+	private boolean isBlocking;
+	
+	public Fighter(String name) {
+		super(name, "STR:4,DEX:3,INT:1,VIT:4,AGI:2,LUK:3");
 	}
 
 	@Override
@@ -44,14 +44,51 @@ public class Fighter extends Protagonist {
 
 	@Override
 	public void attack(Character foe) {
-		// TODO Auto-generated method stub
-
+		
+	}
+	
+	private int getAttackEnergy() {
+		return 6 - (this.getStrength() / 2);
+	}
+	
+	private int getBlockEnergy() {
+		return 4 - (this.getVitality() / 4);
+	}
+	
+	private int getSpecialEnergy() {
+		return 10 - (((this.getStrength() / 2) + (this.getDexterity() / 4) + (this.getVitality() / 4)) / 8);
+	}
+	
+	public void receiveDamage(int damage) {
+		if (isBlocking) {
+			int blockingPower = (int) (((getVitality()  * .6) + (getStrength() * .4)) * 4);
+			int newDamage = Math.max(damage - blockingPower, 0);
+			Game.report(getName() + " blocked " + (damage - newDamage) + "damage!");
+			receiveDirectDamage(damage);
+		} else {
+			super.receiveDamage(damage);
+		}
 	}
 
 	@Override
 	public void selectAction(Party allies, Party enemies, Engagement engagement) {
-		// TODO Auto-generated method stub
-
+		boolean endTurn = false;
+		do {
+			int selection = Game.makeSelection("Attack (" + getAttackEnergy() + " EP)", "Block (" + getBlockEnergy() + " EP)", "Whirlwind Strike (" + getSpecialEnergy() + " EP)", "Use Item", "Pass");
+			if (selection == 0) {
+				if (this.energy >= getAttackEnergy()) {
+					// Select target then attack
+				}
+			}
+			
+			// if out of energy or pass, do this:
+			endTurn = true;
+		} while (!endTurn);
+	}
+	
+	@Override
+	public String toString() {
+		return getName() + ", the Fighter";
 	}
 
 }

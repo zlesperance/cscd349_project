@@ -27,6 +27,12 @@ public abstract class Character {
 			this.die();
 	}
 	
+	protected void receiveDirectDamage(int damage) {
+		this.healthPoints -= damage;
+		if (this.healthPoints < 0)
+			this.die();
+	}
+	
 	private boolean tryDodge() {
 		int agility = this.skills.getAgility();
 		int luck = this.skills.getLuck();

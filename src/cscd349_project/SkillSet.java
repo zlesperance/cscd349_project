@@ -20,7 +20,7 @@ public class SkillSet {
 	}
 	
 	public int getBaseHP() {
-		return vitality * 10;
+		return this.vitality * 10;
 	}
 	
 	public int getStrength() {
