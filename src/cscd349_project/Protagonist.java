@@ -33,6 +33,10 @@ public abstract class Protagonist extends Character {
 		return this.skills.getAgility() + this.getAgilityModifier();
 	}
 	
+	public int getVitality() {
+		return this.skills.getVitality() + this.getVitalityModifier();
+	}
+	
 	public int getLuck() {
 		return this.skills.getLuck() + this.getLuckModifier();
 	}

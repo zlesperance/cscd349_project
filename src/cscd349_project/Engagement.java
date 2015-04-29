@@ -51,10 +51,22 @@ public class Engagement {
 					else
 						partyBNext = null;
 				} else {
-					// TODO:
-					// Equal speed, determine which goes first by luck and RNG
-					// instead of 50/50, start with 50 and add the difference of luck 
-					// to determine the midpoint
+					int luckDifference = partyANext.getLuck() - partyBNext.getLuck();
+					int luckCenter = 50 + luckDifference;
+					
+					if (Math.random() < luckCenter) {
+						partyANext.selectAction(partyA, partyB, this);
+						if (partyACharacters.hasNext())
+							partyANext = partyACharacters.next();
+						else
+							partyANext = null;						
+					} else {
+						partyBNext.selectAction(partyB, partyA, this);
+						if (partyBCharacters.hasNext())
+							partyBNext = partyBCharacters.next();
+						else
+							partyBNext = null;		
+					}
 				}
 			}
 		}

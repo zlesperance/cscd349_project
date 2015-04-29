@@ -2,7 +2,6 @@ package cscd349_project;
 
 import java.util.Iterator;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class Party implements Iterable<Character> {
 	private PriorityQueue<Character> members;
@@ -26,10 +25,6 @@ public class Party implements Iterable<Character> {
 	
 	public void removeMember(Character member) {
 		members.remove(member);
-	}
-	
-	public Queue<Character> getMembersBySpeed() {
-		return new PriorityQueue<Character>(this.members);
 	}
 	
 	public boolean isDefeated() {
