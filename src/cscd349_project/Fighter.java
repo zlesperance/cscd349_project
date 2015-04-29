@@ -47,6 +47,10 @@ public class Fighter extends Protagonist {
 		
 	}
 	
+	private void specialAttack(Party foes) {
+		
+	}
+	
 	private int getAttackEnergy() {
 		return 6 - (this.getStrength() / 2);
 	}
@@ -65,6 +69,12 @@ public class Fighter extends Protagonist {
 			int newDamage = Math.max(damage - blockingPower, 0);
 			Game.report(getName() + " blocked " + (damage - newDamage) + "damage!");
 			receiveDirectDamage(damage);
+			
+			if (this.energy < getBlockEnergy()) {
+				this.isBlocking = false;
+				Game.report(getName() + " does not have enough energy to block again!");
+			}
+			
 		} else {
 			super.receiveDamage(damage);
 		}
@@ -74,10 +84,26 @@ public class Fighter extends Protagonist {
 	public void selectAction(Party allies, Party enemies, Engagement engagement) {
 		boolean endTurn = false;
 		do {
-			int selection = Game.makeSelection("Attack (" + getAttackEnergy() + " EP)", "Block (" + getBlockEnergy() + " EP)", "Whirlwind Strike (" + getSpecialEnergy() + " EP)", "Use Item", "Pass");
+			int selection = Game.makeSelection("Attack (" + getAttackEnergy() + " EP)", "Whirlwind Strike (" + getSpecialEnergy() + " EP)", "Block (" + getBlockEnergy() + " EP)", "Use Item", "Pass");
 			if (selection == 0) {
 				if (this.energy >= getAttackEnergy()) {
-					// Select target then attack
+					Character foe = enemies.selectCharacter(new LivingCharacterTester());
+					attack(foe);
+				} else {
+					Game.report(getName() + " doesn't have enough energy to do that!");
+				}
+			} else if (selection == 2) {
+				if (this.energy >= getSpecialEnergy()) {
+					specialAttack(enemies);
+				} else {
+					Game.report(getName() + " doesn't have enough energy to do that!");
+				}
+			} else if (selection == 3) {
+				if (this.energy >= getBlockEnergy()) {
+					this.energy -= getBlockEnergy();
+					this.isBlocking = true;
+					Game.report(getName() + " prepares to block an attack");
+					endTurn = true;
 				}
 			}
 			

@@ -83,4 +83,6 @@ public abstract class Character {
 	
 	public abstract void attack(Character foe);
 	
+	public abstract String toString();
+	
 }

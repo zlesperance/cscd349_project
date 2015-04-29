@@ -1,8 +1,11 @@
 package cscd349_project;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+	private static Random rng = new Random();
+	
 	public static int makeSelection(String... options) {
 		Scanner kb = new Scanner(System.in);
 		System.out.println("Choose an option:");
@@ -24,5 +27,9 @@ public class Game {
 	
 	public static void report(String message) {
 		System.out.println(message);
+	}
+	
+	public static double nextRandom() {
+		return rng.nextDouble();
 	}
 }
