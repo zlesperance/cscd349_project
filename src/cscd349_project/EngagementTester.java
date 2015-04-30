@@ -9,7 +9,7 @@ public class EngagementTester {
 	
 	public static void testFightVsSlime() {
 		Party protagonists = new Party(new Character[]{new Fighter("Tim")});
-		Party antagonists = new Party(new Character[]{new Slime(), new Slime()});
+		Party antagonists = new Party(new Character[]{new Slime("Slime A"), new Slime("Slime B")});
 		Engagement fight = new Engagement(protagonists, antagonists);
 		fight.begin();
 	}

@@ -22,15 +22,15 @@ public abstract class Character {
 			// report to game logic successful block
 		}
 		
-		Game.report(toString() + " receives " + damage + " damage!");
-		
 		this.healthPoints -= damage;
+		Game.report(toString() + " receives " + damage + " damage!");
 		if (this.healthPoints <= 0)
 			this.die();
 	}
 	
 	protected void receiveDirectDamage(int damage) {
 		this.healthPoints -= damage;
+		Game.report(toString() + " receives " + damage + " damage!");
 		if (this.healthPoints <= 0) 
 			this.die();
 	}
@@ -55,6 +55,10 @@ public abstract class Character {
 		this.healthPoints = Math.min(this.healthPoints + healAmount, this.getBaseHP());
 	}
 	
+	public int getHP() {
+		return this.healthPoints;
+	}
+	
 	public int getBaseHP() {
 		return this.skills.getBaseHP();
 	}
@@ -72,7 +76,7 @@ public abstract class Character {
 	public abstract int getLuck();
 	
 	public int getSpeed() {
-		return (int)((this.getDexterity() * .6) + (this.getAgility() * .4));
+		return (int)(((this.getDexterity() * .6) + (this.getAgility() * .4)) * 10);
 	}
 	
 	private void die() {

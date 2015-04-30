@@ -58,7 +58,7 @@ public class Party implements Iterable<Character> {
 		for (Character member : this.members) {
 			if (tester.test(member)) {
 				characters.add(member);
-				options.add(member.toString());
+				options.add(member.toString() + " [" + member.getHP() + " HP]");
 			}
 		}
 		
