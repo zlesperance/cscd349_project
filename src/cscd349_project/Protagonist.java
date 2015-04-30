@@ -24,23 +24,23 @@ public abstract class Protagonist extends Character {
 	}
 	
 	public int getStrength() {
-		return this.skills.getStrength() + this.getStrengthModifier();
+		return Math.max(1, this.skills.getStrength() + this.getStrengthModifier());
 	}
 	
 	public int getDexterity() {
-		return this.skills.getDexterity() + this.getDexterityModifier();
+		return Math.max(1, this.skills.getDexterity() + this.getDexterityModifier());
 	}
 	
 	public int getIntelligence() {
-		return this.skills.getIntelligence() + this.getIntelligenceModifier();
+		return Math.max(1, this.skills.getIntelligence() + this.getIntelligenceModifier());
 	}
 	
 	public int getAgility() {
-		return this.skills.getAgility() + this.getAgilityModifier();
+		return Math.max(1, this.skills.getAgility() + this.getAgilityModifier());
 	}
 	
 	public int getVitality() {
-		return this.skills.getVitality() + this.getVitalityModifier();
+		return Math.max(1, this.skills.getVitality() + this.getVitalityModifier());
 	}
 	
 	public int getLuck() {
