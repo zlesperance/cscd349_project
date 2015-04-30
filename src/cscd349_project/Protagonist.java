@@ -15,6 +15,10 @@ public abstract class Protagonist extends Character {
 		this.energy = this.getVitality();
 	}
 	
+	public int getItemEnergy() {
+		return 2;
+	}
+	
 	public int getBaseHP() {
 		return this.skills.getBaseHP() + this.getHealthModifier();
 	}

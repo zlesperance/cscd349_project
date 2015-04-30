@@ -45,7 +45,7 @@ public class Party implements Iterable<Character> {
 		Character[] characters = this.members.toArray(new Character[this.members.size()]);
 		String[] options = new String[characters.length];
 		for (int i = 0; i < characters.length; i++) {
-			this.options = characters.toString();
+			options[i] = characters[i].toString();
 		}
 		
 		int selection = Game.makeSelection(options);
@@ -53,9 +53,8 @@ public class Party implements Iterable<Character> {
 	}
 	
 	public Character selectCharacter(CharacterTester tester) {
-		ArrayList<Character> characters;
-		ArrayList<String> options;
-		int i = 0;
+		ArrayList<Character> characters = new ArrayList<Character>();
+		ArrayList<String> options = new ArrayList<String>();
 		for (Character member : this.members) {
 			if (tester.test(member)) {
 				characters.add(member);

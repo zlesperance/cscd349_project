@@ -44,23 +44,28 @@ public class Fighter extends Protagonist {
 
 	@Override
 	public void attack(Character foe) {
+		Game.report(toString() + " swings their weapon at " + foe.toString() + "...");
 		
+		
+		
+		this.energy -= getAttackEnergy();
 	}
 	
 	private void specialAttack(Party foes) {
 		
+		this.energy -= getSpecialEnergy();
 	}
 	
 	private int getAttackEnergy() {
-		return 6 - (this.getStrength() / 2);
+		return Math.max(6 - (this.getStrength() / 2), 2);
 	}
 	
 	private int getBlockEnergy() {
-		return 4 - (this.getVitality() / 4);
+		return Math.max(4 - (this.getVitality() / 4), 1);
 	}
 	
 	private int getSpecialEnergy() {
-		return 10 - (((this.getStrength() / 2) + (this.getDexterity() / 4) + (this.getVitality() / 4)) / 8);
+		return Math.max(10 - (((this.getStrength() / 2) + (this.getDexterity() / 4) + (this.getVitality() / 4)) / 8), 4);
 	}
 	
 	public void receiveDamage(int damage) {
@@ -83,6 +88,8 @@ public class Fighter extends Protagonist {
 	@Override
 	public void selectAction(Party allies, Party enemies, Engagement engagement) {
 		boolean endTurn = false;
+		refresh();
+		
 		do {
 			int selection = Game.makeSelection("Attack (" + getAttackEnergy() + " EP)", "Whirlwind Strike (" + getSpecialEnergy() + " EP)", "Block (" + getBlockEnergy() + " EP)", "Use Item", "Pass");
 			if (selection == 0) {
@@ -105,16 +112,20 @@ public class Fighter extends Protagonist {
 					Game.report(getName() + " prepares to block an attack");
 					endTurn = true;
 				}
+			} else if (selection == 4) {
+				// TODO: use item
+			} else if (selection == 5) {
+				endTurn = true;
 			}
 			
-			// if out of energy or pass, do this:
-			endTurn = true;
+			if (this.energy < getAttackEnergy() && this.energy < getSpecialEnergy() && this.energy < getBlockEnergy() && this.energy < getItemEnergy())
+				endTurn = true;
 		} while (!endTurn);
 	}
 	
 	@Override
 	public String toString() {
-		return getName() + ", the Fighter";
+		return getName();
 	}
 
 }
