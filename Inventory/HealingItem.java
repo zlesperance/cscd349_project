@@ -8,7 +8,7 @@ public class HealingItem extends Item
    
    public HealingItem()
    {
-      super("", "Consumable", 0);
+      super("", "Consumable", 0, 0);
       this.hType = "";
       this.healAmountHP = 0;
       this.healAmountSP = 0;
@@ -17,9 +17,9 @@ public class HealingItem extends Item
    
    //method separation
    
-   public HealingItem(String n, String c, int w, int hp, int sp)//name, weight, heal amount(hp), heal amount(sp)
+   public HealingItem(String n, String c, int w, int hp, int sp, int id)//name, weight, heal amount(hp), heal amount(sp), itemID
    {
-      super(n, "Consumable", w);
+      super(n, "Consumable", w, id);
       this.hType = "Healing";
       this.healAmountHP = hp;
       this.healAmountSP = sp;

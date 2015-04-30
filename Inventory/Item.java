@@ -4,21 +4,24 @@ public abstract class Item
    private String iName;
    private String iType;//might re-evaluate this
    private int iWeight;
+   private int itemID;
    
    public Item()
    {
       this.iName = "";
       this.iType = "";
       this.iWeight = 0;
+      this.itemID = 0;
    }
    
    //method separation
    
-   public Item(String n, String t, int w)
+   public Item(String n, String t, int w, int id)
    {
       this.iName = n;
       this.iType = t;
       this.iWeight = w;
+      this.itemID = id;
    }
    
    //method separation
@@ -43,6 +46,13 @@ public abstract class Item
    }
    
    //method separation
+   
+   public int getID()
+   {
+      return this.itemID;
+   }
+   
+   //method separation
 	
    public void setIName(String n)
    {
@@ -62,6 +72,13 @@ public abstract class Item
    {
       this.iWeight = w;
    }
+   
+   //method separation
+   
+   public void setID(int i)
+   {
+      this.itemID = i;
+   }
 	
 	//method separation
    
@@ -73,5 +90,10 @@ public abstract class Item
    public boolean equals(Object o)
    {
       return this.iName.compareTo(((Item)o).iName) == 0;
+   }
+   
+   public int compareTo(Object o)
+   {
+      return this.itemID - ((Item)o).itemID;
    }
 }

@@ -5,15 +5,15 @@ public class Etc extends Item
 	
    public Etc()
    {
-      super("", "Etc", 0);
+      super("", "Etc", 0, 0);
 		this.iQuantity = 0;
    }
    
    //method separation
    
-   public Etc(String n, int w)//name, weight
+   public Etc(String n, int w, int id)//name, weight, itemID
    {
-      super(n, "Etc", w);
+      super(n, "Etc", w, id);
 		this.iQuantity = 1;
    }
    
@@ -43,6 +43,6 @@ public class Etc extends Item
    @Override
    public String toString()
    {
-      return super.toString("", 0);
+      return super.toString("", iQuantity);
    }
 }

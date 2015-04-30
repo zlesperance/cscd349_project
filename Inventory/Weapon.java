@@ -6,14 +6,14 @@ public class Weapon extends Item
    
    public Weapon()
    {
-      super("Empty Hand", "Equipment", 0);
+      super("Empty Hand", "Equipment", 0, 0);
       gType = "";
       atk = 0;
    }
    
-   public Weapon(String n, int w, String g, int a)//name, weight, gear type, atk
+   public Weapon(String n, int w, String g, int a, int id)//name, weight, gear type, atk, itemID
    {
-      super(n, "Equipment", w);
+      super(n, "Equipment", w, id);
       
       this.gType = g;
       this.atk = a;

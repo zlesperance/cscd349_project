@@ -4,13 +4,9 @@ import java.util.Scanner;
 
 public class InventoryTester
 {
-   static HealingItem a = new HealingItem("Apple", "Consumable", 2, 19, 0);
-   static Weapon b = new Weapon("Knife[0]", 40, "Dagger", 17);
-   static Shield c = new Shield("Guard[0]", 130, "Shield",  6);
-   static Etc d = new Etc("Jellopy", 1);
-   
    public static void main(String []args)
    {
+      ItemDatabase db = new ItemDatabase();
       Inventory inventory = new Inventory();
       
       int i, j;
@@ -24,13 +20,13 @@ public class InventoryTester
          {
             j = inventoryMenu(s);
             
-            addInventoryItem(inventory, j);
+            addInventoryItem(inventory, j, db);
          }
          else if(i == 2)//remove an item
          {
             j = inventoryMenu(s);
             
-            removeInventoryItem(inventory, j);
+            removeInventoryItem(inventory, j, db);
          }
          else if(i == 3)//print the entire inventory
          {
@@ -39,32 +35,8 @@ public class InventoryTester
          
       }while(i != 4);
       
-      
-      
-      /*
-      inventory.addItem(inventory.getItems(), inventory.getItemsName(), a);
-      inventory.addItem(inventory.getEquip(), inventory.getEquipName(), b);
-      inventory.addItem(inventory.getEquip(), inventory.getEquipName(), c);
-      inventory.addItem(inventory.getEtc(), inventory.getEtcName(), d);
-      
-      //System.out.println(inventory.toString());
-      
-      inventory.addItem(inventory.getGears(), inventory.getGearsName(), b);
-      inventory.addItem(inventory.getGears(), inventory.getGearsName(), c);
-      
-      //System.out.println(inventory.toString(inventory.getGearsName(), inventory.getGears()));
-      
-      inventory.removeItem(inventory.getGears(), inventory.getGearsName(), c);
-      
-      //System.out.println(inventory.toString(inventory.getGearsName(), inventory.getGears()));
-      
-      inventory.addItem(inventory.getItems(), inventory.getItemsName(), a);
-      
-      System.out.println(inventory.toString());
-      
-      inventory.removeItem(inventory.getItems(), inventory.getItemsName(), a);
-      
-      System.out.println(inventory.toString());*/
+      //System.out.println(a.compareTo(b));
+      //System.out.println(db.getItem(0).toString());
    }
 	
    //method separation
@@ -90,57 +62,57 @@ public class InventoryTester
       System.out.println("4)Use the list of equipped gears");
       System.out.println("5)Back");
      
-      return getInt(s, 4);
+      return getInt(s, 5);
    }
 	
    //method separation
    
-   public static void addInventoryItem(Inventory i, int t)
+   public static void addInventoryItem(Inventory i, int t, ItemDatabase db)
    {
       if(t == 1)
       {
-         i.addItem(i.getItems(), i.getItemsName(), a);
+         i.addItem(i.getItems(), i.getItemsName(), db.getItem(0).toString());
          System.out.println(i.toString(i.getItemsName(), i.getItems()));
       }
       else if(t == 2)
       {
-         i.addItem(i.getEquip(), i.getEquipName(), b);
+         i.addItem(i.getEquip(), i.getEquipName(), db.getItem(1).toString());
          System.out.println(i.toString(i.getEquipName(), i.getEquip()));
       }
       else if(t == 3)
       {
-         i.addItem(i.getEtc(), i.getEtcName(), d);
+         i.addItem(i.getEtc(), i.getEtcName(), db.getItem(3).toString());
          System.out.println(i.toString(i.getEtcName(), i.getEtc()));
       }
-      else
+      else if(t == 4)
       {
-         i.addItem(i.getGears(), i.getGearsName(), c);
+         i.addItem(i.getGears(), i.getGearsName(), db.getItem(2).toString());
          System.out.println(i.toString(i.getGearsName(), i.getGears()));
       }
    }
 	
    //method separation
    
-   public static void removeInventoryItem(Inventory i, int t)
+   public static void removeInventoryItem(Inventory i, int t, ItemDatabase db)
    {
       if(t == 1)
       {
-         i.removeItem(i.getItems(), i.getItemsName(), a);
+         i.removeItem(i.getItems(), i.getItemsName(), db.getItem(0).toString());
          System.out.println(i.toString(i.getItemsName(), i.getItems()));
       }
       else if(t == 2)
       {
-         i.removeItem(i.getEquip(), i.getEquipName(), b);
+         i.removeItem(i.getEquip(), i.getEquipName(), db.getItem(1).toString());
          System.out.println(i.toString(i.getEquipName(), i.getEquip()));
       }
       else if(t == 3)
       {
-         i.removeItem(i.getEtc(), i.getEtcName(), d);
+         i.removeItem(i.getEtc(), i.getEtcName(), db.getItem(3).toString());
          System.out.println(i.toString(i.getEtcName(), i.getEtc()));
       }
-      else
+      else if(t == 4)
       {
-         i.removeItem(i.getGears(), i.getGearsName(), c);
+         i.removeItem(i.getGears(), i.getGearsName(), db.getItem(2).toString());
          System.out.println(i.toString(i.getGearsName(), i.getGears()));
       }
    }

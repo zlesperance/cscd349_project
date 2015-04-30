@@ -6,14 +6,14 @@ public class Shield extends Item
    
    public Shield()
    {
-      super("Empty Hand", "Equipment", 0);
+      super("Empty Hand", "Equipment", 0, 0);
       gType = "";
       def = 0;
    }
    
-   public Shield(String n, int w, String g, int d)//name, weight, gear type, def
+   public Shield(String n, int w, String g, int d, int id)//name, weight, gear type, def, itemID
    {
-      super(n, "Equipment", w);
+      super(n, "Equipment", w, id);
       
       this.gType = g;
       this.def = d;
