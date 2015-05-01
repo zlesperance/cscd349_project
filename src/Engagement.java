@@ -52,7 +52,7 @@ public class Engagement {
 					int luckDifference = partyANext.getLuck() - partyBNext.getLuck();
 					int luckCenter = 50 + luckDifference;
 					
-					if (Math.random() < luckCenter) {
+					if (Math.random() < (luckCenter / 100)) {
 						partyANext.selectAction(partyA, partyB, this);
 						if (partyACharacters.hasNext())
 							partyANext = partyACharacters.next();

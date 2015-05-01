@@ -11,7 +11,7 @@ public abstract class Character {
 	
 	public void receiveDamage(int damage) {
 		if (tryDodge()) {
-			// report to game logic that dodge succeeded
+			Game.report(toString() + " dodged the attack!");
 			return;
 		}
 		
@@ -21,13 +21,15 @@ public abstract class Character {
 		}
 		
 		this.healthPoints -= damage;
-		if (this.healthPoints < 0)
+		Game.report(toString() + " receives " + damage + " damage!");
+		if (this.healthPoints <= 0)
 			this.die();
 	}
 	
 	protected void receiveDirectDamage(int damage) {
 		this.healthPoints -= damage;
-		if (this.healthPoints < 0)
+		Game.report(toString() + " receives " + damage + " damage!");
+		if (this.healthPoints <= 0) 
 			this.die();
 	}
 	
@@ -51,6 +53,10 @@ public abstract class Character {
 		this.healthPoints = Math.min(this.healthPoints + healAmount, this.getBaseHP());
 	}
 	
+	public int getHP() {
+		return this.healthPoints;
+	}
+	
 	public int getBaseHP() {
 		return this.skills.getBaseHP();
 	}
@@ -68,11 +74,11 @@ public abstract class Character {
 	public abstract int getLuck();
 	
 	public int getSpeed() {
-		return (int)((this.getDexterity() * .6) + (this.getAgility() * .4));
+		return (int)(((this.getDexterity() * .6) + (this.getAgility() * .4)) * 10);
 	}
 	
 	private void die() {
-		// Do something with game logic
+		Game.report(toString() + " is defeated!");
 	}
 	
 	public boolean isDead() {
@@ -80,5 +86,7 @@ public abstract class Character {
 	}
 	
 	public abstract void attack(Character foe);
+	
+	public abstract String toString();
 	
 }

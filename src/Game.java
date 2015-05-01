@@ -1,8 +1,11 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+	private static Random rng = new Random();
+	private static Scanner kb = new Scanner(System.in);
+	
 	public static int makeSelection(String... options) {
-		Scanner kb = new Scanner(System.in);
 		System.out.println("Choose an option:");
 		for (int i = 0; i < options.length; i++) {
 			System.out.println(" " + i + ") " + options[i]);
@@ -11,16 +14,25 @@ public class Game {
 		int selection;
 		do {
 			System.out.print(">> ");
-			selection = kb.nextInt();
-			kb.nextLine();
+			try {
+				selection = Integer.parseInt(kb.nextLine());
+			} catch (NumberFormatException e) {
+				selection = -1;
+			}
 		} while (selection < 0 || selection >= options.length);
-		
-		kb.close();
 		
 		return selection;
 	}
 	
 	public static void report(String message) {
 		System.out.println(message);
+	}
+	
+	public static double nextRandom() {
+		return rng.nextDouble();
+	}
+	
+	public static void end() {
+		kb.close();
 	}
 }
