@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>126</x>
+      <y>217</y>
+      <w>161</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Character
+--
+-healthPoints: int
+#skills: SkillSet
+--
++receiveDamage(int damage): void
++getBaseHP(): int
++getStrength(): int
++getDexterity(): int
++getIntelligence(): int
++getVitality(): int
++getAgility(): int
++getLuck(): int
+-die()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>329</x>
+      <y>112</y>
+      <w>217</w>
+      <h>329</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Protagonist
+--
+-name: String
+-weapon: Weapon
+-offhand: Offhand
+-energy: int
+--
++equipWeapon(Weapon weapon): Weapon
++equipOffhand(Offhand offhand): Offhand
++attack(Antagonist enemy): void
++selectAction(Party allies, Party enemies): void
++useItem(Consumable item): void
++levelUp(): void
++getName(): String
+#isValidTarget(): boolean
++getBaseHP(): int
++getStrength(): int
++getDexterity(): int
++getIntelligence(): int
++getVitality(): int
++getAgility(): int
++getLuck(): int
+#getHealthModifier(): int
+#getStrengthModifier(): int
+#getDexterityModifier(): int
+#getIntelligenceModifier(): int
+#getVitalityModifier(): int
+#getAgilityModifier(): int
+#getLuckModifier(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>329</x>
+      <y>455</y>
+      <w>203</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Antagonist
+--
+-name: String
+-description: String
+--
++attack(Protagonist enemy): void
++examine(): String
++getStrength(): int
++getDexterity(): int
++getIntelligence(): int
++getVitality(): int
++getAgility(): int
++getLuck(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>399</y>
+      <w>126</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>SkillSet
+--
+-strength: int
+-agility: int
+-vitality: int
+-intelligence: int
+-dexterity: int
+-luck: int
+--
++raiseStrength(): void
++raiseAgility(): void
++raiseVitality(): void
++raiseIntelligence(): void
++raiseDexterity(): void
++raiseLuck(): void
++getBaseHP(): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>119</y>
+      <w>161</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Fighter
+--
++attack(Antagonist enemy): void
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>245</y>
+      <w>161</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Fencer
+--
++attack(Antagonist enemy): void
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>182</y>
+      <w>161</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Mancer
+--
++attack(Antagonist enemy): void
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>308</y>
+      <w>161</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Hunter
+--
++attack(Antagonist enemy): void
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>574</x>
+      <y>441</y>
+      <w>161</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Slime
+--
++attack(Protagonist enemy): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>574</x>
+      <y>504</y>
+      <w>161</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Goblin
+--
++attack(Protagonist enemy): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>133</y>
+      <w>91</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;50.0;140.0;50.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>203</y>
+      <w>91</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;50.0;40.0;50.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>224</y>
+      <w>91</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;70.0;110.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>539</x>
+      <y>224</y>
+      <w>91</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;160.0;110.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>175</y>
+      <w>63</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;50.0;120.0;50.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>252</y>
+      <w>63</w>
+      <h>266</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;360.0;70.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>203</x>
+      <y>371</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>105</x>
+      <y>105</y>
+      <w>196</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>Party
+--
+-members: PriorityQueue&lt;Character&gt;
+--
++Party(Character[] members)
++addMember(Character member): void
++removeMember(Character member): void
++isDefeated(): boolean
++iterator(): Iterator&lt;Character&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>126</x>
+      <y>0</y>
+      <w>154</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Engagement
+--
+-partyA: Party
+-partyB: Party
+-ended: boolean
+--
++begin(): void
++end(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>196</x>
+      <y>77</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>196</x>
+      <y>189</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>77</x>
+      <y>28</y>
+      <w>63</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;340.0;10.0;340.0;10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>329</x>
+      <y>42</y>
+      <w>266</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>SpeedComparator
+--
++compare(Character characterA, Character characterB): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>63</y>
+      <w>63</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+</diagram>
