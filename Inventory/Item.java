@@ -5,6 +5,7 @@ public abstract class Item
    private String iType;//might re-evaluate this
    private int iWeight;
    private int itemID;
+   private int iQuantity;
    
    public Item()
    {
@@ -12,6 +13,7 @@ public abstract class Item
       this.iType = "";
       this.iWeight = 0;
       this.itemID = 0;
+      this.iQuantity = 0;
    }
    
    //method separation
@@ -22,6 +24,7 @@ public abstract class Item
       this.iType = t;
       this.iWeight = w;
       this.itemID = id;
+      this.iQuantity = 1;
    }
    
    //method separation
@@ -51,6 +54,13 @@ public abstract class Item
    {
       return this.itemID;
    }
+	
+	//method separation
+   
+   public int getQuantity()
+	{
+		return this.iQuantity;
+	}
    
    //method separation
 	
@@ -80,11 +90,25 @@ public abstract class Item
       this.itemID = i;
    }
 	
-	//method separation
+   //method separation
    
-   public String toString(String s, int q)
+	public void incrementQuantity()
+	{
+		this.iQuantity ++;
+	}
+	
+	//method separation
+	
+	public void decrementQuantity()
+	{
+		this.iQuantity --;
+	}
+   
+   //method separation
+   
+   public String toString(String s)
    {
-      return iName + "(" + q + "), a(n) " + iType + "(" + s + ") item, " + iWeight + " weight\n";
+      return iName + "(" + iQuantity + "), a(n) " + iType + "(" + s + ") item, " + iWeight + " weight\n";
    }
    
    public boolean equals(Object o)

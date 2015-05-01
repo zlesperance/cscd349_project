@@ -1,64 +1,37 @@
 
 public class HealingItem extends Item
 {
-   private String hType;//healing item
-   private int healAmountHP;
-   private int healAmountSP;
-	private int iQuantity;
+   private char hType;//healing item
+   private int healAmount;
    
    public HealingItem()
    {
       super("", "Consumable", 0, 0);
-      this.hType = "";
-      this.healAmountHP = 0;
-      this.healAmountSP = 0;
-		this.iQuantity = 0;
+      this.hType = 'h';
+      this.healAmount = 0;
    }
    
    //method separation
    
-   public HealingItem(String n, String c, int w, int hp, int sp, int id)//name, weight, heal amount(hp), heal amount(sp), itemID
+   public HealingItem(String n, String c, char h, int w, int p, int id)//name, item type, heal type, weight, heal amount, itemID
    {
       super(n, "Consumable", w, id);
-      this.hType = "Healing";
-      this.healAmountHP = hp;
-      this.healAmountSP = sp;
-		this.iQuantity = 1;
+      this.hType = h;
+      this.healAmount = p;
    }
    
    //method separation
    
-   public int getHealAmountHP()
+   public int getHealAmount()
    {
-      return this.healAmountHP;
+      return this.healAmount;
    }
    
    //method separation
-	
-	public int getQuantity()
-	{
-		return this.iQuantity;
-	}
-	
-   //method separation
-   
-	public void incrementQuantity()
-	{
-		this.iQuantity ++;
-	}
-	
-	//method separation
-	
-	public void decrementQuantity()
-	{
-		this.iQuantity --;
-	}
-	
-	//method separation
    
    @Override
    public String toString()
    {
-      return super.toString(hType, iQuantity);
+      return super.toString(hType + "");
    }
 }

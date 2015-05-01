@@ -7,9 +7,11 @@ public class Weapon extends Item
    public Weapon()
    {
       super("Empty Hand", "Equipment", 0, 0);
-      gType = "";
-      atk = 0;
+      this.gType = "";
+      this.atk = 0;
    }
+   
+   //method separation
    
    public Weapon(String n, int w, String g, int a, int id)//name, weight, gear type, atk, itemID
    {
@@ -19,9 +21,18 @@ public class Weapon extends Item
       this.atk = a;
    }
    
+   //method separation
+   
+   public String getGType()
+   {
+      return this.gType;
+   }
+   
+   //method separation
+   
    @Override
    public String toString()
    {
-      return super.toString(gType, 1);
+      return super.toString(gType);
    }
 }

@@ -6,7 +6,7 @@ public class InventoryTester
 {
    public static void main(String []args)
    {
-      ItemDatabase db = new ItemDatabase();
+      ItemDatabasePrototype db = new ItemDatabasePrototype();
       Inventory inventory = new Inventory();
       
       int i, j;
@@ -44,7 +44,7 @@ public class InventoryTester
    public static int mainMenu(Scanner s)
    {
       
-      System.out.println("1)Add an item to the inventory");
+      System.out.println("\n1)Add an item to the inventory");
       System.out.println("2)Remove an item from the inventory");
       System.out.println("3)Print the entire inventory");
       System.out.println("4)Quit");
@@ -67,52 +67,52 @@ public class InventoryTester
 	
    //method separation
    
-   public static void addInventoryItem(Inventory i, int t, ItemDatabase db)
+   public static void addInventoryItem(Inventory i, int t, ItemDatabasePrototype db)
    {
       if(t == 1)
       {
-         i.addItem(i.getItems(), i.getItemsName(), db.getItem(0).toString());
+         i.addItem(i.getItems(), i.getItemsName(), db.getItem(0));
          System.out.println(i.toString(i.getItemsName(), i.getItems()));
       }
       else if(t == 2)
       {
-         i.addItem(i.getEquip(), i.getEquipName(), db.getItem(1).toString());
+         i.addItem(i.getEquip(), i.getEquipName(), db.getItem(1));
          System.out.println(i.toString(i.getEquipName(), i.getEquip()));
       }
       else if(t == 3)
       {
-         i.addItem(i.getEtc(), i.getEtcName(), db.getItem(3).toString());
+         i.addItem(i.getEtc(), i.getEtcName(), db.getItem(3));
          System.out.println(i.toString(i.getEtcName(), i.getEtc()));
       }
       else if(t == 4)
       {
-         i.addItem(i.getGears(), i.getGearsName(), db.getItem(2).toString());
+         i.addItem(i.getGears(), i.getGearsName(), db.getItem(2));
          System.out.println(i.toString(i.getGearsName(), i.getGears()));
       }
    }
 	
    //method separation
    
-   public static void removeInventoryItem(Inventory i, int t, ItemDatabase db)
+   public static void removeInventoryItem(Inventory i, int t, ItemDatabasePrototype db)
    {
       if(t == 1)
       {
-         i.removeItem(i.getItems(), i.getItemsName(), db.getItem(0).toString());
+         i.removeItem(i.getItems(), i.getItemsName(), db.getItem(0));
          System.out.println(i.toString(i.getItemsName(), i.getItems()));
       }
       else if(t == 2)
       {
-         i.removeItem(i.getEquip(), i.getEquipName(), db.getItem(1).toString());
+         i.removeItem(i.getEquip(), i.getEquipName(), db.getItem(1));
          System.out.println(i.toString(i.getEquipName(), i.getEquip()));
       }
       else if(t == 3)
       {
-         i.removeItem(i.getEtc(), i.getEtcName(), db.getItem(3).toString());
+         i.removeItem(i.getEtc(), i.getEtcName(), db.getItem(3));
          System.out.println(i.toString(i.getEtcName(), i.getEtc()));
       }
       else if(t == 4)
       {
-         i.removeItem(i.getGears(), i.getGearsName(), db.getItem(2).toString());
+         i.removeItem(i.getGears(), i.getGearsName(), db.getItem(2));
          System.out.println(i.toString(i.getGearsName(), i.getGears()));
       }
    }

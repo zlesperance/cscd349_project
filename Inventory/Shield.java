@@ -11,6 +11,8 @@ public class Shield extends Item
       def = 0;
    }
    
+   //method separation
+   
    public Shield(String n, int w, String g, int d, int id)//name, weight, gear type, def, itemID
    {
       super(n, "Equipment", w, id);
@@ -19,9 +21,18 @@ public class Shield extends Item
       this.def = d;
    }
    
+   //method separation
+   
+   public String getGType()
+   {
+      return this.gType;
+   }
+   
+   //method separation
+   
    @Override
    public String toString()
    {
-      return super.toString(gType, 1);
+      return super.toString(gType);
    }
 }
