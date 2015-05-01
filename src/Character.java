@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public abstract class Character {
 	private int healthPoints;
 	protected SkillSet skills;

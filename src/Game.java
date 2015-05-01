@@ -1,5 +1,3 @@
-package cscd349_project;
-
 import java.util.Scanner;
 
 public class Game {

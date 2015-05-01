@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public abstract class Protagonist extends Character {
 	private String name;
 	// protected Weapon weapon;

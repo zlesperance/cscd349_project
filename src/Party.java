@@ -1,5 +1,3 @@
-package cscd349_project;
-
 import java.util.Iterator;
 import java.util.PriorityQueue;
 

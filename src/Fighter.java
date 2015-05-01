@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public class Fighter extends Protagonist {
 	private boolean isBlocking;
 	
