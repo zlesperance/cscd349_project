@@ -15,3 +15,4 @@
 * heros/monsters could have a set of unique abilities
 * every time fight a monster, as game progresses, monsters get harder
 * leveling system?
+* ratemyserver.net
