@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public class Slime extends Antagonist {
 	
 	public Slime() {

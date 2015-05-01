@@ -1,5 +1,3 @@
-package cscd349_project;
-
 import java.util.regex.Pattern;
 
 public class SkillSet {

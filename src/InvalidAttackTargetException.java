@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public class InvalidAttackTargetException extends RuntimeException {
 	/**
 	 * 

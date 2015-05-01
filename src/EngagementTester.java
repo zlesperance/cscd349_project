@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public class EngagementTester {
 	public static void main (String[] args) {
 		testEngagementFighterVsSlime();

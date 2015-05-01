@@ -1,5 +1,3 @@
-package cscd349_project;
-
 public abstract class Antagonist extends Character {
 	private String name;
 	private String description;
