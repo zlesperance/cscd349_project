@@ -22,17 +22,17 @@ public class Fighter extends Protagonist {
 
 	@Override
 	public int getIntelligenceModifier() {
-		return (int) -(this.skills.getDexterity() * 0.25);
+		return (int) -(this.skills.getIntelligence() * 0.25);
 	}
 
 	@Override
 	public int getVitalityModifier() {
-		return (int) (this.skills.getBaseHP() * 0.5);
+		return (int) (this.skills.getVitality() * 0.5);
 	}
 
 	@Override
 	public int getAgilityModifier() {
-		return (int) -(this.skills.getBaseHP() * 0.1);
+		return (int) -(this.skills.getAgility() * 0.1);
 	}
 
 	@Override

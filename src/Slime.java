@@ -19,9 +19,9 @@ public class Slime extends Antagonist {
 	public void attack(Character foe) {
 		Game.report(toString() + " lauches itself at " + foe.toString() + "...");
 		
-		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 25) + getLuck()); 
+		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 20) + getLuck()); 
 		int hitChance = Math.min(100, Math.max(50, accuracy));
-		if (Game.nextRandom() > (hitChance / 100)) {
+		if (Game.nextRandom() > (hitChance / 100.0)) {
 			Game.report("but misses!");
 		} else {
 			foe.receiveDamage((int)(this.getStrength() * 1.5));

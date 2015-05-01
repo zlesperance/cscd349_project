@@ -33,6 +33,7 @@ public class Game {
 	}
 	
 	public static void end() {
+		report("Game Over");
 		kb.close();
 	}
 }

@@ -10,7 +10,7 @@ public abstract class Protagonist extends Character {
 	}
 	
 	protected void refresh() {
-		this.energy = this.getVitality() / 4;
+		this.energy = this.getVitality();
 	}
 	
 	public int getItemEnergy() {

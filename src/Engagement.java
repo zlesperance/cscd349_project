@@ -36,13 +36,13 @@ public class Engagement {
 				partyANext = partyACharacters.next();
 				partyBNext = partyBCharacters.next();
 			} else {
-				if (partyBNext == null || partyANext.getSpeed() > partyBNext.getSpeed()) {
+				if (partyBNext == null || (partyANext != null && partyANext.getSpeed() > partyBNext.getSpeed())) {
 					partyANext.selectAction(partyA, partyB, this);
 					if (partyACharacters.hasNext())
 						partyANext = partyACharacters.next();
 					else
 						partyANext = null;
-				} else if (partyANext == null || partyANext.getSpeed() < partyBNext.getSpeed()) {
+				} else if (partyANext == null || (partyBNext != null && partyANext.getSpeed() < partyBNext.getSpeed())) {
 					partyBNext.selectAction(partyB, partyA, this);
 					if (partyBCharacters.hasNext())
 						partyBNext = partyBCharacters.next();
