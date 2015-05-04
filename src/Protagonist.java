@@ -75,5 +75,46 @@ public abstract class Protagonist extends Character {
 	}
 	
 	//public void useItem(Item)
+	
+	@Override
+	public final void selectAction(Party allies, Party enemies, Engagement engagement) {
+		boolean endTurn = false;
+		refresh();
+		beginTurnHook();
+		
+		do {
+			Game.report("What will " + toString() + " do? [" + getHP() + " HP, " + this.energy + " EP]");
+			int selection = Game.makeSelection(getActions());
+			try {
+				performAction(selection, allies, enemies, engagement);
+				
+				if (enemies.isDefeated() || selectionStopsAction(selection) || !canPerformAnyAction())
+					endTurn = true;
+			} catch (NotEnoughEnergyException e) {
+				Game.report(e.getMessage());
+			}
+		} while (!endTurn);
+		
+		endTurnHook();
+	}
+	
+	public int getItemUseEnergy() {
+		return 2;
+	}
+	
+	public void useItem() {
+		// TODO: insert use item functionality
+	}
+	
+	protected void beginTurnHook() {}
+	
+	public abstract String[] getActions();
+	
+	public abstract void performAction(int index, Party allies, Party enemies, Engagement engagement);
+	
+	public abstract boolean selectionStopsAction(int index);
+	
+	public abstract boolean canPerformAnyAction();
 
+	protected void endTurnHook() {}
 }
