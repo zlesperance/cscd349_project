@@ -74,8 +74,6 @@ public abstract class Protagonist extends Character {
 		return this.name;
 	}
 	
-	//public void useItem(Item)
-	
 	@Override
 	public final void selectAction(Party allies, Party enemies, Engagement engagement) {
 		boolean endTurn = false;
