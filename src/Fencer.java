@@ -64,7 +64,80 @@ public class Fencer extends Protagonist {
 
 	@Override
 	public void attack(Character foe) {
+		if (this.energy < getBlockEnergy())
+			throw new NotEnoughEnergyException();
 		
+		this.energy -= getAttackEnergy();
+		Game.report(toString() + " lunges at " + foe.toString() + "...");
+		
+		this.parryCount = 0;
+		
+		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 25) + getLuck()); 
+		int hitChance = Math.min(100, Math.max(50, accuracy));
+		if (Game.nextRandom() > (hitChance / 100)) {
+			Game.report(toString() + "'s attack missed!");
+		} else {
+			int baseDmg = (int) (getDexterity() + (getStrength() / 2));
+			int damageRangeHigh = Math.min(10, getDexterity());
+			int damageRangeLow = -Math.max(0, foe.getAgility());
+			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
+			int actualDamage = Math.max(0, baseDmg + (int) (damageRangeLow + ((damageRangeHigh - damageRangeLow) * roll)));
+			foe.receiveDamage(actualDamage);
+		}
+	}
+	
+	private void block() {
+		if (this.energy < getBlockEnergy())
+			throw new NotEnoughEnergyException();
+		
+		this.energy -= getBlockEnergy();
+		this.isBlocking = true;
+		Game.report(getName() + " prepares to parry an attack");
+	}
+	
+	private void specialAttack(Character foe) {
+		if (this.energy < getSpecialEnergy())
+			throw new NotEnoughEnergyException();
+
+		this.energy -= getSpecialEnergy();
+		Game.report(toString() + " repostes at " + foe.toString() + "...");
+		
+		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 15) + getLuck()); 
+		int hitChance = Math.min(100, Math.max(50, accuracy));
+		if (Game.nextRandom() > (hitChance / 100)) {
+			Game.report(toString() + "'s repost missed!");
+		} else {
+			int baseDmg = (int) (getDexterity() * .8 + (getStrength() * .4));
+			baseDmg *= (1 + (this.parryCount * .5));
+			int damageRangeHigh = Math.min(10, getDexterity());
+			int damageRangeLow = -Math.max(0, foe.getAgility());
+			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
+			int actualDamage = Math.max(0, baseDmg + (int) (damageRangeLow + ((damageRangeHigh - damageRangeLow) * roll)));
+			foe.receiveDamage(actualDamage);
+		}
+		
+		this.parryCount = 0;
+	}
+	
+	@Override
+	public void receiveDamage(int damage) {
+		if (isBlocking) {
+			int blockingPower = (int) (((getDexterity()  * .4) + (getStrength() * .6)) * 4);
+			int newDamage = Math.max(damage - blockingPower, 0);
+			Game.report(getName() + " parried " + (damage - newDamage) + " damage!");
+			receiveDirectDamage(newDamage);
+			this.parryCount++;
+			
+			if (this.energy < getBlockEnergy()) {
+				this.isBlocking = false;
+				Game.report(getName() + " does not have enough energy to parry again!");
+			} else {
+				this.energy -= getBlockEnergy();
+			}
+		} else {
+			this.parryCount = 0;
+			super.receiveDamage(damage);
+		}
 	}
 
 	@Override
@@ -79,30 +152,41 @@ public class Fencer extends Protagonist {
 		
 		return this.actions;
 	}
+	
+	@Override
+	public void beginTurnHook() {
+		this.isBlocking = false;		
+	}
 
 	@Override
 	public void performAction(int index, Party allies, Party enemies,
 			Engagement engagement) {
-		// TODO Auto-generated method stub
-
+		if (index == 0) {
+			Character foe = enemies.selectCharacter(new LivingCharacterTester());
+			attack(foe);
+		} else if (index == 1) {
+			block();
+		} else if (index == 2) {
+			Character foe = enemies.selectCharacter(new LivingCharacterTester());			
+			specialAttack(foe);
+		} else if (index == 3) {
+			useItem();
+		}
 	}
 
 	@Override
 	public boolean selectionStopsAction(int index) {
-		// TODO Auto-generated method stub
-		return false;
+		return (index == 1 || index == 4);
 	}
 
 	@Override
 	public boolean canPerformAnyAction() {
-		// TODO Auto-generated method stub
-		return false;
+		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemUseEnergy());
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return getName();
 	}
 
 }

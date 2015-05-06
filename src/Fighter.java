@@ -154,7 +154,7 @@ public class Fighter extends Protagonist {
 	
 	@Override
 	public boolean canPerformAnyAction() {
-		return (this.energy <= getAttackEnergy() && this.energy <= getSpecialEnergy() && this.energy <= getBlockEnergy() && this.energy <= getItemUseEnergy());
+		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemUseEnergy());
 	}
 	
 	@Override

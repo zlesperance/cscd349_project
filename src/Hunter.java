@@ -3,14 +3,13 @@ public class Hunter extends Protagonist {
 	private boolean isAiming;
 	private Character target;
 	private String[] actions;
-	private int ammo;
 	
 	public Hunter(String name) {
 		super(name, "STR:1,DEX:3,INT:2,VIT:2,AGI:5,LUK:3");
 		actions = new String[5];
 		actions[0] = "Fire";
 		actions[1] = "Take Aim";
-		actions[2] = "Reload";
+		actions[2] = "Piercing Shot";
 		actions[3] = "Use Item";
 		actions[4] = "Pass";
 		
@@ -61,7 +60,7 @@ public class Hunter extends Protagonist {
 		return 0;
 	}
 	
-	private int getReloadEnergy() {
+	private int getSpecialEnergy() {
 		return 0;
 	}
 
@@ -77,19 +76,8 @@ public class Hunter extends Protagonist {
 		this.isAiming = true;
 	}
 	
-	private void reload() {
-		this.energy -= getReloadEnergy();
+	private void specialAttack(Character foe) {
 		
-		this.isAiming = false;
-		this.target = null;
-		
-		// TODO: This method should depend on the weapon equipped
-		/*
-		 * If the weapon has a clip, spend more energy, but set ammo to max
-		 * If the weapon does not have a clip, spend less energy, but only load 1 ammo
-		 */
-		// Another note: reloading action may be better if functionality is delegated to the weapon
-		this.ammo = 3; // This is temporary
 	}
 
 	@Override
@@ -98,7 +86,7 @@ public class Hunter extends Protagonist {
 		
 		actionsWithEnergy[0] = this.actions[0] + " (" + getAttackEnergy() + " EP)";
 		actionsWithEnergy[1] = this.actions[1] + " (" + getAimEnergy() + " EP)";
-		actionsWithEnergy[2] = this.actions[2] + " (" + getReloadEnergy() + " EP)";
+		actionsWithEnergy[2] = this.actions[2] + " (" + getSpecialEnergy() + " EP)";
 		actionsWithEnergy[3] = this.actions[3] + " (" + getItemEnergy() + " EP)";
 		actionsWithEnergy[4] = this.actions[4];
 		
