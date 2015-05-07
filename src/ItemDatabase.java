@@ -23,13 +23,13 @@ public class ItemDatabase
       
       //Etc tab items
       Etc jellopy = new Etc("Jellopy", 1, 3001);
-      Etc pGemstone = new Etc("Purple Gemstone", 1, 3002);
+      Etc pGemstone = new Etc("Purple Gemstone", 1, 3002);//maybe ammunition
       Etc eyeOfNewt = new Etc("Eye of Newt", 1, 3003);
       Etc clawOfRat = new Etc("Claw of Rat", 1, 3004);
       Etc bloodOfSloth = new Etc("Blood of Sloth", 1, 3005);
       Etc barbedWire = new Etc("Barbed Wire", 1, 3006);
       Etc shrunkenHead = new Etc("Shrunken Head", 1, 3007);
-      Etc chalkStick = new Etc("Chalk Stick", 1, 3008);
+      Etc chalkStick = new Etc("Chalk Stick", 1, 3008);//maybe catalyst
       Etc wingOfDragonfly = new Etc("Wing of Dragonfly", 1, 3009);
       Etc fluff = new Etc("Fluff", 1, 3010);
       Etc dustParticle = new Etc("Dust Particle", 1, 3011);
@@ -39,6 +39,8 @@ public class ItemDatabase
       Etc decayedToenail = new Etc("Decayed Toenail", 1, 3015);
       Etc shrodingerBox = new Etc("Shrodinger Box", 1, 3016);
       Etc stickyMucus = new Etc("Sticky Mucus", 1, 3017);
+      Etc arrow = new Etc("Arrow", 1, 3018);//ammunition
+      Etc bolt = new Etc("Bolt", 1, 3019);//ammunition
       
       db[0] = redPotion;
       db[1] = bluePotion;
@@ -67,8 +69,10 @@ public class ItemDatabase
       db[24] = decayedToenail;
       db[25] = shrodingerBox;
       db[26] = stickyMucus;
+      db[27] = arrow;
+      db[28] = bolt;
       
-      this.size = 27;
+      this.size = 29;
    }
    
    public Item getItem(int i)
