@@ -60,7 +60,7 @@ public class Fighter extends Protagonist {
 		if (Game.nextRandom() > (hitChance / 100)) {
 			Game.report(toString() + "'s attack missed!");
 		} else {
-			int baseDmg = (int) (getStrength() * 1.5);
+			int baseDmg = (int) ((getStrength() + this.weapon.getAtk()) * 1.5);
 			int damageRangeHigh = Math.min(10, getDexterity());
 			int damageRangeLow = -Math.max(0, foe.getAgility());
 			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));

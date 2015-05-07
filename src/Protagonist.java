@@ -1,12 +1,16 @@
 public abstract class Protagonist extends Character {
 	private String name;
-	// protected Weapon weapon;
+	protected Weapon weapon;
 	// protected Offhand offhand;
 	protected int energy;
 
 	protected Protagonist(String name, String skills) {
 		super(skills);
 		this.name = name;
+	}
+	
+	public void equipWeapon(Weapon weapon) {
+		this.weapon = weapon;
 	}
 	
 	protected void refresh() {

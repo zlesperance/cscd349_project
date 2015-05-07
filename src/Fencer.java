@@ -77,7 +77,7 @@ public class Fencer extends Protagonist {
 		if (Game.nextRandom() > (hitChance / 100)) {
 			Game.report(toString() + "'s attack missed!");
 		} else {
-			int baseDmg = (int) (getDexterity() + (getStrength() / 2));
+			int baseDmg = (int) (getDexterity() + ((getStrength() + this.weapon.getAtk()) / 2));
 			int damageRangeHigh = Math.min(10, getDexterity());
 			int damageRangeLow = -Math.max(0, foe.getAgility());
 			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
