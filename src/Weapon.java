@@ -27,6 +27,13 @@ public class Weapon extends Item
    {
       return this.gType;
    }
+	
+	//method separation
+	
+	public int getAtk()
+	{
+		return this.atk;
+	}
    
    //method separation
    
