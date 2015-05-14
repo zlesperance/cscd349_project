@@ -2,10 +2,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-	private static Random rng = new Random();
-	private static Scanner kb = new Scanner(System.in);
+	private static boolean active = false;
+	private static Random rng;
+	private static Scanner kb;
+	private static Inventory inventory;
 	
 	public static int makeSelection(String... options) {
+		checkGameActive();
 		System.out.println("Choose an option:");
 		for (int i = 0; i < options.length; i++) {
 			System.out.println(" " + i + ") " + options[i]);
@@ -32,12 +35,29 @@ public class Game {
 		report("You are at row " + x + ", column " + y + ".");
 	}
 	
+	public static void openInventory() {
+		
+	}
+	
 	public static double nextRandom() {
 		return rng.nextDouble();
 	}
 	
+	private static void checkGameActive() {
+		if (!active)
+			throw new GameNotInitializedException();
+	}
+	
+	public static void start() {
+		rng = new Random();
+		kb = new Scanner(System.in);
+		inventory = new Inventory();
+	}
+	
 	public static void end() {
-		report("Game Over");
+		checkGameActive();
 		kb.close();
+		active = false;
+		report("Game Over");
 	}
 }

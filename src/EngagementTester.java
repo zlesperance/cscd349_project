@@ -11,5 +11,9 @@ public class EngagementTester {
 		Engagement fight = new Engagement(protagonists, antagonists);
 		fight.begin();
 	}
+	
+	public static void testEngagementFigherFencerVsSlime() {
+		
+	}
 }
  
