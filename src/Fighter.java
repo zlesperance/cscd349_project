@@ -125,7 +125,7 @@ public class Fighter extends Protagonist {
 		actionsWithEnergy[3] = this.actions[3] + " (" + getItemEnergy() + " EP)";
 		actionsWithEnergy[4] = this.actions[4];
 		
-		return this.actions;
+		return actionsWithEnergy;
 	}
 	
 	@Override

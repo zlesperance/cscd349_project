@@ -28,6 +28,10 @@ public class Game {
 		System.out.println(message);
 	}
 	
+	public static void reportLocation(int x, int y) {
+		report("You are at row " + x + ", column " + y + ".");
+	}
+	
 	public static double nextRandom() {
 		return rng.nextDouble();
 	}
