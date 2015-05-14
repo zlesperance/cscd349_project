@@ -3,10 +3,16 @@ import java.util.Iterator;
 public class Engagement {
 	private Party partyA, partyB;
 	private boolean ended;
+	private boolean escapable;
 	
 	public Engagement(Party partyA, Party partyB) {
+		this(partyA, partyB, true);
+	}
+	
+	public Engagement(Party partyA, Party partyB, boolean escapable) {
 		this.partyA = partyA;
 		this.partyB = partyB;
+		this.escapable = escapable;
 	}
 	
 	public void begin() {
@@ -73,5 +79,14 @@ public class Engagement {
 	
 	public void end() {
 		this.ended = true;
+	}
+	
+	public boolean tryFlee() {
+		if (!escapable) {
+			Game.report("You cannot escape!");
+			return false;
+		}
+		// Todo: Add flee mechanics
+		return true;
 	}
 }

@@ -1,8 +1,15 @@
 public class Fighter extends Protagonist {
 	private boolean isBlocking;
+	private String[] actions;
 	
 	public Fighter(String name) {
 		super(name, "STR:4,DEX:3,INT:1,VIT:4,AGI:2,LUK:3");
+		actions = new String[5];
+		actions[0] = "Attack";
+		actions[1] = "Whirlwind Strike";
+		actions[2] = "Block";
+		actions[3] = "Use Item";
+		actions[4] = "Pass";
 	}
 
 	@Override
@@ -41,7 +48,10 @@ public class Fighter extends Protagonist {
 	}
 
 	@Override
-	public void attack(Character foe) {
+	public void attack(Character foe) throws NotEnoughEnergyException {
+		if (this.energy < getAttackEnergy())
+			throw new NotEnoughEnergyException();
+		
 		this.energy -= getAttackEnergy();
 		Game.report(toString() + " swings their weapon at " + foe.toString() + "...");
 		
@@ -50,7 +60,7 @@ public class Fighter extends Protagonist {
 		if (Game.nextRandom() > (hitChance / 100)) {
 			Game.report(toString() + "'s attack missed!");
 		} else {
-			int baseDmg = (int) (getStrength() * 1.5);
+			int baseDmg = (int) ((getStrength() + this.weapon.getAtk()) * 1.5);
 			int damageRangeHigh = Math.min(10, getDexterity());
 			int damageRangeLow = -Math.max(0, foe.getAgility());
 			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
@@ -60,8 +70,19 @@ public class Fighter extends Protagonist {
 	}
 	
 	private void specialAttack(Party foes) {
+		if (this.energy < getSpecialEnergy())
+			throw new NotEnoughEnergyException();
 		
 		this.energy -= getSpecialEnergy();
+	}
+	
+	private void block() {
+		if (this.energy < getBlockEnergy())
+			throw new NotEnoughEnergyException();
+		
+		this.energy -= getBlockEnergy();
+		this.isBlocking = true;
+		Game.report(getName() + " prepares to block an attack");
 	}
 	
 	private int getAttackEnergy() {
@@ -93,44 +114,47 @@ public class Fighter extends Protagonist {
 			super.receiveDamage(damage);
 		}
 	}
-
+	
 	@Override
-	public void selectAction(Party allies, Party enemies, Engagement engagement) {
-		boolean endTurn = false;
-		refresh();
+	public String[] getActions() {
+		String[] actionsWithEnergy = new String[this.actions.length];
 		
-		do {
-			Game.report("What will " + toString() + " do? [" + getHP() + " HP, " + this.energy + " EP]");
-			int selection = Game.makeSelection("Attack (" + getAttackEnergy() + " EP)", "Whirlwind Strike (" + getSpecialEnergy() + " EP)", "Block (" + getBlockEnergy() + " EP)", "Use Item (" + getItemEnergy() + " EP)", "Pass");
-			if (selection == 0) {
-				if (this.energy >= getAttackEnergy()) {
-					Character foe = enemies.selectCharacter(new LivingCharacterTester());
-					attack(foe);
-				} else {
-					Game.report(getName() + " doesn't have enough energy to do that!");
-				}
-			} else if (selection == 1) {
-				if (this.energy >= getSpecialEnergy()) {
-					specialAttack(enemies);
-				} else {
-					Game.report(getName() + " doesn't have enough energy to do that!");
-				}
-			} else if (selection == 2) {
-				if (this.energy >= getBlockEnergy()) {
-					this.energy -= getBlockEnergy();
-					this.isBlocking = true;
-					Game.report(getName() + " prepares to block an attack");
-					endTurn = true;
-				}
-			} else if (selection == 3) {
-				// TODO: use item
-			} else if (selection == 4) {
-				endTurn = true;
-			}
-			
-			if (enemies.isDefeated() || (this.energy < getAttackEnergy() && this.energy < getSpecialEnergy() && this.energy < getBlockEnergy() && this.energy < getItemEnergy()))
-				endTurn = true;
-		} while (!endTurn);
+		actionsWithEnergy[0] = this.actions[0] + " (" + getAttackEnergy() + " EP)";
+		actionsWithEnergy[1] = this.actions[1] + " (" + getSpecialEnergy() + " EP)";
+		actionsWithEnergy[2] = this.actions[2] + " (" + getBlockEnergy() + " EP)";
+		actionsWithEnergy[3] = this.actions[3] + " (" + getItemEnergy() + " EP)";
+		actionsWithEnergy[4] = this.actions[4];
+		
+		return actionsWithEnergy;
+	}
+	
+	@Override
+	protected void beginTurnHook() {
+		this.isBlocking = false;
+	}
+	
+	@Override
+	public void performAction(int index, Party allies, Party enemies, Engagement engagement) throws NotEnoughEnergyException {
+		if (index == 0) {
+			Character foe = enemies.selectCharacter(new LivingCharacterTester());
+			attack(foe);
+		} else if (index == 1) {
+			specialAttack(enemies);
+		} else if (index == 2) {
+			block();
+		} else if (index == 3) {
+			useItem();
+		}
+	}
+	
+	@Override
+	public boolean selectionStopsAction(int index) {
+		return (index == 2 || index == 4);
+	}
+	
+	@Override
+	public boolean canPerformAnyAction() {
+		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemUseEnergy());
 	}
 	
 	@Override
