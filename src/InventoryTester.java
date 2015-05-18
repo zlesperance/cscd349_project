@@ -71,22 +71,22 @@ public class InventoryTester
    {
       if(t == 1)
       {
-         i.addItem(i.getItems(), i.getItemsName(), db.getItem(0));
+         i.addItem(db.getHealingItem(0));
          System.out.println(i.toString(i.getItemsName(), i.getItems()));
       }
       else if(t == 2)
       {
-         i.addItem(i.getEquip(), i.getEquipName(), db.getItem(1));
+         i.addItem(db.getWeapon(1));
          System.out.println(i.toString(i.getEquipName(), i.getEquip()));
       }
       else if(t == 3)
       {
-         i.addItem(i.getEtc(), i.getEtcName(), db.getItem(3));
+         i.addItem(db.getEtc(3));
          System.out.println(i.toString(i.getEtcName(), i.getEtc()));
       }
       else if(t == 4)
       {
-         i.addItem(i.getGears(), i.getGearsName(), db.getItem(2));
+         i.addGear(db.getShield(2));
          System.out.println(i.toString(i.getGearsName(), i.getGears()));
       }
    }
@@ -97,22 +97,23 @@ public class InventoryTester
    {
       if(t == 1)
       {
-         i.removeItem(i.getItems(), i.getItemsName(), db.getItem(0));
+         i.removeItem(db.getHealingItem(0));
          System.out.println(i.toString(i.getItemsName(), i.getItems()));
       }
       else if(t == 2)
       {
-         i.removeItem(i.getEquip(), i.getEquipName(), db.getItem(1));
+         i.removeEquip(db.getWeapon(1));
          System.out.println(i.toString(i.getEquipName(), i.getEquip()));
       }
       else if(t == 3)
       {
-         i.removeItem(i.getEtc(), i.getEtcName(), db.getItem(3));
+         i.removeItem(db.getEtc(3));
          System.out.println(i.toString(i.getEtcName(), i.getEtc()));
       }
       else if(t == 4)
       {
-         i.removeItem(i.getGears(), i.getGearsName(), db.getItem(2));
+         //uses the addGear method to remove any equipped shield and replace it with an empty hand
+         i.addGear(new Shield());
          System.out.println(i.toString(i.getGearsName(), i.getGears()));
       }
    }
