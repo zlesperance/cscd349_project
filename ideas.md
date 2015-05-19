@@ -17,3 +17,4 @@
 * leveling system?
 * ratemyserver.net
 * http://irowiki.org/wiki/Stats
+* Prototype pattern may be good for antagonist creation (variation in stats)
