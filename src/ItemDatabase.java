@@ -1,8 +1,8 @@
 
-
+//figher, mancer, fencer, hunter
 public class ItemDatabase
 {
-   private Item []db = new Item[40];
+   private Item []db = new Item[50];
    private int size;
    
    public ItemDatabase()
@@ -11,15 +11,27 @@ public class ItemDatabase
       HealingItem redPotion = new HealingItem("Red Potion", "Consumable", 'h', 2, 19, 1001);
       HealingItem bluePotion = new HealingItem("Blue Potion", "Consumable", 'm', 5, 10, 1002);
       HealingItem greenPotion = new HealingItem("Green Potion", "Consumable", 's', 3, 5, 1003);
-      HealingItem teamHealScroll = new HealingItem("Team Heal Scroll", "Consumable", 'h', 10, 20, 1004);
+      HealingItem teamHealingScroll = new HealingItem("Team Healing Scroll", "Consumable", 'h', 10, 20, 1004);
+      HealingItem healingScroll = new HealingItem("Healing Scroll", "Consumable", 'h', 8, 25, 1005);
       UsableItem teleportScroll = new UsableItem("Teleport Scroll", 5, 1005);
       UsableItem reviveScroll = new UsableItem("Revive Scroll", 5, 1006);
       
       //Equip tab items
-      Weapon knife = new Weapon("Knife[0]", 40, "Dagger", 17, 2001);//physical weapon
-      Weapon arcWand = new Weapon("Arc Wand[0]", 45, "Staff", 60, 2002);//magic weapon
-      Shield guard = new Shield("Guard[0]", 130, "Shield",  6, 2003);//physical shield
-      Shield eCoat = new Shield("Energy Coat[0]", 0, "Shield", 4, 2004);//magic shield
+      //Weapons
+      Weapon bronzeSword = new Weapon("Bronze Sword", 40, "Sword", 10, 2001);//physical weapon
+      Weapon ironSword = new Weapon("Iron Sword", 38, "Sword", 20, 2002);//physical weapon
+      Weapon steelSword = new Weapon("Steel Sword", 35, "Sword", 30, 2003);//physical weapon
+      Weapon woodenStaff = new Weapon("Wooden Staff", 15, "Staff", 12, 2004);//magic weapon
+      Weapon magicianStaff = new Weapon("Magician Staff", 13, "Staff", 18, 2005);//magic weapon
+      Weapon wizardStaff = new Weapon("Wizard Staff", 10, "Staff", 24, 2006);//magic weapon
+      Weapon longBow = new Weapon("Long Bow", 25, "Bow", 9, 2007);//physical weapon
+      Weapon compositeBow = new Weapon("Composite Bow", 23, "Bow", 18, 2008);//physical weapon
+      Weapon crossbow = new Weapon("Crossbow", 20, "Bow", 27, 2009);//physical weapon
+      
+      //Equip tab items
+      //Shields
+      Shield guard = new Shield("Guard", 130, "Shield",  6, 2003);//physical shield
+      Shield eCoat = new Shield("Energy Coat", 0, "Shield", 4, 2004);//magic shield
       
       //Etc tab items
       Etc jellopy = new Etc("Jellopy", 1, 3001);
@@ -45,38 +57,76 @@ public class ItemDatabase
       db[0] = redPotion;
       db[1] = bluePotion;
       db[2] = greenPotion;
-      db[3] = teamHealScroll;
-      db[4] = teleportScroll;
-      db[5] = reviveScroll;
-      db[6] = knife;
-      db[7] = arcWand;
-      db[8] = guard;
-      db[9] = eCoat;
-      db[10] = jellopy;
-      db[11] = pGemstone;
-      db[12] = eyeOfNewt;
-      db[13] = clawOfRat;
-      db[14] = bloodOfSloth;
-      db[15] = barbedWire;
-      db[16] = shrunkenHead;
-      db[17] = chalkStick;
-      db[18] = wingOfDragonfly;
-      db[19] = fluff;
-      db[20] = dustParticle;
-      db[21] = toothOfBat;
-      db[22] = tentacle;
-      db[23] = ectoplasm;
-      db[24] = decayedToenail;
-      db[25] = shrodingerBox;
-      db[26] = stickyMucus;
-      db[27] = arrow;
-      db[28] = bolt;
+      db[3] = teamHealingScroll;
+      db[4] = healingScroll;
+      db[5] = teleportScroll;
+      db[6] = reviveScroll;
+      db[7] = bronzeSword;
+      db[8] = ironSword;
+      db[9] = steelSword;
+      db[10] = woodenStaff;
+      db[11] = magicianStaff;
+      db[12] = wizardStaff;
+      db[13] = longBow;
+      db[14] = compositeBow;
+      db[15] = crossbow;
+      db[16] = guard;
+      db[17] = eCoat;
+      db[18] = jellopy;
+      db[19] = pGemstone;
+      db[20] = eyeOfNewt;
+      db[21] = clawOfRat;
+      db[22] = bloodOfSloth;
+      db[23] = barbedWire;
+      db[24] = shrunkenHead;
+      db[25] = chalkStick;
+      db[26] = wingOfDragonfly;
+      db[27] = fluff;
+      db[28] = dustParticle;
+      db[29] = toothOfBat;
+      db[30] = tentacle;
+      db[31] = ectoplasm;
+      db[32] = decayedToenail;
+      db[33] = shrodingerBox;
+      db[34] = stickyMucus;
+      db[35] = arrow;
+      db[36] = bolt;
       
-      this.size = 29;
+      this.size = 37;
    }
    
-   public Item getItem(int i)
+   //method separation
+   
+   public UsableItem getUsableItem(int i)
    {
-      return this.db[i];
+      return (UsableItem)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public HealingItem getHealingItem(int i)
+   {
+      return (HealingItem)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public Weapon getWeapon(int i)
+   {
+      return (Weapon)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public Shield getShield(int i)
+   {
+      return (Shield)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public Etc getEtc(int i)
+   {
+      return (Etc)(this.db[i]);
    }
 }
