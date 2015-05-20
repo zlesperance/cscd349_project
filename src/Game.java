@@ -52,6 +52,7 @@ public class Game {
 		rng = new Random();
 		kb = new Scanner(System.in);
 		inventory = new Inventory();
+		active = true;
 	}
 	
 	public static void end() {

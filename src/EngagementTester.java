@@ -1,5 +1,7 @@
 public class EngagementTester {
 	public static void main (String[] args) {
+		Game.start();
+		
 		testEngagementFighterVsSlime();
 		
 		Game.end();
