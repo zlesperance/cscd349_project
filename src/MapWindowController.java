@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -19,12 +20,17 @@ public class MapWindowController implements Initializable {
 	private int partyX;
 	private int partyY;
 	private GraphicsContext gc;
+	private Scene scene;
+	private GameClient client;
+	
 	@FXML
 	Canvas mapCanvas;
 	@FXML
 	Label messageBox;
 	@FXML
 	VBox windowVBox;
+	@FXML
+	VBox buttonContainer;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,8 +42,15 @@ public class MapWindowController implements Initializable {
 		drawParty(gc);
 		
 		messageBox.setText("Game Ready");
-		
-		installKeyEventHandler(windowVBox);
+	}
+	
+	public void setScene(Scene scene) {
+		this.scene = scene;
+		installKeyEventHandler(this.scene);
+	}
+	
+	public void setGameClient(GameClient client) {
+		this.client = client;
 	}
 	
 	private void updateMap() {
@@ -63,7 +76,7 @@ public class MapWindowController implements Initializable {
 		gc.strokePolygon(new double[]{baseX + (CELL_SIZE / 2.0), baseX + padding, baseX + CELL_SIZE - padding}, new double[]{baseY + padding, baseY + CELL_SIZE - padding, baseY + CELL_SIZE - padding}, 3);
 	}
 	
-	private void installKeyEventHandler(final Node keyNode) {
+	private void installKeyEventHandler(final Scene keyNode) {
 		final EventHandler<KeyEvent> keyEventHandler = 
 				new EventHandler<KeyEvent>() {
 			public void handle(final KeyEvent keyEvent) {
@@ -103,12 +116,12 @@ public class MapWindowController implements Initializable {
 	}
 	
 	private void tryTravelUp() {
-		partyY++;
+		partyY--;
 		updateMap();
 	}
 	
 	private void tryTravelDown() {
-		partyY--;
+		partyY++;
 		updateMap();
 	}
 
