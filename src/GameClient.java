@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 public class GameClient extends Application {
 	private Stage stage;
+	private WindowController controller;
 	private Scene mapScene;
 	private MapWindowController mapController;
 	private Scene inventoryScene;
@@ -25,8 +26,8 @@ public class GameClient extends Application {
 		this.mapController = (MapWindowController) loader.getController();
 		this.mapController.setScene(this.mapScene);
 		this.mapController.setGameClient(this);
-		
-		loader = new FXMLLoader(getClass().getResource("mapWindow.fxml"));
+		/*
+		loader = new FXMLLoader(getClass().getResource(""));
 		
 		this.inventoryScene = new Scene(loader.<Parent>load());
 		
@@ -34,20 +35,26 @@ public class GameClient extends Application {
 		this.inventoryController.setScene(this.inventoryScene);
 		this.inventoryController.setGameClient(this);
 		
-		loader = new FXMLLoader(getClass().getResource("mapWindow.fxml"));
+		loader = new FXMLLoader(getClass().getResource(""));
 		
 		this.engagementScene = new Scene(loader.<Parent>load());
 		
 		this.engagementController = (EngagementWindowController) loader.getController();
 		this.engagementController.setScene(this.engagementScene);
 		this.engagementController.setGameClient(this);		
-		
+		*/
 		primaryStage.setTitle("CSCD349 Final Project");
 		primaryStage.setScene(this.mapScene);
 
 		primaryStage.show();
 		
 		this.stage = primaryStage;
+		this.controller = this.mapController;
+		
+		Game.registerGameClient(this);
+		Game.start();
+		
+		Game.makeSelection("A", "B", "C", "D");
 	}
 	
 	public void openInventory() {
@@ -60,6 +67,10 @@ public class GameClient extends Application {
 	
 	public void openEngagement() {
 		this.stage.setScene(this.engagementScene);
+	}
+	
+	public int makeSelection(String... options) {
+		return this.controller.makeSelection(options);
 	}
 
 	public static void main(String[] args) {

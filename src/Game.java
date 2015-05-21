@@ -6,9 +6,17 @@ public class Game {
 	private static Random rng;
 	private static Scanner kb;
 	private static Inventory inventory;
+	private static GameClient gameClient;
+	
+	public static void registerGameClient(GameClient gameClient) {
+		Game.gameClient = gameClient;
+	}
 	
 	public static int makeSelection(String... options) {
 		checkGameActive();
+		
+		return Game.gameClient.makeSelection(options);
+		/*
 		System.out.println("Choose an option:");
 		for (int i = 0; i < options.length; i++) {
 			System.out.println(" " + i + ") " + options[i]);
@@ -24,7 +32,7 @@ public class Game {
 			}
 		} while (selection < 0 || selection >= options.length);
 		
-		return selection;
+		return selection;*/
 	}
 	
 	public static void report(String message) {
@@ -44,7 +52,7 @@ public class Game {
 	}
 	
 	private static void checkGameActive() {
-		if (!active)
+		if (!active || gameClient == null)
 			throw new GameNotInitializedException();
 	}
 	

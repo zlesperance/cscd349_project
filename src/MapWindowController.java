@@ -1,6 +1,7 @@
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,14 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 
-public class MapWindowController implements Initializable {
+public class MapWindowController implements Initializable, WindowController {
 	private final double CELL_SIZE = 48;
 	private int partyX;
 	private int partyY;
@@ -31,6 +34,33 @@ public class MapWindowController implements Initializable {
 	VBox windowVBox;
 	@FXML
 	VBox buttonContainer;
+	
+	private class ButtonSelectionHandler<T extends Event> implements EventHandler<T> {
+		private boolean waitingForInput;
+		private String inputResult;
+		
+		public ButtonSelectionHandler() {
+			this.waitingForInput = true;
+			this.inputResult = null;
+		}
+		
+		public boolean isWaiting() {
+			return this.waitingForInput;
+		}
+		
+		public String getResult() {
+			return this.inputResult;
+		}
+
+		@Override
+		public synchronized void handle(T event) {
+			if (this.waitingForInput) {
+				this.waitingForInput = false;
+				this.inputResult = ((Button)event.getSource()).getText();
+			}
+		}
+		
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -123,6 +153,40 @@ public class MapWindowController implements Initializable {
 	private void tryTravelDown() {
 		partyY++;
 		updateMap();
+	}
+
+	@Override
+	public int makeSelection(String... options) {
+		buttonContainer.getChildren().clear();
+		
+		final ButtonSelectionHandler<MouseEvent> mouseEventHandler = new ButtonSelectionHandler<MouseEvent>();
+		
+		for (String option : options) {
+			Button btn = new Button(option);
+			
+			buttonContainer.getChildren().add(btn);
+			btn.setOnMouseClicked(mouseEventHandler);
+		}
+		
+		while (mouseEventHandler.isWaiting()) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				return -1;
+			}
+		}
+		
+		String result = mouseEventHandler.getResult();
+		
+		messageBox.setText("Selection: " + result);
+		
+		for (int i = 0; i < options.length; i++) {
+			if (options[i].equals(result))
+				return i;
+		}
+		
+		return -1;
 	}
 
 }
