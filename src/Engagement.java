@@ -4,6 +4,7 @@ public class Engagement {
 	private Party partyA, partyB;
 	private boolean ended;
 	private boolean escapable;
+	private Game game;
 	
 	public Engagement(Party partyA, Party partyB) {
 		this(partyA, partyB, true);
@@ -13,6 +14,7 @@ public class Engagement {
 		this.partyA = partyA;
 		this.partyB = partyB;
 		this.escapable = escapable;
+		this.game = Game.getInstance();
 	}
 	
 	public void begin() {
@@ -83,7 +85,7 @@ public class Engagement {
 	
 	public boolean tryFlee() {
 		if (!escapable) {
-			Game.report("You cannot escape!");
+			this.game.report("You cannot escape!");
 			return false;
 		}
 		// Todo: Add flee mechanics

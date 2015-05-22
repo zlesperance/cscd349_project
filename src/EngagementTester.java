@@ -1,10 +1,10 @@
 public class EngagementTester {
 	public static void main (String[] args) {
-		Game.start();
+		Game game = Game.getInstance();
 		
 		testEngagementFighterVsSlime();
 		
-		Game.end();
+		game.end();
 	}
 	
 	public static void testEngagementFighterVsSlime() {

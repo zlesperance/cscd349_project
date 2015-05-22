@@ -3,11 +3,13 @@ public abstract class Protagonist extends Character {
 	protected Weapon weapon;
 	// protected Offhand offhand;
 	protected int energy;
+	private Game game;
 
 	protected Protagonist(String name, String skills) {
 		super(skills);
 		this.name = name;
 		this.weapon = new Weapon();
+		this.game = Game.getInstance();
 	}
 	
 	public void equipWeapon(Weapon weapon) {
@@ -86,15 +88,15 @@ public abstract class Protagonist extends Character {
 		beginTurnHook();
 		
 		do {
-			Game.report("What will " + toString() + " do? [" + getHP() + " HP, " + this.energy + " EP]");
-			int selection = Game.makeSelection(getActions());
+			this.game.report("What will " + toString() + " do? [" + getHP() + " HP, " + this.energy + " EP]");
+			int selection = this.game.makeSelection(getActions());
 			try {
 				performAction(selection, allies, enemies, engagement);
 				
 				if (enemies.isDefeated() || selectionStopsAction(selection) || !canPerformAnyAction())
 					endTurn = true;
 			} catch (NotEnoughEnergyException e) {
-				Game.report(e.getMessage());
+				this.game.report(e.getMessage());
 			}
 		} while (!endTurn);
 		

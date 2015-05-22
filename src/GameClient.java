@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class GameClient extends Application {
+	private Game game;
 	private Stage stage;
 	private WindowController controller;
 	private Scene mapScene;
@@ -51,10 +52,10 @@ public class GameClient extends Application {
 		this.stage = primaryStage;
 		this.controller = this.mapController;
 		
-		Game.registerGameClient(this);
-		Game.start();
+		this.game = Game.getInstance();
+		this.game.registerGameClient(this);
 		
-		Game.makeSelection("A", "B", "C", "D");
+		this.game.makeSelection("A", "B", "C", "D");
 	}
 	
 	public void openInventory() {

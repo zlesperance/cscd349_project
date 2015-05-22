@@ -3,6 +3,7 @@ public class Fencer extends Protagonist {
 	private boolean isBlocking;
 	private int parryCount;
 	private String[] actions;
+	private Game game;
 	
 	public Fencer(String name) {
 		super(name, "STR:2,DEX:4,INT:1,VIT:3,AGI:4,LUK:3");
@@ -13,6 +14,7 @@ public class Fencer extends Protagonist {
 		actions[3] = "Use Item";
 		actions[4] = "Pass";
 		parryCount = 0;
+		this.game = Game.getInstance();
 	}
 
 	@Override
@@ -68,19 +70,19 @@ public class Fencer extends Protagonist {
 			throw new NotEnoughEnergyException();
 		
 		this.energy -= getAttackEnergy();
-		Game.report(toString() + " lunges at " + foe.toString() + "...");
+		this.game.report(toString() + " lunges at " + foe.toString() + "...");
 		
 		this.parryCount = 0;
 		
 		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 25) + getLuck()); 
 		int hitChance = Math.min(100, Math.max(50, accuracy));
-		if (Game.nextRandom() > (hitChance / 100)) {
-			Game.report(toString() + "'s attack missed!");
+		if (this.game.nextRandom() > (hitChance / 100)) {
+			this.game.report(toString() + "'s attack missed!");
 		} else {
 			int baseDmg = (int) (getDexterity() + ((getStrength() + this.weapon.getAtk()) / 2));
 			int damageRangeHigh = Math.min(10, getDexterity());
 			int damageRangeLow = -Math.max(0, foe.getAgility());
-			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
+			double roll = Math.max(0, Math.min(100, this.game.nextRandom() + (getLuck() / 100)));
 			int actualDamage = Math.max(0, baseDmg + (int) (damageRangeLow + ((damageRangeHigh - damageRangeLow) * roll)));
 			foe.receiveDamage(actualDamage);
 		}
@@ -92,7 +94,7 @@ public class Fencer extends Protagonist {
 		
 		this.energy -= getBlockEnergy();
 		this.isBlocking = true;
-		Game.report(getName() + " prepares to parry an attack");
+		this.game.report(getName() + " prepares to parry an attack");
 	}
 	
 	private void specialAttack(Character foe) {
@@ -100,18 +102,18 @@ public class Fencer extends Protagonist {
 			throw new NotEnoughEnergyException();
 
 		this.energy -= getSpecialEnergy();
-		Game.report(toString() + " repostes at " + foe.toString() + "...");
+		this.game.report(toString() + " repostes at " + foe.toString() + "...");
 		
 		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 15) + getLuck()); 
 		int hitChance = Math.min(100, Math.max(50, accuracy));
-		if (Game.nextRandom() > (hitChance / 100)) {
-			Game.report(toString() + "'s repost missed!");
+		if (this.game.nextRandom() > (hitChance / 100)) {
+			this.game.report(toString() + "'s repost missed!");
 		} else {
 			int baseDmg = (int) (getDexterity() * .8 + (getStrength() * .4));
 			baseDmg *= (1 + (this.parryCount * .5));
 			int damageRangeHigh = Math.min(10, getDexterity());
 			int damageRangeLow = -Math.max(0, foe.getAgility());
-			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
+			double roll = Math.max(0, Math.min(100, this.game.nextRandom() + (getLuck() / 100)));
 			int actualDamage = Math.max(0, baseDmg + (int) (damageRangeLow + ((damageRangeHigh - damageRangeLow) * roll)));
 			foe.receiveDamage(actualDamage);
 		}
@@ -124,13 +126,13 @@ public class Fencer extends Protagonist {
 		if (isBlocking) {
 			int blockingPower = (int) (((getDexterity()  * .4) + (getStrength() * .6)) * 4);
 			int newDamage = Math.max(damage - blockingPower, 0);
-			Game.report(getName() + " parried " + (damage - newDamage) + " damage!");
+			this.game.report(getName() + " parried " + (damage - newDamage) + " damage!");
 			receiveDirectDamage(newDamage);
 			this.parryCount++;
 			
 			if (this.energy < getBlockEnergy()) {
 				this.isBlocking = false;
-				Game.report(getName() + " does not have enough energy to parry again!");
+				this.game.report(getName() + " does not have enough energy to parry again!");
 			} else {
 				this.energy -= getBlockEnergy();
 			}

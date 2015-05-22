@@ -2,20 +2,35 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-	private static boolean active = false;
-	private static Random rng;
-	private static Scanner kb;
-	private static Inventory inventory;
-	private static GameClient gameClient;
+	private static Game instance;
+	private boolean active = false;
+	private Random rng;
+	private Scanner kb;
+	private Inventory inventory;
+	private GameClient gameClient;
 	
-	public static void registerGameClient(GameClient gameClient) {
-		Game.gameClient = gameClient;
+	private Game() {
+		rng = new Random();
+		kb = new Scanner(System.in);
+		inventory = new Inventory();
+		active = true;
 	}
 	
-	public static int makeSelection(String... options) {
+	public static Game getInstance() {
+		if (instance == null) {
+			instance = new Game();
+		}
+		return instance;
+	}
+	
+	public void registerGameClient(GameClient gameClient) {
+		this.gameClient = gameClient;
+	}
+	
+	public int makeSelection(String... options) {
 		checkGameActive();
 		
-		return Game.gameClient.makeSelection(options);
+		return this.gameClient.makeSelection(options);
 		/*
 		System.out.println("Choose an option:");
 		for (int i = 0; i < options.length; i++) {
@@ -35,38 +50,31 @@ public class Game {
 		return selection;*/
 	}
 	
-	public static void report(String message) {
+	public void report(String message) {
 		System.out.println(message);
 	}
 	
-	public static void reportLocation(int x, int y) {
+	public void reportLocation(int x, int y) {
 		report("You are at row " + x + ", column " + y + ".");
 	}
 	
-	public static void openInventory() {
+	public void openInventory() {
 		
 	}
 	
-	public static double nextRandom() {
+	public double nextRandom() {
 		return rng.nextDouble();
 	}
 	
-	private static void checkGameActive() {
-		if (!active || gameClient == null)
+	private void checkGameActive() {
+		if (!this.active || this.gameClient == null)
 			throw new GameNotInitializedException();
 	}
 	
-	public static void start() {
-		rng = new Random();
-		kb = new Scanner(System.in);
-		inventory = new Inventory();
-		active = true;
-	}
-	
-	public static void end() {
+	public void end() {
 		checkGameActive();
-		kb.close();
-		active = false;
+		this.kb.close();
+		this.active = false;
 		report("Game Over");
 	}
 }

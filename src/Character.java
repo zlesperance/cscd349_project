@@ -1,17 +1,19 @@
 public abstract class Character {
 	private int healthPoints;
 	protected SkillSet skills;
+	private Game game;
 	
 	protected Character(String skills) {
 		this.skills = SkillSet.buildSkills(skills);
 		this.healthPoints = this.skills.getBaseHP();
+		this.game = Game.getInstance();
 	}
 	
 	public abstract void selectAction(Party allies, Party enemies, Engagement engagement);
 	
 	public void receiveDamage(int damage) {
 		if (tryDodge()) {
-			Game.report(toString() + " dodged the attack!");
+			this.game.report(toString() + " dodged the attack!");
 			return;
 		}
 		
@@ -21,14 +23,14 @@ public abstract class Character {
 		}
 		
 		this.healthPoints -= damage;
-		Game.report(toString() + " receives " + damage + " damage!");
+		this.game.report(toString() + " receives " + damage + " damage!");
 		if (this.healthPoints <= 0)
 			this.die();
 	}
 	
 	protected void receiveDirectDamage(int damage) {
 		this.healthPoints -= damage;
-		Game.report(toString() + " receives " + damage + " damage!");
+		this.game.report(toString() + " receives " + damage + " damage!");
 		if (this.healthPoints <= 0) 
 			this.die();
 	}
@@ -78,7 +80,7 @@ public abstract class Character {
 	}
 	
 	private void die() {
-		Game.report(toString() + " is defeated!");
+		this.game.report(toString() + " is defeated!");
 	}
 	
 	public boolean isDead() {
