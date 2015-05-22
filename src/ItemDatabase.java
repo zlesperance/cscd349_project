@@ -13,25 +13,26 @@ public class ItemDatabase
       HealingItem greenPotion = new HealingItem("Green Potion", "Consumable", 's', 3, 5, 1003);
       HealingItem teamHealingScroll = new HealingItem("Team Healing Scroll", "Consumable", 'h', 10, 20, 1004);
       HealingItem healingScroll = new HealingItem("Healing Scroll", "Consumable", 'h', 8, 25, 1005);
-      UsableItem teleportScroll = new UsableItem("Teleport Scroll", 5, 1005);
-      UsableItem reviveScroll = new UsableItem("Revive Scroll", 5, 1006);
+      UsableItem teleportScroll = new UsableItem("Teleport Scroll", 5, 1006);
+      UsableItem reviveScroll = new UsableItem("Revive Scroll", 5, 1007);
       
       //Equip tab items
       //Weapons
       Weapon bronzeSword = new Weapon("Bronze Sword", 40, "Sword", 10, 2001);//physical weapon
       Weapon ironSword = new Weapon("Iron Sword", 38, "Sword", 20, 2002);//physical weapon
       Weapon steelSword = new Weapon("Steel Sword", 35, "Sword", 30, 2003);//physical weapon
-      Weapon woodenStaff = new Weapon("Wooden Staff", 15, "Staff", 12, 2004);//magic weapon
+      Weapon woodenStaff = new Weapon("Wooden Staff", 15, "Staff", 9, 2004);//magic weapon
       Weapon magicianStaff = new Weapon("Magician Staff", 13, "Staff", 18, 2005);//magic weapon
-      Weapon wizardStaff = new Weapon("Wizard Staff", 10, "Staff", 24, 2006);//magic weapon
-      Weapon longBow = new Weapon("Long Bow", 25, "Bow", 9, 2007);//physical weapon
+      Weapon wizardStaff = new Weapon("Wizard Staff", 10, "Staff", 27, 2006);//magic weapon
+      Weapon longBow = new Weapon("Long Bow", 25, "Bow", 12, 2007);//physical weapon
       Weapon compositeBow = new Weapon("Composite Bow", 23, "Bow", 18, 2008);//physical weapon
-      Weapon crossbow = new Weapon("Crossbow", 20, "Bow", 27, 2009);//physical weapon
+      Weapon crossbow = new Weapon("Crossbow", 20, "Bow", 24, 2009);//physical weapon
       
       //Equip tab items
       //Shields
-      Shield guard = new Shield("Guard", 130, "Shield",  6, 2003);//physical shield
-      Shield eCoat = new Shield("Energy Coat", 0, "Shield", 4, 2004);//magic shield
+      Shield guard = new Shield("Guard", 30, "Shield",  6, 2010);//physical shield
+      Shield buckler = new Shield("Buckler", 40, "Shield", 10, 2011);//physical shield
+      Shield eCoat = new Shield("Energy Coat", 0, "Shield", 4, 2012);//magic shield
       
       //Etc tab items
       Etc jellopy = new Etc("Jellopy", 1, 3001);
@@ -53,6 +54,8 @@ public class ItemDatabase
       Etc stickyMucus = new Etc("Sticky Mucus", 1, 3017);
       Etc arrow = new Etc("Arrow", 1, 3018);//ammunition
       Etc bolt = new Etc("Bolt", 1, 3019);//ammunition
+      Etc yBackbone = new Etc("Yellow Backbone", 1, 3020);
+      Etc bVial = new Etc("Blood Vial", 1, 3021);
       
       db[0] = redPotion;
       db[1] = bluePotion;
@@ -71,28 +74,31 @@ public class ItemDatabase
       db[14] = compositeBow;
       db[15] = crossbow;
       db[16] = guard;
-      db[17] = eCoat;
-      db[18] = jellopy;
-      db[19] = pGemstone;
-      db[20] = eyeOfNewt;
-      db[21] = clawOfRat;
-      db[22] = bloodOfSloth;
-      db[23] = barbedWire;
-      db[24] = shrunkenHead;
-      db[25] = chalkStick;
-      db[26] = wingOfDragonfly;
-      db[27] = fluff;
-      db[28] = dustParticle;
-      db[29] = toothOfBat;
-      db[30] = tentacle;
-      db[31] = ectoplasm;
-      db[32] = decayedToenail;
-      db[33] = shrodingerBox;
-      db[34] = stickyMucus;
-      db[35] = arrow;
-      db[36] = bolt;
+      db[17] = buckler;
+      db[18] = eCoat;
+      db[19] = jellopy;
+      db[20] = pGemstone;
+      db[21] = eyeOfNewt;
+      db[22] = clawOfRat;
+      db[23] = bloodOfSloth;
+      db[24] = barbedWire;
+      db[25] = shrunkenHead;
+      db[26] = chalkStick;
+      db[27] = wingOfDragonfly;
+      db[28] = fluff;
+      db[29] = dustParticle;
+      db[30] = toothOfBat;
+      db[31] = tentacle;
+      db[32] = ectoplasm;
+      db[33] = decayedToenail;
+      db[34] = shrodingerBox;
+      db[35] = stickyMucus;
+      db[36] = arrow;
+      db[37] = bolt;
+      db[38] = yBackbone;
+      db[39] = bVial;
       
-      this.size = 37;
+      this.size = 40;
    }
    
    //method separation

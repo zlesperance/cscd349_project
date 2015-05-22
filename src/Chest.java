@@ -3,51 +3,79 @@
 public class Chest
 {
    private Item loot;
-   private int amount;
    
    public Chest()
    {
       this.loot = null;
-      this.amount = 0;
    }
    
    //method separation
    
-   public Chest(HealingItem h, int i)
+   public Chest(HealingItem h)
    {
       this.loot = h;
-      this.amount = i;
    }
    
    //method separation
    
-   public Chest(UsableItem u, int i)
+   public Chest(UsableItem u)
    {
       this.loot = u;
-      this.amount = i;
    }
    
    //method separation
    
-   public Chest(Weapon w, int i)
+   public Chest(Weapon w)
    {
       this.loot = w;
-      this.amount = i;
    }
    
    //method separation
    
-   public Chest(Shield s, int i)
+   public Chest(Shield s)
    {
       this.loot = s;
-      this.amount = i;
    }
    
    //method separation
    
-   public Chest(Etc e, int i)
+   public Chest(Etc e)
    {
       this.loot = e;
-      this.amount = i;
+   }
+   
+   //method separation
+   
+   public HealingItem getHealingItem()
+   {
+      return (HealingItem)(this.loot);
+   }
+   
+   //method separation
+   
+   public UsableItem getUsableItem()
+   {
+      return (UsableItem)(this.loot);
+   }
+   
+   //method separation
+   
+   public Weapon getWeapon()
+   {
+      return (Weapon)(this.loot);
+   }
+   
+   //method separation
+   
+   public Shield getShield()
+   {
+      return (Shield)(this.loot);
+   }
+   
+   //method separation
+   
+   public Etc getEtc()
+   {
+      return (Etc)(this.loot);
    }
 }
