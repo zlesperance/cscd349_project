@@ -4,18 +4,25 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>217</y>
-      <w>161</w>
-      <h>161</h>
+      <x>140</x>
+      <y>490</y>
+      <w>322</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Character
 --
 -healthPoints: int
+-game: Game
 #skills: SkillSet
 --
++selectionAction(Party allies, Party enemies, Engagement engagement)
 +receiveDamage(int damage): void
+#receiveDirectDamage(int damage): void
+-tryBlock(): boolean
+-tryDodge(): boolean
++healDamage(int healAmount): void
++getHP(): int
 +getBaseHP(): int
 +getStrength(): int
 +getDexterity(): int
@@ -23,30 +30,37 @@ Character
 +getVitality(): int
 +getAgility(): int
 +getLuck(): int
--die()</panel_attributes>
++getSpeed(): int
+-die(): void
++isDead(): boolean
++attack(Character foe): void
++toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>112</y>
-      <w>217</w>
-      <h>329</h>
+      <x>504</x>
+      <y>273</y>
+      <w>385</w>
+      <h>427</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Protagonist
 --
 -name: String
 -weapon: Weapon
--offhand: Offhand
+-offhand: Shield
 -energy: int
+-game: Game
 --
-+equipWeapon(Weapon weapon): Weapon
-+equipOffhand(Offhand offhand): Offhand
++equipWeapon(Weapon weapon): void
++equipOffhand(Shield offhand): void
+#refresh(): void
+#getItemEnergy(): int
 +attack(Antagonist enemy): void
-+selectAction(Party allies, Party enemies): void
-+useItem(Consumable item): void
++selectAction(Party allies, Party enemies, Engagement engagement): void
++useItem(): void
 +levelUp(): void
 +getName(): String
 #isValidTarget(): boolean
@@ -63,14 +77,21 @@ Protagonist
 #getIntelligenceModifier(): int
 #getVitalityModifier(): int
 #getAgilityModifier(): int
-#getLuckModifier(): int</panel_attributes>
+#getLuckModifier(): int
+#beginTurnHook(): void
+#getActions(): String[]
+#performAction(int index, Party allies, Party enemies, Engagement engagement): void
+#selectionStopsAction(int index): void
+#canPerformAnyAction(): boolean
+#endHook(): void
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>455</y>
+      <x>504</x>
+      <y>728</y>
       <w>203</w>
       <h>147</h>
     </coordinates>
@@ -93,8 +114,8 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>399</y>
+      <x>315</x>
+      <y>805</y>
       <w>126</w>
       <h>182</h>
     </coordinates>
@@ -120,22 +141,44 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>119</y>
-      <w>161</w>
-      <h>42</h>
+      <x>938</x>
+      <y>70</y>
+      <w>378</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>Fighter
 --
-+attack(Antagonist enemy): void
+-isBlocking: boolean
+-actions: String[]
+-game: Game
+--
+#getHealthModifier(): int
+#getStrengthModifier(): int
+#getDexterityModifier(): int
+#getIntelligenceModifier(): int
+#getVitalityModifier(): int
+#getAgilityModifier(): int
+#getLuckModifier(): int
++attack(Antagonist foe): void
+-specialAttack(Party foes): void
+-block(): void
+-getAttackEnergy(): void
+-getBlockEnergy(): void
+-getSpecialEnergy(): void
++receiveDamage(int damage): void
++getActions(): String[]
+#beginTurnHook(): void
+#performAction(int index, Party allies, Party enemies, Engagement engagement): void
+#selectionStopsAction(int index): boolean
+#canPerformAnyAction(): boolean
 +toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>245</y>
+      <x>1148</x>
+      <y>553</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
@@ -148,8 +191,8 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>182</y>
+      <x>1148</x>
+      <y>462</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
@@ -162,8 +205,8 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>308</y>
+      <x>1148</x>
+      <y>651</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
@@ -176,8 +219,8 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>441</y>
+      <x>749</x>
+      <y>714</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
@@ -189,8 +232,8 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>504</y>
+      <x>749</x>
+      <y>777</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
@@ -202,63 +245,63 @@ Antagonist
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>133</y>
-      <w>91</w>
+      <x>882</x>
+      <y>105</y>
+      <w>70</w>
+      <h>399</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;550.0;50.0;550.0;50.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>483</y>
+      <w>280</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;380.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>483</y>
+      <w>280</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;140.0;50.0;140.0;50.0;10.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;380.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>203</y>
-      <w>91</w>
-      <h>42</h>
+      <x>882</x>
+      <y>483</y>
+      <w>280</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;50.0;40.0;50.0;10.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;380.0;280.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>224</y>
-      <w>91</w>
-      <h>63</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;70.0;110.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>539</x>
-      <y>224</y>
-      <w>91</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;160.0;110.0;160.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>280</x>
-      <y>175</y>
+      <x>455</x>
+      <y>434</y>
       <w>63</w>
-      <h>98</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;120.0;50.0;120.0;50.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;140.0;50.0;140.0;50.0;10.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>252</y>
+      <x>455</x>
+      <y>525</y>
       <w>63</w>
       <h>266</h>
     </coordinates>
@@ -268,19 +311,19 @@ Antagonist
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>203</x>
-      <y>371</y>
+      <x>378</x>
+      <y>763</y>
       <w>21</w>
-      <h>42</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>105</x>
-      <y>105</y>
+      <x>280</x>
+      <y>364</y>
       <w>196</w>
       <h>91</h>
     </coordinates>
@@ -298,59 +341,53 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>0</y>
-      <w>154</w>
-      <h>84</h>
+      <x>175</x>
+      <y>196</y>
+      <w>280</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Engagement
 --
 -partyA: Party
 -partyB: Party
 -ended: boolean
+-escapable: boolean
+-game: Game
 --
++Engagement(Party partyA, Party partyB)
++Engagement(Party partyA, Party partyB, boolean escapable)
 +begin(): void
-+end(): void</panel_attributes>
++end(): void
++tryFlee(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>196</x>
-      <y>77</y>
+      <x>371</x>
+      <y>329</y>
       <w>21</w>
-      <h>42</h>
+      <h>49</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>196</x>
-      <y>189</y>
-      <w>21</w>
-      <h>42</h>
+      <x>112</x>
+      <y>280</y>
+      <w>77</w>
+      <h>273</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>77</x>
-      <y>28</y>
-      <w>63</w>
-      <h>252</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>70.0;340.0;10.0;340.0;10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>40.0;370.0;10.0;370.0;10.0;10.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>42</y>
+      <x>483</x>
+      <y>182</y>
       <w>266</w>
       <h>35</h>
     </coordinates>
@@ -360,14 +397,100 @@ Antagonist
     <additional_attributes/>
   </element>
   <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>84</x>
+      <y>805</y>
+      <w>140</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+CharacterTester
+--
++test(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>63</y>
-      <w>63</w>
+      <x>371</x>
+      <y>448</y>
+      <w>21</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>189</y>
+      <w>35</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;200.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>175</x>
+      <y>763</y>
+      <w>21</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>161</x>
+      <y>882</y>
+      <w>140</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+DeadCharacterTester
+--
++test(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>882</y>
+      <w>140</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+LivingCharacterTester
+--
++test(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>63</x>
+      <y>840</y>
+      <w>98</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>120.0;10.0;120.0;40.0;10.0;40.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>840</y>
+      <w>105</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;130.0;40.0;130.0;60.0</additional_attributes>
   </element>
 </diagram>

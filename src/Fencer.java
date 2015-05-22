@@ -183,7 +183,7 @@ public class Fencer extends Protagonist {
 
 	@Override
 	public boolean canPerformAnyAction() {
-		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemUseEnergy());
+		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemEnergy());
 	}
 
 	@Override

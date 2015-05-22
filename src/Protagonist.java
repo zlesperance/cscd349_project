@@ -1,7 +1,7 @@
 public abstract class Protagonist extends Character {
 	private String name;
 	protected Weapon weapon;
-	// protected Offhand offhand;
+	protected Shield offhand;
 	protected int energy;
 	private Game game;
 
@@ -9,6 +9,7 @@ public abstract class Protagonist extends Character {
 		super(skills);
 		this.name = name;
 		this.weapon = new Weapon();
+		this.offhand = new Shield();
 		this.game = Game.getInstance();
 	}
 	
@@ -16,11 +17,15 @@ public abstract class Protagonist extends Character {
 		this.weapon = weapon;
 	}
 	
+	public void equipOffhand(Shield shield) {
+		this.offhand = shield;
+	}
+	
 	protected void refresh() {
 		this.energy = this.getVitality();
 	}
 	
-	public int getItemEnergy() {
+	protected int getItemEnergy() {
 		return 2;
 	}
 	
@@ -52,19 +57,19 @@ public abstract class Protagonist extends Character {
 		return this.skills.getLuck() + this.getLuckModifier();
 	}
 
-	public abstract int getHealthModifier();
+	protected abstract int getHealthModifier();
 
-	public abstract int getStrengthModifier();
+	protected abstract int getStrengthModifier();
 	
-	public abstract int getDexterityModifier();
+	protected abstract int getDexterityModifier();
 	
-	public abstract int getIntelligenceModifier();
+	protected abstract int getIntelligenceModifier();
 	
-	public abstract int getVitalityModifier();
+	protected abstract int getVitalityModifier();
 	
-	public abstract int getAgilityModifier();
+	protected abstract int getAgilityModifier();
 	
-	public abstract int getLuckModifier();
+	protected abstract int getLuckModifier();
 
 	@Override
 	public abstract void attack(Character foe);
@@ -103,23 +108,19 @@ public abstract class Protagonist extends Character {
 		endTurnHook();
 	}
 	
-	public int getItemUseEnergy() {
-		return 2;
-	}
-	
 	public void useItem() {
 		// TODO: insert use item functionality
 	}
 	
 	protected void beginTurnHook() {}
 	
-	public abstract String[] getActions();
+	protected abstract String[] getActions();
 	
-	public abstract void performAction(int index, Party allies, Party enemies, Engagement engagement);
+	protected abstract void performAction(int index, Party allies, Party enemies, Engagement engagement);
 	
-	public abstract boolean selectionStopsAction(int index);
+	protected abstract boolean selectionStopsAction(int index);
 	
-	public abstract boolean canPerformAnyAction();
+	protected abstract boolean canPerformAnyAction();
 
 	protected void endTurnHook() {}
 }
