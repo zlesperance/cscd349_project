@@ -1,6 +1,7 @@
 public class Fighter extends Protagonist {
 	private boolean isBlocking;
 	private String[] actions;
+	private Game game;
 	
 	public Fighter(String name) {
 		super(name, "STR:4,DEX:3,INT:1,VIT:4,AGI:2,LUK:3");
@@ -10,6 +11,7 @@ public class Fighter extends Protagonist {
 		actions[2] = "Block";
 		actions[3] = "Use Item";
 		actions[4] = "Pass";
+		this.game = Game.getInstance();
 	}
 
 	@Override
@@ -53,17 +55,17 @@ public class Fighter extends Protagonist {
 			throw new NotEnoughEnergyException();
 		
 		this.energy -= getAttackEnergy();
-		Game.report(toString() + " swings their weapon at " + foe.toString() + "...");
+		this.game.report(toString() + " swings their weapon at " + foe.toString() + "...");
 		
 		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 25) + getLuck()); 
 		int hitChance = Math.min(100, Math.max(50, accuracy));
-		if (Game.nextRandom() > (hitChance / 100)) {
-			Game.report(toString() + "'s attack missed!");
+		if (this.game.nextRandom() > (hitChance / 100)) {
+			this.game.report(toString() + "'s attack missed!");
 		} else {
 			int baseDmg = (int) ((getStrength() + this.weapon.getAtk()) * 1.5);
 			int damageRangeHigh = Math.min(10, getDexterity());
 			int damageRangeLow = -Math.max(0, foe.getAgility());
-			double roll = Math.max(0, Math.min(100, Game.nextRandom() + (getLuck() / 100)));
+			double roll = Math.max(0, Math.min(100, this.game.nextRandom() + (getLuck() / 100)));
 			int actualDamage = Math.max(0, baseDmg + (int) (damageRangeLow + ((damageRangeHigh - damageRangeLow) * roll)));
 			foe.receiveDamage(actualDamage);
 		}
@@ -82,7 +84,7 @@ public class Fighter extends Protagonist {
 		
 		this.energy -= getBlockEnergy();
 		this.isBlocking = true;
-		Game.report(getName() + " prepares to block an attack");
+		this.game.report(getName() + " prepares to block an attack");
 	}
 	
 	private int getAttackEnergy() {
@@ -101,12 +103,12 @@ public class Fighter extends Protagonist {
 		if (isBlocking) {
 			int blockingPower = (int) (((getVitality()  * .6) + (getStrength() * .4)) * 4);
 			int newDamage = Math.max(damage - blockingPower, 0);
-			Game.report(getName() + " blocked " + (damage - newDamage) + " damage!");
+			this.game.report(getName() + " blocked " + (damage - newDamage) + " damage!");
 			receiveDirectDamage(newDamage);
 			
 			if (this.energy < getBlockEnergy()) {
 				this.isBlocking = false;
-				Game.report(getName() + " does not have enough energy to block again!");
+				this.game.report(getName() + " does not have enough energy to block again!");
 			} else {
 				this.energy -= getBlockEnergy();
 			}

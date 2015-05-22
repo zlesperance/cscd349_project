@@ -1,4 +1,5 @@
 public class Slime extends Antagonist {
+	private Game game;
 	
 	public Slime() {
 		this("Slime");
@@ -8,6 +9,7 @@ public class Slime extends Antagonist {
 		super(name
 				, "A common monster that gets in the way of many a wyverian journey."
 				, "STR:2,DEX:1,INT:1,VIT:3,AGI:1,LUK:1");
+		this.game = Game.getInstance();
 	}
 
 	@Override
@@ -17,12 +19,12 @@ public class Slime extends Antagonist {
 
 	@Override
 	public void attack(Character foe) {
-		Game.report(toString() + " lauches itself at " + foe.toString() + "...");
+		this.game.report(toString() + " lauches itself at " + foe.toString() + "...");
 		
 		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 20) + getLuck()); 
 		int hitChance = Math.min(100, Math.max(50, accuracy));
-		if (Game.nextRandom() > (hitChance / 100.0)) {
-			Game.report("but misses!");
+		if (this.game.nextRandom() > (hitChance / 100.0)) {
+			this.game.report("but misses!");
 		} else {
 			foe.receiveDamage((int)(this.getStrength() * 1.5));
 		}

@@ -1,8 +1,10 @@
 public class EngagementTester {
 	public static void main (String[] args) {
+		Game game = Game.getInstance();
+		
 		testEngagementFighterVsSlime();
 		
-		Game.end();
+		game.end();
 	}
 	
 	public static void testEngagementFighterVsSlime() {
@@ -10,6 +12,10 @@ public class EngagementTester {
 		Party antagonists = new Party(new Character[]{new Slime("Slime A"), new Slime("Slime B")});
 		Engagement fight = new Engagement(protagonists, antagonists);
 		fight.begin();
+	}
+	
+	public static void testEngagementFigherFencerVsSlime() {
+		
 	}
 }
  

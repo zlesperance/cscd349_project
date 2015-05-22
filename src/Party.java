@@ -4,9 +4,11 @@ import java.util.PriorityQueue;
 
 public class Party implements Iterable<Character> {
 	private PriorityQueue<Character> members;
+	private Game game;
 	
 	public Party() {
 		this.members = new PriorityQueue<Character>(4, new SpeedComparator());
+		this.game = Game.getInstance();
 	}
 	
 	public Party(Character[] members) {
@@ -46,7 +48,7 @@ public class Party implements Iterable<Character> {
 			options[i] = characters[i].toString();
 		}
 		
-		int selection = Game.makeSelection(options);
+		int selection = this.game.makeSelection(options);
 		return characters[selection];		
 	}
 	
@@ -60,12 +62,12 @@ public class Party implements Iterable<Character> {
 			}
 		}
 		
-		int selection = Game.makeSelection(options.toArray(new String[options.size()]));
+		int selection = this.game.makeSelection(options.toArray(new String[options.size()]));
 		return characters.get(selection);
 	}
 	
 	public Character selectRandomCharacter() {
-		int index = (int) (Game.nextRandom() * this.members.size());
+		int index = (int) (this.game.nextRandom() * this.members.size());
 		Character[] characters = this.members.toArray(new Character[this.members.size()]);
 		return characters[index];
 	}
@@ -73,7 +75,7 @@ public class Party implements Iterable<Character> {
 	public Character selectRandomLivingCharacter() {
 		if (isDefeated())
 			throw new RuntimeException("No characters left");
-		int index = (int) (Game.nextRandom() * this.members.size());
+		int index = (int) (this.game.nextRandom() * this.members.size());
 		Character[] characters = this.members.toArray(new Character[this.members.size()]);
 		while (characters[index].isDead()) {
 			index = ((index + 1) % this.members.size());
