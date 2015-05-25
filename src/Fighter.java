@@ -15,37 +15,37 @@ public class Fighter extends Protagonist {
 	}
 
 	@Override
-	public int getHealthModifier() {
+	protected int getHealthModifier() {
 		return (int) (this.skills.getBaseHP() * 0.1);
 	}
 
 	@Override
-	public int getStrengthModifier() {
+	protected int getStrengthModifier() {
 		return (int) (this.skills.getStrength() * 0.25);
 	}
 
 	@Override
-	public int getDexterityModifier() {
+	protected int getDexterityModifier() {
 		return (int) (this.skills.getDexterity() * 0.1);
 	}
 
 	@Override
-	public int getIntelligenceModifier() {
+	protected int getIntelligenceModifier() {
 		return (int) -(this.skills.getIntelligence() * 0.25);
 	}
 
 	@Override
-	public int getVitalityModifier() {
+	protected int getVitalityModifier() {
 		return (int) (this.skills.getVitality() * 0.5);
 	}
 
 	@Override
-	public int getAgilityModifier() {
+	protected int getAgilityModifier() {
 		return (int) -(this.skills.getAgility() * 0.1);
 	}
 
 	@Override
-	public int getLuckModifier() {
+	protected int getLuckModifier() {
 		return 0;
 	}
 
@@ -136,7 +136,7 @@ public class Fighter extends Protagonist {
 	}
 	
 	@Override
-	public void performAction(int index, Party allies, Party enemies, Engagement engagement) throws NotEnoughEnergyException {
+	protected void performAction(int index, Party allies, Party enemies, Engagement engagement) throws NotEnoughEnergyException {
 		if (index == 0) {
 			Character foe = enemies.selectCharacter(new LivingCharacterTester());
 			attack(foe);
@@ -150,13 +150,13 @@ public class Fighter extends Protagonist {
 	}
 	
 	@Override
-	public boolean selectionStopsAction(int index) {
+	protected boolean selectionStopsAction(int index) {
 		return (index == 2 || index == 4);
 	}
 	
 	@Override
-	public boolean canPerformAnyAction() {
-		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemUseEnergy());
+	protected boolean canPerformAnyAction() {
+		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemEnergy());
 	}
 	
 	@Override

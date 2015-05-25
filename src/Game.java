@@ -16,7 +16,7 @@ public class Game {
 		active = true;
 	}
 	
-	public static Game getInstance() {
+	public static synchronized Game getInstance() {
 		if (instance == null) {
 			instance = new Game();
 		}

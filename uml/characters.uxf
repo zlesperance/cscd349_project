@@ -4,18 +4,26 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>217</y>
-      <w>161</w>
-      <h>161</h>
+      <x>196</x>
+      <y>791</y>
+      <w>322</w>
+      <h>294</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Character
 --
 -healthPoints: int
+-game: Game
 #skills: SkillSet
 --
+#&lt;&lt;contructor&gt;&gt;Character(String skills)
++selectionAction(Party allies, Party enemies, Engagement engagement)
 +receiveDamage(int damage): void
+#receiveDirectDamage(int damage): void
+-tryBlock(): boolean
+-tryDodge(): boolean
++healDamage(int healAmount): void
++getHP(): int
 +getBaseHP(): int
 +getStrength(): int
 +getDexterity(): int
@@ -23,30 +31,38 @@ Character
 +getVitality(): int
 +getAgility(): int
 +getLuck(): int
--die()</panel_attributes>
++getSpeed(): int
+-die(): void
++isDead(): boolean
++attack(Character foe): void
++toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>112</y>
-      <w>217</w>
-      <h>329</h>
+      <x>560</x>
+      <y>567</y>
+      <w>385</w>
+      <h>441</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Protagonist
 --
 -name: String
 -weapon: Weapon
--offhand: Offhand
+-offhand: Shield
 -energy: int
+-game: Game
 --
-+equipWeapon(Weapon weapon): Weapon
-+equipOffhand(Offhand offhand): Offhand
+#&lt;&lt;constructor&gt;&gt;Protagonist(String name, String skills)
++equipWeapon(Weapon weapon): void
++equipOffhand(Shield offhand): void
+#refresh(): void
+#getItemEnergy(): int
 +attack(Antagonist enemy): void
-+selectAction(Party allies, Party enemies): void
-+useItem(Consumable item): void
++selectAction(Party allies, Party enemies, Engagement engagement): void
++useItem(): void
 +levelUp(): void
 +getName(): String
 #isValidTarget(): boolean
@@ -63,16 +79,23 @@ Protagonist
 #getIntelligenceModifier(): int
 #getVitalityModifier(): int
 #getAgilityModifier(): int
-#getLuckModifier(): int</panel_attributes>
+#getLuckModifier(): int
+#beginTurnHook(): void
+#getActions(): String[]
+#performAction(int index, Party allies, Party enemies, Engagement engagement): void
+#selectionStopsAction(int index): void
+#canPerformAnyAction(): boolean
+#endHook(): void
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>455</y>
-      <w>203</w>
-      <h>147</h>
+      <x>560</x>
+      <y>1043</y>
+      <w>329</w>
+      <h>161</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Antagonist
@@ -80,6 +103,7 @@ Antagonist
 -name: String
 -description: String
 --
++&lt;&lt;constructor&gt;&gt;Antagonist(String name, String description, String skills)
 +attack(Protagonist enemy): void
 +examine(): String
 +getStrength(): int
@@ -93,10 +117,10 @@ Antagonist
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>399</y>
-      <w>126</w>
-      <h>182</h>
+      <x>119</x>
+      <y>1120</y>
+      <w>413</w>
+      <h>259</h>
     </coordinates>
     <panel_attributes>SkillSet
 --
@@ -107,6 +131,7 @@ Antagonist
 -dexterity: int
 -luck: int
 --
++&lt;&lt;constructor&gt;&gt;SkillSet(int strength, int agility, int vitality, int intelligence, int dexterity, int luck)
 +raiseStrength(): void
 +raiseAgility(): void
 +raiseVitality(): void
@@ -114,243 +139,233 @@ Antagonist
 +raiseDexterity(): void
 +raiseLuck(): void
 +getBaseHP(): int
++getStrength(): int
++getAgility(): int
++getVitality(): int
++getDexterity(): int
++getIntelligence(): int
++getLuck(): int
+_+buildSkills(String skills): SkillSet_
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>119</y>
-      <w>161</w>
-      <h>42</h>
+      <x>994</x>
+      <y>266</y>
+      <w>378</w>
+      <h>308</h>
     </coordinates>
     <panel_attributes>Fighter
 --
-+attack(Antagonist enemy): void
+-isBlocking: boolean
+-actions: String[]
+-game: Game
+--
++&lt;&lt;constructor&gt;&gt;Fighter(String name)
+#getHealthModifier(): int
+#getStrengthModifier(): int
+#getDexterityModifier(): int
+#getIntelligenceModifier(): int
+#getVitalityModifier(): int
+#getAgilityModifier(): int
+#getLuckModifier(): int
++attack(Antagonist foe): void
+-specialAttack(Party foes): void
+-block(): void
+-getAttackEnergy(): void
+-getBlockEnergy(): void
+-getSpecialEnergy(): void
++receiveDamage(int damage): void
++getActions(): String[]
+#beginTurnHook(): void
+#performAction(int index, Party allies, Party enemies, Engagement engagement): void
+#selectionStopsAction(int index): boolean
+#canPerformAnyAction(): boolean
 +toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>245</y>
+      <x>994</x>
+      <y>630</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
-    <panel_attributes>Fencer
---
-+attack(Antagonist enemy): void
-+toString(): String</panel_attributes>
+    <panel_attributes>Mancer</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>182</y>
-      <w>161</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>Mancer
---
-+attack(Antagonist enemy): void
-+toString(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>616</x>
-      <y>308</y>
-      <w>161</w>
-      <h>42</h>
-    </coordinates>
-    <panel_attributes>Hunter
---
-+attack(Antagonist enemy): void
-+toString(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>574</x>
-      <y>441</y>
-      <w>161</w>
-      <h>42</h>
+      <x>952</x>
+      <y>1043</y>
+      <w>336</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>Slime
 --
-+attack(Protagonist enemy): void</panel_attributes>
+-game: Game
+--
++&lt;&lt;contructor&gt;&gt;Slime()
++&lt;&lt;contructor&gt;&gt;Slime(String name)
++attack(Protagonist enemy): void
++selectAction(Party allies, Party enemies, Engagement engagement): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>574</x>
-      <y>504</y>
+      <x>952</x>
+      <y>1148</y>
       <w>161</w>
-      <h>42</h>
+      <h>28</h>
     </coordinates>
-    <panel_attributes>Goblin
---
-+attack(Protagonist enemy): void</panel_attributes>
+    <panel_attributes>Goblin</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>133</y>
-      <w>91</w>
-      <h>112</h>
+      <x>938</x>
+      <y>567</y>
+      <w>266</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;140.0;50.0;140.0;50.0;10.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;360.0;50.0;360.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>203</y>
-      <w>91</w>
-      <h>42</h>
+      <x>938</x>
+      <y>595</y>
+      <w>147</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;50.0;40.0;50.0;10.0;110.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>224</y>
-      <w>91</w>
-      <h>63</h>
+      <x>938</x>
+      <y>595</y>
+      <w>546</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;70.0;110.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;760.0;10.0;760.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>224</y>
-      <w>91</w>
-      <h>126</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;160.0;110.0;160.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>280</x>
-      <y>175</y>
+      <x>511</x>
+      <y>728</y>
       <w>63</w>
-      <h>98</h>
+      <h>119</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;120.0;50.0;120.0;50.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;150.0;50.0;150.0;50.0;10.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>252</y>
+      <x>511</x>
+      <y>826</y>
       <w>63</w>
-      <h>266</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;50.0;10.0;50.0;360.0;70.0;360.0</additional_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;380.0;70.0;380.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>203</x>
-      <y>371</y>
+      <x>336</x>
+      <y>1078</y>
       <w>21</w>
-      <h>42</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>105</x>
-      <y>105</y>
-      <w>196</w>
-      <h>91</h>
+      <x>231</x>
+      <y>616</y>
+      <w>245</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>Party
 --
 -members: PriorityQueue&lt;Character&gt;
+-game: Game
 --
-+Party(Character[] members)
++&lt;&lt;constructor&gt;&gt;Party(Character[] members)
 +addMember(Character member): void
 +removeMember(Character member): void
 +isDefeated(): boolean
-+iterator(): Iterator&lt;Character&gt;</panel_attributes>
++iterator(): Iterator&lt;Character&gt;
++selectCharacter(): Character
++selectCharacter(CharacterTester tester): Character
++selectRandomCharacter(): Character
++selectRandomLivingCharacter(): Character</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>126</x>
-      <y>0</y>
-      <w>154</w>
-      <h>84</h>
+      <x>63</x>
+      <y>427</y>
+      <w>343</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Engagement
 --
 -partyA: Party
 -partyB: Party
 -ended: boolean
+-escapable: boolean
+-game: Game
 --
++&lt;&lt;constructor&gt;&gt;Engagement(Party partyA, Party partyB)
++&lt;&lt;constructor&gt;&gt;Engagement(Party partyA, Party partyB, boolean escapable)
 +begin(): void
-+end(): void</panel_attributes>
++end(): void
++tryFlee(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>196</x>
-      <y>77</y>
+      <x>336</x>
+      <y>560</y>
       <w>21</w>
-      <h>42</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>196</x>
-      <y>189</y>
-      <w>21</w>
-      <h>42</h>
+      <x>168</x>
+      <y>560</y>
+      <w>42</w>
+      <h>294</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>77</x>
-      <y>28</y>
-      <w>63</w>
-      <h>252</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>70.0;340.0;10.0;340.0;10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>40.0;400.0;10.0;400.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>329</x>
-      <y>42</y>
+      <x>539</x>
+      <y>497</y>
       <w>266</w>
       <h>35</h>
     </coordinates>
@@ -360,14 +375,322 @@ Antagonist
     <additional_attributes/>
   </element>
   <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>21</x>
+      <y>896</y>
+      <w>140</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+CharacterTester
+--
++test(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>63</y>
-      <w>63</w>
+      <x>336</x>
+      <y>756</y>
+      <w>21</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>427</x>
+      <y>504</y>
+      <w>126</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>154</x>
+      <y>903</y>
+      <w>56</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1043</y>
+      <w>140</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+DeadCharacterTester
+--
++test(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>980</y>
+      <w>140</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+LivingCharacterTester
+--
++test(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>133</x>
+      <y>931</y>
+      <w>28</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>20.0;10.0;20.0;100.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>133</x>
+      <y>931</y>
+      <w>28</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>20.0;10.0;20.0;190.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1386</x>
+      <y>266</y>
+      <w>378</w>
+      <h>308</h>
+    </coordinates>
+    <panel_attributes>Fencer
+--
+-isBlocking: boolean
+-parryCount: int
+-actions: String[]
+-game: Game
+--
++&lt;&lt;constructor&gt;&gt;Fencer(String name)
+#getHealthModifier(): int
+#getStrengthModifier(): int
+#getDexterityModifier(): int
+#getIntelligenceModifier(): int
+#getVitalityModifier(): int
+#getAgilityModifier(): int
+#getLuckModifier(): int
++attack(Antagonist foe): void
+-specialAttack(Party foes): void
+-block(): void
+-getAttackEnergy(): void
+-getBlockEnergy(): void
+-getSpecialEnergy(): void
++receiveDamage(int damage): void
++getActions(): String[]
+#beginTurnHook(): void
+#performAction(int index, Party allies, Party enemies, Engagement engagement): void
+#selectionStopsAction(int index): boolean
+#canPerformAnyAction(): boolean
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>938</x>
+      <y>567</y>
+      <w>623</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;870.0;50.0;870.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>595</x>
+      <y>210</y>
+      <w>252</w>
+      <h>217</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+_-instance: Game_
+-active: boolean
+-rng: Random
+-kb: Scanner
+-inventory: Inventory
+-gameClient: GameClient
+--
+-&lt;&lt;constructor&gt;&gt;Game()
+_+getInstance(): Game_
++registerGameClient(GameClient gameClient)
++makeSelection(String... options): int
++report(String message): void
++reportLocation(int x, int y): void
++openInventory(): void
++openMap(): void
++nextRandom(): double
+-checkGameActive(): void
++end(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1386</x>
+      <y>630</y>
+      <w>378</w>
+      <h>308</h>
+    </coordinates>
+    <panel_attributes>Hunter
+--
+-isAiming: boolean
+-target: Character
+-actions: String[]
+-game: Game
+--
++&lt;&lt;constructor&gt;&gt;Hunter(String name)
+#getHealthModifier(): int
+#getStrengthModifier(): int
+#getDexterityModifier(): int
+#getIntelligenceModifier(): int
+#getVitalityModifier(): int
+#getAgilityModifier(): int
+#getLuckModifier(): int
++attack(Antagonist foe): void
+-specialAttack(Character foe): void
+-aim(Character foe): void
+-getAttackEnergy(): void
+-getAimEnergy(): void
+-getSpecialEnergy(): void
++receiveDamage(int damage): void
++getActions(): String[]
+#beginTurnHook(): void
+#performAction(int index, Party allies, Party enemies, Engagement engagement): void
+#selectionStopsAction(int index): boolean
+#canPerformAnyAction(): boolean
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>1071</y>
+      <w>84</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>1071</y>
+      <w>84</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;130.0;100.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>259</x>
+      <y>175</y>
+      <w>252</w>
+      <h>196</h>
+    </coordinates>
+    <panel_attributes>GameClient
+--
+-game: Game
+-stage: Stage
+-controller: WindowController
+-mapScene: Scene
+-mapController: MapWindowController
+-inventoryScene: Scene
+-inventoryController: InventoryWindowController
+-engagementScene: Scene
+-engagementController: EngagementWindowController
+--
++start(Stage primaryStage): void
++openInventory(): void
++openMap(): void
++openEngagement(): void
++makeSelection(String... options): int
+_+main(String[] args): void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>259</y>
+      <w>105</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>826</x>
+      <y>182</y>
+      <w>56</w>
       <h>56</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;60.0;60.0;60.0;60.0;10.0;10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>238</y>
+      <w>105</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>315</x>
+      <y>119</y>
+      <w>140</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>javafx.application.Application</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>133</y>
+      <w>21</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>
