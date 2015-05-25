@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>196</x>
-      <y>910</y>
+      <y>791</y>
       <w>322</w>
       <h>294</h>
     </coordinates>
@@ -42,7 +42,7 @@ Character
     <id>UMLClass</id>
     <coordinates>
       <x>560</x>
-      <y>686</y>
+      <y>567</y>
       <w>385</w>
       <h>441</h>
     </coordinates>
@@ -93,7 +93,7 @@ Protagonist
     <id>UMLClass</id>
     <coordinates>
       <x>560</x>
-      <y>1162</y>
+      <y>1043</y>
       <w>329</w>
       <h>161</h>
     </coordinates>
@@ -118,7 +118,7 @@ Antagonist
     <id>UMLClass</id>
     <coordinates>
       <x>119</x>
-      <y>1239</y>
+      <y>1120</y>
       <w>413</w>
       <h>259</h>
     </coordinates>
@@ -153,7 +153,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>994</x>
-      <y>385</y>
+      <y>266</y>
       <w>378</w>
       <h>308</h>
     </coordinates>
@@ -190,7 +190,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>994</x>
-      <y>749</y>
+      <y>630</y>
       <w>161</w>
       <h>42</h>
     </coordinates>
@@ -201,7 +201,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>952</x>
-      <y>1162</y>
+      <y>1043</y>
       <w>336</w>
       <h>84</h>
     </coordinates>
@@ -219,7 +219,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>952</x>
-      <y>1267</y>
+      <y>1148</y>
       <w>161</w>
       <h>28</h>
     </coordinates>
@@ -230,7 +230,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>938</x>
-      <y>686</y>
+      <y>567</y>
       <w>266</w>
       <h>49</h>
     </coordinates>
@@ -241,7 +241,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>938</x>
-      <y>714</y>
+      <y>595</y>
       <w>147</w>
       <h>49</h>
     </coordinates>
@@ -252,7 +252,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>938</x>
-      <y>714</y>
+      <y>595</y>
       <w>546</w>
       <h>49</h>
     </coordinates>
@@ -263,7 +263,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>511</x>
-      <y>847</y>
+      <y>728</y>
       <w>63</w>
       <h>119</h>
     </coordinates>
@@ -274,7 +274,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>511</x>
-      <y>945</y>
+      <y>826</y>
       <w>63</w>
       <h>280</h>
     </coordinates>
@@ -285,7 +285,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>336</x>
-      <y>1197</y>
+      <y>1078</y>
       <w>21</w>
       <h>56</h>
     </coordinates>
@@ -296,7 +296,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>231</x>
-      <y>735</y>
+      <y>616</y>
       <w>245</w>
       <h>147</h>
     </coordinates>
@@ -320,7 +320,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>63</x>
-      <y>546</y>
+      <y>427</y>
       <w>343</w>
       <h>140</h>
     </coordinates>
@@ -343,7 +343,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>336</x>
-      <y>679</y>
+      <y>560</y>
       <w>21</w>
       <h>70</h>
     </coordinates>
@@ -354,7 +354,7 @@ _+buildSkills(String skills): SkillSet_
     <id>Relation</id>
     <coordinates>
       <x>168</x>
-      <y>679</y>
+      <y>560</y>
       <w>42</w>
       <h>294</h>
     </coordinates>
@@ -365,7 +365,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>539</x>
-      <y>616</y>
+      <y>497</y>
       <w>266</w>
       <h>35</h>
     </coordinates>
@@ -378,7 +378,7 @@ _+buildSkills(String skills): SkillSet_
     <id>UMLClass</id>
     <coordinates>
       <x>21</x>
-      <y>1015</y>
+      <y>896</y>
       <w>140</w>
       <h>42</h>
     </coordinates>
@@ -392,7 +392,7 @@ CharacterTester
     <id>Relation</id>
     <coordinates>
       <x>336</x>
-      <y>875</y>
+      <y>756</y>
       <w>21</w>
       <h>49</h>
     </coordinates>
@@ -403,7 +403,7 @@ CharacterTester
     <id>Relation</id>
     <coordinates>
       <x>427</x>
-      <y>623</y>
+      <y>504</y>
       <w>126</w>
       <h>126</h>
     </coordinates>
@@ -414,7 +414,7 @@ CharacterTester
     <id>Relation</id>
     <coordinates>
       <x>154</x>
-      <y>1022</y>
+      <y>903</y>
       <w>56</w>
       <h>21</h>
     </coordinates>
@@ -425,7 +425,7 @@ CharacterTester
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1162</y>
+      <y>1043</y>
       <w>140</w>
       <h>42</h>
     </coordinates>
@@ -439,7 +439,7 @@ DeadCharacterTester
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1099</y>
+      <y>980</y>
       <w>140</w>
       <h>42</h>
     </coordinates>
@@ -453,7 +453,7 @@ LivingCharacterTester
     <id>Relation</id>
     <coordinates>
       <x>133</x>
-      <y>1050</y>
+      <y>931</y>
       <w>28</w>
       <h>84</h>
     </coordinates>
@@ -464,7 +464,7 @@ LivingCharacterTester
     <id>Relation</id>
     <coordinates>
       <x>133</x>
-      <y>1050</y>
+      <y>931</y>
       <w>28</w>
       <h>147</h>
     </coordinates>
@@ -475,7 +475,7 @@ LivingCharacterTester
     <id>UMLClass</id>
     <coordinates>
       <x>1386</x>
-      <y>385</y>
+      <y>266</y>
       <w>378</w>
       <h>308</h>
     </coordinates>
@@ -513,7 +513,7 @@ LivingCharacterTester
     <id>Relation</id>
     <coordinates>
       <x>938</x>
-      <y>686</y>
+      <y>567</y>
       <w>623</w>
       <h>49</h>
     </coordinates>
@@ -524,7 +524,7 @@ LivingCharacterTester
     <id>UMLClass</id>
     <coordinates>
       <x>595</x>
-      <y>329</y>
+      <y>210</y>
       <w>252</w>
       <h>217</h>
     </coordinates>
@@ -554,7 +554,7 @@ _+getInstance(): Game_
     <id>UMLClass</id>
     <coordinates>
       <x>1386</x>
-      <y>749</y>
+      <y>630</y>
       <w>378</w>
       <h>308</h>
     </coordinates>
@@ -592,7 +592,7 @@ _+getInstance(): Game_
     <id>Relation</id>
     <coordinates>
       <x>882</x>
-      <y>1190</y>
+      <y>1071</y>
       <w>84</w>
       <h>21</h>
     </coordinates>
@@ -603,7 +603,7 @@ _+getInstance(): Game_
     <id>Relation</id>
     <coordinates>
       <x>882</x>
-      <y>1190</y>
+      <y>1071</y>
       <w>84</w>
       <h>105</h>
     </coordinates>
@@ -614,7 +614,7 @@ _+getInstance(): Game_
     <id>UMLClass</id>
     <coordinates>
       <x>259</x>
-      <y>294</y>
+      <y>175</y>
       <w>252</w>
       <h>196</h>
     </coordinates>
@@ -642,7 +642,7 @@ _+main(String[] args): void_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>504</x>
-      <y>378</y>
+      <y>259</y>
       <w>105</w>
       <h>21</h>
     </coordinates>
@@ -653,7 +653,7 @@ _+main(String[] args): void_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>826</x>
-      <y>301</y>
+      <y>182</y>
       <w>56</w>
       <h>56</h>
     </coordinates>
@@ -664,7 +664,7 @@ _+main(String[] args): void_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>504</x>
-      <y>357</y>
+      <y>238</y>
       <w>105</w>
       <h>21</h>
     </coordinates>
@@ -675,7 +675,7 @@ _+main(String[] args): void_</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>315</x>
-      <y>238</y>
+      <y>119</y>
       <w>140</w>
       <h>21</h>
     </coordinates>
@@ -686,7 +686,7 @@ _+main(String[] args): void_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>378</x>
-      <y>252</y>
+      <y>133</y>
       <w>21</w>
       <h>56</h>
     </coordinates>
