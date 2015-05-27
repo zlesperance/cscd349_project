@@ -54,8 +54,6 @@ public class GameClient extends Application {
 		
 		this.game = Game.getInstance();
 		this.game.registerGameClient(this);
-		
-		this.game.makeSelection("A", "B", "C", "D");
 	}
 	
 	public void openInventory() {

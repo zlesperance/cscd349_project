@@ -35,7 +35,7 @@ public class MapWindowController implements Initializable, WindowController {
 	@FXML
 	VBox buttonContainer;
 	
-	private class ButtonSelectionHandler<T extends Event> implements EventHandler<T> {
+	private static class ButtonSelectionHandler<T extends Event> implements EventHandler<T> {
 		private boolean waitingForInput;
 		private String inputResult;
 		
@@ -136,8 +136,13 @@ public class MapWindowController implements Initializable, WindowController {
 	}
 	
 	private void tryTravelRight() {
-		partyX++;
+		partyX++;		
+		
 		updateMap();
+		
+		messageBox.setText("Something happens!");
+		int result = client.makeSelection("A","B","C","D");
+		messageBox.setText(result + " is chosen!");
 	}
 	
 	private void tryTravelLeft() {
@@ -159,7 +164,7 @@ public class MapWindowController implements Initializable, WindowController {
 	public int makeSelection(String... options) {
 		buttonContainer.getChildren().clear();
 		
-		final ButtonSelectionHandler<MouseEvent> mouseEventHandler = new ButtonSelectionHandler<MouseEvent>();
+		ButtonSelectionHandler<MouseEvent> mouseEventHandler = new ButtonSelectionHandler<MouseEvent>();
 		
 		for (String option : options) {
 			Button btn = new Button(option);
@@ -173,7 +178,7 @@ public class MapWindowController implements Initializable, WindowController {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-				return -1;
+				break;
 			}
 		}
 		
