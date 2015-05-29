@@ -1,5 +1,10 @@
 public class Slime extends Antagonist {
 	private Game game;
+	private ItemDrops dropTable;
+	private static final GEL_ID = 0;
+	private static final POTION_ID = 0;
+	private static final KEY_ID = 0;
+	private static ItemDrops defaultDropTable;
 	
 	public Slime() {
 		this("Slime");
@@ -10,6 +15,28 @@ public class Slime extends Antagonist {
 				, "A common monster that gets in the way of many a wyverian journey."
 				, "STR:2,DEX:1,INT:1,VIT:3,AGI:1,LUK:1");
 		this.game = Game.getInstance();
+		if (Slime.defaultDropTable == null) {
+			Slime.setDefaultDrops();
+		}
+		this.dropTable = Slime.defaultDropTable;
+	}
+	
+	private static void setDefaultDrops() {
+		Slime.defaultDropTable = new ItemDrops();
+		Slime.defaultDropTable.add(GEL_ID, .8);
+		Slime.defaultDropTable.add(KEY_ID, .2);		
+	}
+	
+	private void setDropTable(ItemDrops dropTable) {
+		this.dropTable = dropTable;
+	}
+	
+	public static Slime makeKeyBearer(String name) {
+		Slime slime = new Slime(name);
+		ItemDrops dropTable = new ItemDrops();
+		dropTable.add(KEY_ID, 1.0);
+		slime.setDropTable(dropTable);
+		return slime;
 	}
 
 	@Override
