@@ -70,7 +70,7 @@ public class Hunter extends Protagonist {
 	}
 	
 	private void aim(Character foe) {
-		this.energy -= getAimEnergy();
+		this.spendEnergy(getAimEnergy());
 		
 		this.target = foe;
 		this.isAiming = true;

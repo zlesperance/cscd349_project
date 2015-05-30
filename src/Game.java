@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class Game {
 	private static Game instance;
@@ -7,11 +6,15 @@ public class Game {
 	private Random rng;
 	private Inventory inventory;
 	private GameClient gameClient;
-	private Maze maze;
+	private Party protagonists;
+	private StartMaze maze;
+	public static final int MAX_PARTY_SIZE = 4;
+	
 	
 	private Game() {
 		rng = new Random();
 		inventory = new Inventory();
+		this.maze = new StartMaze();
 		active = true;
 	}
 	
@@ -24,6 +27,15 @@ public class Game {
 	
 	public void registerGameClient(GameClient gameClient) {
 		this.gameClient = gameClient;
+	}
+	
+	public void start() {
+		this.selectProtagonists();
+		this.maze.startGame();
+	}
+	
+	public void selectProtagonists() {
+		this.protagonists = this.gameClient.openCharacterSelect();
 	}
 	
 	public int makeSelection(String... options) {
@@ -40,8 +52,16 @@ public class Game {
 		report("You are at row " + x + ", column " + y + ".");
 	}
 	
-	public void openInventory() {
-		
+	public Item openInventory() {
+		return this.gameClient.openInventory(inventory);
+	}
+	
+	public void beginEngagement(Party antagonists) {
+		Engagement engagement = new Engagement(this.protagonists, antagonists);
+		this.gameClient.openEngagement(engagement);
+	}
+	
+	public void openMap() {
 	}
 	
 	public double nextRandom() {

@@ -2,7 +2,7 @@ public abstract class Protagonist extends Character {
 	private String name;
 	protected Weapon weapon;
 	protected Shield offhand;
-	protected int energy;
+	private int energy;
 	private Game game;
 
 	protected Protagonist(String name, String skills) {
@@ -23,6 +23,14 @@ public abstract class Protagonist extends Character {
 	
 	protected void refresh() {
 		this.energy = this.getVitality();
+	}
+	
+	protected void spendEnergy(int energy) {
+		this.energy = Math.max(0, this.energy - energy);
+	}
+	
+	protected boolean canDoAction(int energyRequirement) {
+		return this.energy >= energyRequirement;
 	}
 	
 	protected int getItemEnergy() {
@@ -108,8 +116,16 @@ public abstract class Protagonist extends Character {
 		endTurnHook();
 	}
 	
-	public void useItem() {
-		// TODO: insert use item functionality
+	protected void useItem() {
+		if (!this.canDoAction(getItemEnergy()))
+			throw new NotEnoughEnergyException();
+		
+		Item item = game.openInventory();
+		if (item != null) {
+			// TODO: Add ability to use items here
+			game.report(this.getName() + " used a " + item.getIName() + "... but it did nothing because that's not coded in yet!");
+			spendEnergy(this.getItemEnergy());
+		}
 	}
 	
 	protected void beginTurnHook() {}

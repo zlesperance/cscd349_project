@@ -77,7 +77,8 @@ public class GUIGameClient extends Application implements GameClient {
 	}
 
 	@Override
-	public void openInventory(Inventory inventory) {		
+	public Item openInventory(Inventory inventory) {
+		return null;
 	}
 
 	@Override

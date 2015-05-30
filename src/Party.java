@@ -25,7 +25,14 @@ public class Party implements Iterable<Character> {
 	}
 	
 	public void removeMember(Character member) {
+		if (this.size() == 1) {
+			throw new IllegalStateException("A party cannot be empty");
+		}
 		members.remove(member);
+	}
+	
+	public int size() {
+		return this.members.size();
 	}
 	
 	public boolean isDefeated() {
