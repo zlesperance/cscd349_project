@@ -27,7 +27,7 @@ public class UsableItem extends Item implements RandomNumber
    
    //method separation
    
-   public int rand(int upperBound)
+   public int rand(int upperBound)//may be used for teleport map coordinates, IDK
    {
       return r.nextInt() % upperBound;
    }
