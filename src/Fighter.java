@@ -51,10 +51,10 @@ public class Fighter extends Protagonist {
 
 	@Override
 	public void attack(Character foe) throws NotEnoughEnergyException {
-		if (this.energy < getAttackEnergy())
+		if (!this.canDoAction(getAttackEnergy()))
 			throw new NotEnoughEnergyException();
 		
-		this.energy -= getAttackEnergy();
+		this.spendEnergy(getAttackEnergy());
 		this.game.report(toString() + " swings their weapon at " + foe.toString() + "...");
 		
 		int accuracy = ((getDexterity() * 50) + getLuck()) - ((foe.getAgility() * 25) + getLuck()); 
@@ -72,17 +72,17 @@ public class Fighter extends Protagonist {
 	}
 	
 	private void specialAttack(Party foes) {
-		if (this.energy < getSpecialEnergy())
+		if (!this.canDoAction(getSpecialEnergy()))
 			throw new NotEnoughEnergyException();
 		
-		this.energy -= getSpecialEnergy();
+		this.spendEnergy(getSpecialEnergy());
 	}
 	
 	private void block() {
-		if (this.energy < getBlockEnergy())
+		if (!this.canDoAction(getBlockEnergy()))
 			throw new NotEnoughEnergyException();
 		
-		this.energy -= getBlockEnergy();
+		this.spendEnergy(getBlockEnergy());
 		this.isBlocking = true;
 		this.game.report(getName() + " prepares to block an attack");
 	}
@@ -106,11 +106,11 @@ public class Fighter extends Protagonist {
 			this.game.report(getName() + " blocked " + (damage - newDamage) + " damage!");
 			receiveDirectDamage(newDamage);
 			
-			if (this.energy < getBlockEnergy()) {
+			if (!this.canDoAction(getBlockEnergy())) {
 				this.isBlocking = false;
 				this.game.report(getName() + " does not have enough energy to block again!");
 			} else {
-				this.energy -= getBlockEnergy();
+				this.spendEnergy(getBlockEnergy());
 			}
 		} else {
 			super.receiveDamage(damage);
@@ -156,7 +156,7 @@ public class Fighter extends Protagonist {
 	
 	@Override
 	protected boolean canPerformAnyAction() {
-		return (this.energy >= getAttackEnergy() || this.energy >= getSpecialEnergy() || this.energy >= getBlockEnergy() || this.energy >= getItemEnergy());
+		return (this.canDoAction(getAttackEnergy()) || this.canDoAction(getSpecialEnergy()) || this.canDoAction(getBlockEnergy()) || this.canDoAction(getItemEnergy()));
 	}
 	
 	@Override

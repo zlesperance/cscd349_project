@@ -1,18 +1,20 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class Game {
 	private static Game instance;
 	private boolean active = false;
 	private Random rng;
-	private Scanner kb;
 	private Inventory inventory;
 	private GameClient gameClient;
+	private Party protagonists;
+	private StartMaze maze;
+	public static final int MAX_PARTY_SIZE = 4;
+	
 	
 	private Game() {
 		rng = new Random();
-		kb = new Scanner(System.in);
 		inventory = new Inventory();
+		this.maze = new StartMaze();
 		active = true;
 	}
 	
@@ -27,27 +29,19 @@ public class Game {
 		this.gameClient = gameClient;
 	}
 	
+	public void start() {
+		this.selectProtagonists();
+		this.maze.startGame();
+	}
+	
+	public void selectProtagonists() {
+		this.protagonists = this.gameClient.openCharacterSelect();
+	}
+	
 	public int makeSelection(String... options) {
 		checkGameActive();
 		
 		return this.gameClient.makeSelection(options);
-		/*
-		System.out.println("Choose an option:");
-		for (int i = 0; i < options.length; i++) {
-			System.out.println(" " + i + ") " + options[i]);
-		}
-		
-		int selection;
-		do {
-			System.out.print(">> ");
-			try {
-				selection = Integer.parseInt(kb.nextLine());
-			} catch (NumberFormatException e) {
-				selection = -1;
-			}
-		} while (selection < 0 || selection >= options.length);
-		
-		return selection;*/
 	}
 	
 	public void report(String message) {
@@ -58,8 +52,16 @@ public class Game {
 		report("You are at row " + x + ", column " + y + ".");
 	}
 	
-	public void openInventory() {
-		
+	public Item openInventory() {
+		return this.gameClient.openInventory(inventory);
+	}
+	
+	public void beginEngagement(Party antagonists) {
+		Engagement engagement = new Engagement(this.protagonists, antagonists);
+		this.gameClient.openEngagement(engagement);
+	}
+	
+	public void openMap() {
 	}
 	
 	public double nextRandom() {
@@ -73,7 +75,7 @@ public class Game {
 	
 	public void end() {
 		checkGameActive();
-		this.kb.close();
+		this.gameClient.end();
 		this.active = false;
 		report("Game Over");
 	}
