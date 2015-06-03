@@ -98,9 +98,9 @@ public class ConsoleGameClient implements GameClient {
 		
 		for(int i = 0; i < 4; i++) {
 			if (i == tabIndex)
-				tabFooter += "         ";
+				tabFooter += "        ";
 			else {
-				tabFooter += "````````";
+				tabFooter += "```````";
 				tabFooter += (i + 1 == tabIndex) ? " " : "`";
 			}
 		}
