@@ -5,5 +5,5 @@ public interface MoveMaze
    public void createMaze();
    public void traverseMaze();
   
-   public void placeMonstersDoors();
+  
 }
