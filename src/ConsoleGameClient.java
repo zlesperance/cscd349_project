@@ -108,7 +108,7 @@ public class ConsoleGameClient implements GameClient {
 		
 		int i = 0;
 		for(Item item : tab) {
-			report(i + ") " + item.toString());
+			report((i++) + ") " + item.getIName() + " (" + item.getQuantity() + ")");
 		}
 	}
 

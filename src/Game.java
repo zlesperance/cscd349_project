@@ -4,6 +4,7 @@ public class Game {
 	private static Game instance;
 	private boolean active = false;
 	private Random rng;
+	private ItemDatabase itemDatabase;
 	private Inventory inventory;
 	private GameClient gameClient;
 	private Party protagonists;
@@ -14,6 +15,7 @@ public class Game {
 	private Game() {
 		rng = new Random();
 		inventory = new Inventory();
+		itemDatabase = new ItemDatabase();
 		this.maze = new StartMaze();
 		active = true;
 	}
@@ -32,12 +34,11 @@ public class Game {
 	public void start() {
 		this.selectProtagonists();
 		this.report("Party made!");
-		ItemDatabase db = new ItemDatabase();
-		inventory.addItem(db.getWeapon(7));
-		inventory.addItem(db.getShield(16));
-		inventory.addItem(db.getHealingItem(0));
+		inventory.addItem(itemDatabase.getWeapon(7));
+		inventory.addItem(itemDatabase.getShield(16));
+		inventory.addItem(itemDatabase.getHealingItem(0));
 		Item item = this.openInventory();
-		this.report("You got a " + item + "!");
+		this.report("You got a " + item.getIName() + "!");
 		//this.maze.startGame();
 	}
 	
