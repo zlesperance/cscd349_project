@@ -31,7 +31,14 @@ public class Game {
 	
 	public void start() {
 		this.selectProtagonists();
-		this.maze.startGame();
+		this.report("Party made!");
+		ItemDatabase db = new ItemDatabase();
+		inventory.addItem(db.getWeapon(7));
+		inventory.addItem(db.getShield(16));
+		inventory.addItem(db.getHealingItem(0));
+		Item item = this.openInventory();
+		this.report("You got a " + item + "!");
+		//this.maze.startGame();
 	}
 	
 	public void selectProtagonists() {
@@ -78,5 +85,12 @@ public class Game {
 		this.gameClient.end();
 		this.active = false;
 		report("Game Over");
+	}
+	
+	public static void main(String[] args) {
+		Game game = Game.getInstance();
+		game.registerGameClient(new ConsoleGameClient());
+		game.start();
+		game.end();
 	}
 }

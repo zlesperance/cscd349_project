@@ -98,9 +98,9 @@ public class ConsoleGameClient implements GameClient {
 		
 		for(int i = 0; i < 4; i++) {
 			if (i == tabIndex)
-				tabFooter += "         ";
+				tabFooter += "        ";
 			else {
-				tabFooter += "````````";
+				tabFooter += "```````";
 				tabFooter += (i + 1 == tabIndex) ? " " : "`";
 			}
 		}
@@ -141,30 +141,46 @@ public class ConsoleGameClient implements GameClient {
 		do {			
 			choice = this.makeSelection("Add Another Member", "List Party Members", "Remove Party Member", "End Party Creation");
 			
-			if (choice == 1) {
+			if (choice == 0) {
 				this.addNewCharacter(party);
-			} else if (choice == 2) {
+			} else if (choice == 1) {
 				report("Current Party Members: ");
-				int i = 0;
 				for (Character member : party) {
-					report((i++) + ")" + member.toString());
+					report(" - " + member.toString());
 				}
-			} else if (choice == 3) {
+			} else if (choice == 2) {
 				Character removal = party.selectCharacter();
 				report("Are you sure you want to remove " + removal.toString() + "?");
-				try {
-					party.removeMember(removal);
-				} catch (Exception e) {
-					report("Error: " + e.getMessage());
+				int result = this.makeSelection("Yes", "No");
+				if (result == 0) {
+					try {
+						party.removeMember(removal);
+					} catch (Exception e) {
+						report("Error: " + e.getMessage());
+					}
 				}
 			}
 			
-		} while (party.size() < Game.MAX_PARTY_SIZE && choice != 4);
+		} while (party.size() < Game.MAX_PARTY_SIZE && choice != 3);
 		return party;
 	}
 	
 	private void addNewCharacter(Party party) {
+		CharacterFactory factory = new HeroesAndMonstersCharacterFactory();
+		this.report("Select Your Character's Class:");
 		
+		String[] classes = new String[] { "Fighter", "Fencer", "Hunter", "Mancer" };
+		
+		int choice = this.makeSelection(classes);
+		
+		this.report("Name Your Character:");
+		String name = "";
+		
+		do {
+			name = kb.nextLine();
+		} while (name.trim().equals(""));
+		
+		party.addMember(factory.buildProtagonist(classes[choice], name));
 	}
 	
 }

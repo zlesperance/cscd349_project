@@ -1,9 +1,9 @@
 public class Slime extends Antagonist {
 	private Game game;
 	private ItemDrops dropTable;
-	private static final GEL_ID = 0;
-	private static final POTION_ID = 0;
-	private static final KEY_ID = 0;
+	private static final int GEL_ID = 0;
+	private static final int POTION_ID = 0;
+	private static final int KEY_ID = 0;
 	private static ItemDrops defaultDropTable;
 	
 	public Slime() {

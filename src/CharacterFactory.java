@@ -1,7 +1,5 @@
-public class CharacterFactory {
-	public static Protagonist buildProtagonist(String chrClass, String chrName, String chrSkills) {
-		
-		
-		return null;
-	}
+
+public interface CharacterFactory {
+	public Protagonist buildProtagonist(String characterClass, String characterName);
+	public Protagonist buildAntagonist(String characterClass, String characterName);
 }
