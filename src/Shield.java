@@ -30,9 +30,23 @@ public class Shield extends Item
    
    //method separation
    
+   public int getDef()
+   {
+      return this.def;
+   }
+   
+   //method separation
+   
    @Override
    public String toString()
    {
       return super.toString(gType);
+   }
+   
+   //method separation
+   
+   public void use(Party p)
+   {
+      throw new Exception("This item cannot be \"used\".");
    }
 }

@@ -42,4 +42,11 @@ public class Weapon extends Item
    {
       return super.toString(gType);
    }
+   
+   //method separation
+   
+   public void use(Party p)
+   {
+      throw new Exception("This item cannot be \"used\".");
+   }
 }

@@ -25,8 +25,38 @@ public class ItemDatabasePrototype
       this.size = 4;
    }
    
-   public Item getItem(int i)
+   //method separation
+   
+   public UsableItem getUsableItem(int i)
    {
-      return this.db[i];
+      return (UsableItem)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public HealingItem getHealingItem(int i)
+   {
+      return (HealingItem)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public Weapon getWeapon(int i)
+   {
+      return (Weapon)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public Shield getShield(int i)
+   {
+      return (Shield)(this.db[i]);
+   }
+   
+   //method separation
+   
+   public Etc getEtc(int i)
+   {
+      return (Etc)(this.db[i]);
    }
 }

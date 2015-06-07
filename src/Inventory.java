@@ -27,28 +27,28 @@ public class Inventory
    
    //method separation
    
-   public LinkedList<Item> getItems()
+   public LinkedList getItems()
    {
       return this.items;
    }
    
    //method separation
    
-   public LinkedList<Item> getEquip()
+   public LinkedList getEquip()
    {
       return this.equip;
    }
    
    //method separation
    
-   public LinkedList<Item> getEtc()
+   public LinkedList getEtc()
    {
       return this.etc;
    }
    
    //method separation
    
-   public LinkedList<Item> getGears()
+   public LinkedList getGears()
    {
       return this.gears;
    }

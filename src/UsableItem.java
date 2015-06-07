@@ -1,10 +1,7 @@
 
-import java.util.Random;
 
-public class UsableItem extends Item implements RandomNumber
+public class UsableItem extends Item
 {
-   private Random r = new Random(System.nanoTime());
-   
    public UsableItem()
    {
       super("", "Consumable", 0, 0);
@@ -27,8 +24,17 @@ public class UsableItem extends Item implements RandomNumber
    
    //method separation
    
-   public int rand(int upperBound)//may be used for teleport map coordinates, IDK
+   public void use(Party p)
    {
-      return r.nextInt() % upperBound;
+      if(this.getID() == 1006)
+      {
+         //teleport
+      }
+      else //if(this.getID() == 1007)
+      {
+         Character c = p.selectCharacter(new DeadCharacterTester());
+         
+         c.healDamage(c.getBaseHP());
+      }
    }
 }

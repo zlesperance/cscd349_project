@@ -111,13 +111,21 @@ public abstract class Item
       return iName + "(" + iQuantity + "), a(n) " + iType + "(" + s + ") item, " + iWeight + " weight\n";
    }
    
+	//method separation
+	
    public boolean equals(Object o)
    {
       return this.iName.compareTo(((Item)o).iName) == 0;
    }
+	
+	//method separation
    
    public int compareTo(Object o)
    {
       return this.itemID - ((Item)o).itemID;
    }
+   
+   //method separation
+   
+   public abstract void use(Party p);
 }

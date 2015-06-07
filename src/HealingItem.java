@@ -1,11 +1,9 @@
 
-import java.util.Random;
 
-public class HealingItem extends Item implements RandomNumber
+public class HealingItem extends Item
 {
    private char hType;//healing item
    private int healAmount;
-   private Random r = new Random(System.nanoTime());
    
    public HealingItem()
    {
@@ -40,8 +38,24 @@ public class HealingItem extends Item implements RandomNumber
    
    //method separation
    
-   public int rand(int upperBound)//may be used for ranged heal amount, IDK
+   public void use(Party p)
    {
-      return r.nextInt() % upperBound;
+      if(this.getID() == 1004)//many target
+      {
+         for(Character c : p)
+         {
+            c.healDamage(10);
+         }
+      }
+      else if (this.getID() == 1001)//single target
+      {
+         Character c = p.selectCharacter(new LivingCharacterTester());
+         
+         c.healDamage(10);
+      }
    }
+   
+   //method separation
+   
+
 }
