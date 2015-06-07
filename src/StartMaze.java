@@ -232,5 +232,13 @@ public class StartMaze implements MoveMaze
    {
       return rowIndex;
    }
+   public void removeDoorFlag(int i, int j)
+   {
+      this.twoDMaze[i][j] = 0;
+   }
+   public Direction getDirectionReference()
+   {
+      return this.direction;
+   }
    
 }

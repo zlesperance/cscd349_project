@@ -51,5 +51,10 @@ public class MoveDirection implements Direction
       //System.out.println("Number: " + randomNumber);
       return randomNumber;
    }
+   
+   public String getDirection()
+   {
+      return this.v;
+   }
 
 }

@@ -51,7 +51,7 @@ public class ConsoleGameClient implements GameClient {
 			if (command.equalsIgnoreCase("help")) {
 				report("Commands:");
 				report("Enter a number representing an item to use that item (Ex: 1 uses item at index 1)");
-				report("Enter then name of a tab to open said tab (Ex: >> EQUIP opens the EQUIP tab)");
+				report("Enter the name of a tab to open said tab (Ex: >> EQUIP opens the EQUIP tab)");
 				report("Other commands: close, help");
 			} else if (command.equalsIgnoreCase("items")) {
 				currentTab = inventory.getItems();
