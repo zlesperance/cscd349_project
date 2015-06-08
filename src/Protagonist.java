@@ -123,7 +123,7 @@ public abstract class Protagonist extends Character {
 		Item item = game.openInventory();
 		if (item != null) {
 			spendEnergy(this.getItemEnergy());
-			item.use(game.getProtagonists());
+			game.useItem(item);
 		}
 	}
 	

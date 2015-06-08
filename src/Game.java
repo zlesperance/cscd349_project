@@ -33,7 +33,7 @@ public class Game {
 	
 	public void start() {
 		this.selectProtagonists();
-		//this.maze.startGame();
+		this.maze.startGame();
 	}
 	
 	public void selectProtagonists() {
@@ -72,6 +72,14 @@ public class Game {
 		}
 	}
 	
+	public void useItem(Item item) {
+		try {
+			item.use(this.inventory, this.protagonists, this.maze);
+		} catch (Exception e) {
+			report(e.getMessage());
+		}
+	}
+	
 	public void beginEngagement(Party antagonists) {
 		Engagement engagement = new Engagement(this.protagonists, antagonists);
 		this.gameClient.openEngagement(engagement);
@@ -80,9 +88,6 @@ public class Game {
 			report("You received a " + spoil.toString());
 			this.inventory.addItem(spoil);
 		}
-	}
-	
-	public void openMap() {
 	}
 	
 	public double nextRandom() {
