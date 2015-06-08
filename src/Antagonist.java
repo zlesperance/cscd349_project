@@ -2,6 +2,7 @@ public abstract class Antagonist extends Character {
 	private String name;
 	private String description;
 	private ItemDrops dropTable;
+	private int KEY_ID = 39;
 	
 	public Antagonist(String name, String description, String skills) {
 		super(skills);
@@ -50,6 +51,11 @@ public abstract class Antagonist extends Character {
 	
 	protected void setDropTable(ItemDrops dropTable) {
 		this.dropTable = dropTable;
+	}
+	
+	public void makeKeyBearer() {
+		this.dropTable = new ItemDrops();
+		this.dropTable.add(KEY_ID, 1.0);
 	}
 	
 	public Item loot() {

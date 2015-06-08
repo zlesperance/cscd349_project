@@ -2,7 +2,6 @@ public class Slime extends Antagonist {
 	private Game game;
 	private static final int GEL_ID = 18;
 	private static final int POTION_ID = 0;
-	private static final int KEY_ID = 39;
 	private static ItemDrops defaultDropTable;
 	
 	public Slime() {
@@ -24,14 +23,6 @@ public class Slime extends Antagonist {
 		Slime.defaultDropTable = new ItemDrops();
 		Slime.defaultDropTable.add(GEL_ID, .8);
 		Slime.defaultDropTable.add(POTION_ID, .2);		
-	}
-	
-	public static Slime makeKeyBearer(String name) {
-		Slime slime = new Slime(name);
-		ItemDrops dropTable = new ItemDrops();
-		dropTable.add(KEY_ID, 1.0);
-		slime.setDropTable(dropTable);
-		return slime;
 	}
 
 	@Override
