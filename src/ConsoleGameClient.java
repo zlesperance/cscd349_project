@@ -133,8 +133,8 @@ public class ConsoleGameClient implements GameClient {
 	}
 
 	@Override
-	public Party openCharacterSelect() {
-		Party party = new Party();
+	public Party<Protagonist> openCharacterSelect() {
+		Party<Protagonist> party = new Party<Protagonist>();
 		int choice;
 
 		this.addNewCharacter(party);
@@ -149,7 +149,7 @@ public class ConsoleGameClient implements GameClient {
 					report(" - " + member.toString());
 				}
 			} else if (choice == 2) {
-				Character removal = party.selectCharacter();
+				Protagonist removal = party.selectCharacter();
 				report("Are you sure you want to remove " + removal.toString() + "?");
 				int result = this.makeSelection("Yes", "No");
 				if (result == 0) {
@@ -165,7 +165,7 @@ public class ConsoleGameClient implements GameClient {
 		return party;
 	}
 	
-	private void addNewCharacter(Party party) {
+	private void addNewCharacter(Party<Protagonist> party) {
 		CharacterFactory factory = new HeroesAndMonstersCharacterFactory();
 		this.report("Select Your Character's Class:");
 		

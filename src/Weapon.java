@@ -45,7 +45,7 @@ public class Weapon extends Item
    
    //method separation
    
-   public void use(Party p)
+   public void use(Party<Character> p)
    {
       throw new Exception("This item cannot be \"used\".");
    }

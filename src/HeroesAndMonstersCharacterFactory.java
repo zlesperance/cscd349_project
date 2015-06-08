@@ -11,10 +11,21 @@ public class HeroesAndMonstersCharacterFactory implements CharacterFactory {
 		
 		throw new IllegalArgumentException("Invalid Character Class");
 	}
+	
+	@Override
+	public Antagonist buildAntagonist(String characterClass) {
+		return buildAntagonist(characterClass, null);
+	}
 
 	@Override
-	public Protagonist buildAntagonist(String characterClass,
+	public Antagonist buildAntagonist(String characterClass,
 			String characterName) {
-		return null;
+		if (characterName == null)
+			characterName = characterClass;
+		
+		if (characterClass.equalsIgnoreCase("slime"))
+			return new Slime(characterName);
+		
+		throw new IllegalArgumentException("Invalid Character Class");
 	}
 }

@@ -46,5 +46,7 @@ public abstract class Antagonist extends Character {
 	public String examine() {
 		return this.description;
 	}
+	
+	public abstract Item loot();
 
 }

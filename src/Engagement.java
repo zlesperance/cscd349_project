@@ -1,16 +1,17 @@
 import java.util.Iterator;
 
 public class Engagement {
-	private Party partyA, partyB;
+	private Party<Protagonist> partyA;
+	private Party<Antagonist> partyB;
 	private boolean ended;
 	private boolean escapable;
 	private Game game;
 	
-	public Engagement(Party partyA, Party partyB) {
+	public Engagement(Party<Protagonist> partyA, Party<Antagonist> partyB) {
 		this(partyA, partyB, true);
 	}
 	
-	public Engagement(Party partyA, Party partyB, boolean escapable) {
+	public Engagement(Party<Protagonist> partyA, Party<Antagonist> partyB, boolean escapable) {
 		this.partyA = partyA;
 		this.partyB = partyB;
 		this.escapable = escapable;
@@ -19,8 +20,8 @@ public class Engagement {
 	
 	public void begin() {
 		this.ended = false;
-		Iterator<Character> partyACharacters = partyA.iterator(),
-				partyBCharacters = partyB.iterator();
+		Iterator<Protagonist> partyACharacters = partyA.iterator();
+		Iterator<Antagonist> partyBCharacters = partyB.iterator();
 		Character partyANext = partyACharacters.next(),
 				partyBNext = partyBCharacters.next();
 		
@@ -81,6 +82,20 @@ public class Engagement {
 	
 	public void end() {
 		this.ended = true;
+	}
+	
+	public Item[] lootSpoils() {
+		if (this.ended == false)
+			throw new IllegalStateException("Cannot loot while the engagement is ongoing");
+		
+		Item[] spoils = new Item[partyB.size()];
+		
+		int i = 0;
+		for (Antagonist foe : partyB) {
+			spoils[i++] = foe.loot();
+		}
+		
+		return spoils;
 	}
 	
 	public boolean tryFlee() {
