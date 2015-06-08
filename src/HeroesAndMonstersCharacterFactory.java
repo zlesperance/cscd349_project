@@ -14,17 +14,23 @@ public class HeroesAndMonstersCharacterFactory implements CharacterFactory {
 	
 	@Override
 	public Antagonist buildAntagonist(String characterClass) {
-		return buildAntagonist(characterClass, null);
+		if (characterClass.equalsIgnoreCase("slime"))
+			return new Slime();
+		if (characterClass.equalsIgnoreCase("newt"))
+			return new Newt();
+		
+		throw new IllegalArgumentException("Invalid Character Class");
 	}
 
 	@Override
-	public Antagonist buildAntagonist(String characterClass,
-			String characterName) {
-		if (characterName == null)
-			characterName = characterClass;
+	public Antagonist buildAntagonist(String characterClass, boolean key) {
+		if (key == false)
+			return buildAntagonist(characterClass);
 		
 		if (characterClass.equalsIgnoreCase("slime"))
-			return new Slime(characterName);
+			return Slime.makeKeyBearer(characterClass);		
+		if (characterClass.equalsIgnoreCase("newt"))
+			return Newt.makeKeyBearer(characterClass);
 		
 		throw new IllegalArgumentException("Invalid Character Class");
 	}

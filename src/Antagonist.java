@@ -1,6 +1,7 @@
 public abstract class Antagonist extends Character {
 	private String name;
 	private String description;
+	private ItemDrops dropTable;
 	
 	public Antagonist(String name, String description, String skills) {
 		super(skills);
@@ -47,6 +48,12 @@ public abstract class Antagonist extends Character {
 		return this.description;
 	}
 	
-	public abstract Item loot();
+	protected void setDropTable(ItemDrops dropTable) {
+		this.dropTable = dropTable;
+	}
+	
+	public Item loot() {
+		return dropTable.getItem();
+	}
 
 }
