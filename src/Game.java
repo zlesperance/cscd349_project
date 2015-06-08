@@ -66,6 +66,12 @@ public class Game {
 		return this.itemDatabase.getItem(id);
 	}
 	
+	public void addToInventory(Item... items) {
+		for (Item item : items) {
+			this.inventory.addItem(item);
+		}
+	}
+	
 	public void beginEngagement(Party antagonists) {
 		Engagement engagement = new Engagement(this.protagonists, antagonists);
 		this.gameClient.openEngagement(engagement);

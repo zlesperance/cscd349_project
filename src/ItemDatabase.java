@@ -135,4 +135,11 @@ public class ItemDatabase
    {
       return (Etc)(this.db[i]);
    }
+   
+   //method separation
+   
+   public Item getItem(int i)
+   {
+      return this.db[i];
+   }
 }
