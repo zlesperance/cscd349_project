@@ -33,17 +33,15 @@ public class Game {
 	
 	public void start() {
 		this.selectProtagonists();
-		this.report("Party made!");
-		inventory.addItem(itemDatabase.getWeapon(7));
-		inventory.addItem(itemDatabase.getShield(16));
-		inventory.addItem(itemDatabase.getHealingItem(0));
-		Item item = this.openInventory();
-		this.report("You got a " + item.getIName() + "!");
 		//this.maze.startGame();
 	}
 	
 	public void selectProtagonists() {
 		this.protagonists = this.gameClient.openCharacterSelect();
+	}
+	
+	public Party getProtagonists() {
+		return this.protagonists;
 	}
 	
 	public int makeSelection(String... options) {

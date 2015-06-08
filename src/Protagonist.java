@@ -122,9 +122,8 @@ public abstract class Protagonist extends Character {
 		
 		Item item = game.openInventory();
 		if (item != null) {
-			// TODO: Add ability to use items here
-			game.report(this.getName() + " used a " + item.getIName() + "... but it did nothing because that's not coded in yet!");
 			spendEnergy(this.getItemEnergy());
+			item.use(game.getProtagonists());
 		}
 	}
 	
