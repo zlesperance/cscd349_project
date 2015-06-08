@@ -75,6 +75,11 @@ public class Game {
 	public void beginEngagement(Party antagonists) {
 		Engagement engagement = new Engagement(this.protagonists, antagonists);
 		this.gameClient.openEngagement(engagement);
+		Item[] spoils = engagement.lootSpoils();
+		for (Item spoil : spoils) {
+			report("You received a " + spoil.toString());
+			this.inventory.addItem(spoil);
+		}
 	}
 	
 	public void openMap() {
