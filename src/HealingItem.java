@@ -38,7 +38,7 @@ public class HealingItem extends Item
    
    //method separation
    
-   public void use(Party p)
+   public void use(Inventory i, Party p, StartMaze sm) throws Exception
    {
       if(this.getID() == 1004)//many target
       {
