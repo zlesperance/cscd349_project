@@ -62,6 +62,10 @@ public class Game {
 		return this.gameClient.openInventory(inventory);
 	}
 	
+	public Item getItemByID(int id) {
+		return this.itemDatabase.getItem(id);
+	}
+	
 	public void beginEngagement(Party antagonists) {
 		Engagement engagement = new Engagement(this.protagonists, antagonists);
 		this.gameClient.openEngagement(engagement);
