@@ -23,11 +23,11 @@ public class Etc extends Item
    
    //method separation
    
-   public void use(Inventory i, Party p, StartMaze sm)
+   public void use(Inventory i, Party p, StartMaze sm) throws Exception
    {
       if(this.getID() == 3022)//key
       {
-         if(sm.getDirectionReference().getDirection().equals("up"))
+         if(sm.getDirectionReference().getDirection("up").equals("up"))
          {
             if((sm.getRowIndex() - 1) == 1)
             {
@@ -35,7 +35,7 @@ public class Etc extends Item
                sm.removeDoorFlag(sm.getRowIndex() - 1, sm.getColIndex());
             }
          }
-         else if(sm.getDirectionReference().getDirection().equals("down"))
+         else if(sm.getDirectionReference().getDirection("down").equals("up"))
          {
             if((sm.getRowIndex() + 1) == 1)
             {
@@ -43,7 +43,7 @@ public class Etc extends Item
                sm.removeDoorFlag(sm.getRowIndex() + 1, sm.getColIndex());
             }
          }
-         else if(sm.getDirectionReference().getDirection().equals("left"))
+         else if(sm.getDirectionReference().getDirection("left").equals("up"))
          {
             if((sm.getColIndex() - 1) == 1)
             {

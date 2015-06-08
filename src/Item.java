@@ -127,5 +127,5 @@ public abstract class Item
    
    //method separation
    
-   public abstract void use(Party p);
+   public abstract void use(Inventory i, Party p, StartMaze sm)throws Exception;
 }

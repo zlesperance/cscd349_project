@@ -45,7 +45,7 @@ public class Shield extends Item
    
    //method separation
    
-   public void use(Party p)
+   public void use(Inventory i, Party p, StartMaze sm) throws Exception
    {
       throw new Exception("This item cannot be \"used\".");
    }
