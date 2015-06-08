@@ -118,6 +118,24 @@ public class Inventory
    
    //method separation
    
+   public void addItem(Item item)
+   {
+	   if (item instanceof HealingItem)
+		   addItem((HealingItem) item);
+	   else if (item instanceof UsableItem)
+		   addItem((UsableItem) item);
+	   else if (item instanceof Shield)
+		   addItem((Shield) item);
+	   else if (item instanceof Weapon)
+		   addItem((Weapon) item);
+	   else if (item instanceof Etc)
+		   addItem((Etc) item);
+	   else
+		   throw new IllegalArgumentException("Invalid Item");
+   }
+   
+   //method separation
+   
    public void addGear(Weapon wItem)
    {
       gears.removeFirst();
