@@ -127,5 +127,5 @@ public abstract class Item
    
    //method separation
    
-   public abstract void use(Party<Character> p);
+   public abstract void use(Party p);
 }

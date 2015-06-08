@@ -45,7 +45,7 @@ public class Shield extends Item
    
    //method separation
    
-   public void use(Party<Character> p)
+   public void use(Party p)
    {
       throw new Exception("This item cannot be \"used\".");
    }

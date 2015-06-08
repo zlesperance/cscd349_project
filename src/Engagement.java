@@ -1,17 +1,17 @@
 import java.util.Iterator;
 
 public class Engagement {
-	private Party<Protagonist> partyA;
-	private Party<Antagonist> partyB;
+	private Party partyA;
+	private Party partyB;
 	private boolean ended;
 	private boolean escapable;
 	private Game game;
 	
-	public Engagement(Party<Protagonist> partyA, Party<Antagonist> partyB) {
+	public Engagement(Party partyA, Party partyB) {
 		this(partyA, partyB, true);
 	}
 	
-	public Engagement(Party<Protagonist> partyA, Party<Antagonist> partyB, boolean escapable) {
+	public Engagement(Party partyA, Party partyB, boolean escapable) {
 		this.partyA = partyA;
 		this.partyB = partyB;
 		this.escapable = escapable;
@@ -20,8 +20,8 @@ public class Engagement {
 	
 	public void begin() {
 		this.ended = false;
-		Iterator<Protagonist> partyACharacters = partyA.iterator();
-		Iterator<Antagonist> partyBCharacters = partyB.iterator();
+		Iterator<Character> partyACharacters = partyA.iterator(), 
+				partyBCharacters = partyB.iterator();
 		Character partyANext = partyACharacters.next(),
 				partyBNext = partyBCharacters.next();
 		
@@ -91,8 +91,9 @@ public class Engagement {
 		Item[] spoils = new Item[partyB.size()];
 		
 		int i = 0;
-		for (Antagonist foe : partyB) {
-			spoils[i++] = foe.loot();
+		for (Character foe : partyB) {
+			if (foe instanceof Antagonist)
+				spoils[i++] = ((Antagonist) foe).loot();
 		}
 		
 		return spoils;

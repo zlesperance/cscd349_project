@@ -2,29 +2,29 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-public class Party<T extends Character> implements Iterable<T> {
-	private PriorityQueue<T> members;
+public class Party implements Iterable<Character> {
+	private PriorityQueue<Character> members;
 	private Game game;
 	
 	public Party() {
-		this.members = new PriorityQueue<T>(4, new SpeedComparator());
+		this.members = new PriorityQueue<Character>(4, new SpeedComparator());
 		this.game = Game.getInstance();
 	}
 	
-	public Party(T[] members) {
+	public Party(Character[] members) {
 		this();
-		for (T member : members) {
+		for (Character member : members) {
 			addMember(member);
 		}
 	}
 	
-	public void addMember(T member) {
+	public void addMember(Character member) {
 		if (members.contains(member))
 			throw new IllegalArgumentException("Character already exists in the party");
 		members.add(member);
 	}
 	
-	public void removeMember(T member) {
+	public void removeMember(Character member) {
 		if (this.size() == 1) {
 			throw new IllegalStateException("A party cannot be empty");
 		}
@@ -36,7 +36,7 @@ public class Party<T extends Character> implements Iterable<T> {
 	}
 	
 	public boolean isDefeated() {
-		for (T member : this.members) {
+		for (Character member : this.members) {
 			if (!member.isDead())
 				return false;
 		}
@@ -44,15 +44,15 @@ public class Party<T extends Character> implements Iterable<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<Character> iterator() {
 		return this.members.iterator();
 	}
 	
-	public T selectCharacter() {
-		ArrayList<T> characters = new ArrayList<T>(this.members.size());
+	public Character selectCharacter() {
+		ArrayList<Character> characters = new ArrayList<Character>(this.members.size());
 		String[] options = new String[this.members.size()];
 		int i = 0;
-		for (T character : this.members) {
+		for (Character character : this.members) {
 			options[i++] = character.toString();
 			characters.add(character);
 		}
@@ -61,10 +61,10 @@ public class Party<T extends Character> implements Iterable<T> {
 		return characters.get(selection);
 	}
 	
-	public T selectCharacter(CharacterTester tester) {
-		ArrayList<T> characters = new ArrayList<T>();
+	public Character selectCharacter(CharacterTester tester) {
+		ArrayList<Character> characters = new ArrayList<Character>();
 		ArrayList<String> options = new ArrayList<String>();
-		for (T member : this.members) {
+		for (Character member : this.members) {
 			if (tester.test(member)) {
 				characters.add(member);
 				options.add(member.toString() + " [" + member.getHP() + " HP]");
@@ -75,10 +75,10 @@ public class Party<T extends Character> implements Iterable<T> {
 		return characters.get(selection);
 	}
 	
-	public T selectRandomCharacter() {
+	public Character selectRandomCharacter() {
 		int index = (int) (this.game.nextRandom() * this.members.size());
 		int i = 0;
-		for (T character : this.members) {
+		for (Character character : this.members) {
 			if (i == index)
 				return character;
 			i++;
@@ -86,12 +86,12 @@ public class Party<T extends Character> implements Iterable<T> {
 		throw new IndexOutOfBoundsException("RNG selected an out of bounds index. Whoops!");
 	}
 	
-	public T selectRandomLivingCharacter() {
+	public Character selectRandomLivingCharacter() {
 		if (isDefeated())
 			throw new RuntimeException("No characters left");
 		int index = (int) (this.game.nextRandom() * this.members.size());
-		ArrayList<T> characters = new ArrayList<T>(this.members.size());
-		for (T character : this.members) {
+		ArrayList<Character> characters = new ArrayList<Character>(this.members.size());
+		for (Character character : this.members) {
 			characters.add(character);
 		}
 		while (characters.get(index).isDead()) {
