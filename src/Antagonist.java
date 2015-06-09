@@ -2,7 +2,7 @@ public abstract class Antagonist extends Character {
 	private String name;
 	private String description;
 	private ItemDrops dropTable;
-	private int KEY_ID = 39;
+	private static final int KEY_ID = 39;
 	
 	public Antagonist(String name, String description, String skills) {
 		super(skills);

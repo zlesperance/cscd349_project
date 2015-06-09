@@ -20,8 +20,8 @@ public class HeroesAndMonstersCharacterFactory implements CharacterFactory {
 			return new Newt();
 		if (characterClass.equalsIgnoreCase("ghost"))
 			return new Ghost();
-		if (characterClass.equalsIgnoreCase("anarchist"))
-			return new Anarchist();
+		if (characterClass.equalsIgnoreCase("goblin"))
+			return new Goblin();
 		
 		throw new IllegalArgumentException("Invalid Character Class");
 	}
