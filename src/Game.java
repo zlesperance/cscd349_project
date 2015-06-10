@@ -33,14 +33,13 @@ public class Game {
 	
 	public void start() {
 		this.selectProtagonists();
-		//this.maze.startGame();
-		this.startDemo();
+		this.maze.startGame();
 	}
 	
 	private void startDemo() {
+		this.selectProtagonists();
 		PartyFactory factory = new HeroesAndMonstersPartyFactory();
 		Party enemies = factory.makeParty("antagonists", "goblin", "slime", "ghost");
-		System.out.println("Party made");
 		for (int i = 0; i < 3; i++)
 			inventory.addItem(itemDatabase.getHealingItem(0));
 		this.beginEngagement(enemies);
@@ -124,6 +123,9 @@ public class Game {
 	public static void main(String[] args) {
 		Game game = Game.getInstance();
 		game.registerGameClient(new ConsoleGameClient());
-		game.start();
+		if (args.length == 1 && args[0].equalsIgnoreCase("demo"))
+			game.startDemo();
+		else
+			game.start();
 	}
 }

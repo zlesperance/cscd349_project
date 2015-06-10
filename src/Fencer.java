@@ -53,15 +53,15 @@ public class Fencer extends Protagonist {
 	}
 	
 	private int getAttackEnergy() {
-		return 0;
+		return 2;
 	}
 	
 	private int getBlockEnergy() {
-		return 0;
+		return 1;
 	}
 	
 	private int getSpecialEnergy() {
-		return 0;
+		return 3;
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class Fencer extends Protagonist {
 	}
 	
 	private void block() {
-		if (this.canDoAction(getBlockEnergy()))
+		if (!this.canDoAction(getBlockEnergy()))
 			throw new NotEnoughEnergyException();
 		
 		this.spendEnergy(getBlockEnergy());
@@ -98,7 +98,7 @@ public class Fencer extends Protagonist {
 	}
 	
 	private void specialAttack(Character foe) {
-		if (this.canDoAction(getSpecialEnergy()))
+		if (!this.canDoAction(getSpecialEnergy()))
 			throw new NotEnoughEnergyException();
 
 		this.spendEnergy(getSpecialEnergy());
@@ -130,7 +130,7 @@ public class Fencer extends Protagonist {
 			receiveDirectDamage(newDamage);
 			this.parryCount++;
 			
-			if (this.canDoAction(getBlockEnergy())) {
+			if (!this.canDoAction(getBlockEnergy())) {
 				this.isBlocking = false;
 				this.game.report(getName() + " does not have enough energy to parry again!");
 			} else {
@@ -152,7 +152,7 @@ public class Fencer extends Protagonist {
 		actionsWithEnergy[3] = this.actions[3] + " (" + getItemEnergy() + " EP)";
 		actionsWithEnergy[4] = this.actions[4];
 		
-		return this.actions;
+		return actionsWithEnergy;
 	}
 	
 	@Override

@@ -1,0 +1,66 @@
+\documentclass{article}
+\title{CSCD349: Project Description}
+\author{The $\alpha$ - Team}
+\date{\today}
+
+\begin{document}
+
+\maketitle{}
+
+\section{Introduction}
+
+\paragraph{}
+Our project is a turn-based role playing game based on the Heroes and Monsters assignment from previous programming classes.
+
+\paragraph{}
+The game begins by choosing a party consisting of one to four ``heroes.'' Heroes can be any of the following classes:
+\begin{itemize}
+\item Fighter: A strength-based melee character who uses a sword or axe and a shield to fight.
+\item Fencer: A dexterity-based melee character who uses a rapier to fight.
+\item Hunter: A dexterity-based ranged character who uses a bow or crossbow to fight.
+\item Mancer: An intelligence-based ranged character who uses magic to fight.
+\end{itemize}
+
+\paragraph{}
+The party of heroes is then put into a maze which contains rooms, doors (some locked and some not), and an exit. The objective of the game is to try and move the party of heroes to the exit. When moving room to room, there is a chance that a monster will appear and you will be forced to fight!
+
+\subsection{Combat}
+
+\paragraph{}
+When combat is triggered with a party of monsters, the game will decide the order of ``initiative'' based on the stats of the heroes and the monsters. Then, each character in the engagement will take turns choosing their actions.
+
+\paragraph{}
+On a character's turn, they may do as many actions as they can with their alloted energy points (EP). For example, if it costs 2 EP to attack and a character has 5 EP, then they may attack twice on their turn.
+
+\paragraph{}
+Each character has a set of actions they may take on their turn, defined by their class:
+\begin{itemize}
+\item A Fighter may do a strength-based attack on a single enemy, prepare to block future attacks, or attempt a ``Whirlwind Strike'' that damages all monsters in the opposing party.
+\item A Fencer may do a dexterity-based attack on a single enemy, prepare to parry future attacks, or do a ``Riposte'', which has a damage multiplier based on how many parries the fencer has done immediately prior to riposting.
+\item A Hunter may aim at an opponent, may do a dexterity-based ranged attack on a single enemy provided that the hunter has aimed at that enemy, or may do a  ``Piercing Shot'' on an aimed-at enemy, which ignores armor and evade chance and does direct damage.
+\item A Mancer may cast a fireball at a single enemy with pyromancy, heal allies with restomancy, or summon an imp to jump in the way of an attack to prevent all damage. However, if an imp is still around next turn, it may get bored and turn on its master.
+\end{itemize}
+
+\paragraph{}
+Combat continues until all characters in one of the parties has been defeated. If the heroes party has been defeated, it's game over.
+
+\section{Inventory}
+When a party of monsters are defeated in combat, they drop items that will be collected in the game's ``inventory''. Items that can be dropped include weapons, shields, potions, and miscellaneous items. The player can open the inventory at any time when traversing the maze, and may use items during a hero's turn, at the cost of EP.
+
+\subsection{Item Types}
+\subsubsection{Weapons}
+Weapons can be equipped to heroes to increase the amount of damage they do to their opponents.
+
+\subsubsection{Shields}
+Shields can be equipped to increase the effectiveness of blocking actions by heroes.
+
+\subsubsection{Usable/Healing Items}
+Potions and Scrolls can be used to heal or revive party members.
+
+\subsubsection{Etc}
+Etc items are mostly useless items picked up from slain monsters. Keep them as mementos from the monsters you have slain.
+
+\section{Winning the Game}
+You win the game by getting to the end of the maze. If your party is slain before then, you lose the game.
+
+\end{document}
