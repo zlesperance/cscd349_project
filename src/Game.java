@@ -33,7 +33,17 @@ public class Game {
 	
 	public void start() {
 		this.selectProtagonists();
-		this.maze.startGame();
+		//this.maze.startGame();
+		this.startDemo();
+	}
+	
+	private void startDemo() {
+		PartyFactory factory = new HeroesAndMonstersPartyFactory();
+		Party enemies = factory.makeParty("antagonists", "goblin", "slime", "ghost");
+		System.out.println("Party made");
+		for (int i = 0; i < 3; i++)
+			inventory.addItem(itemDatabase.getHealingItem(0));
+		this.beginEngagement(enemies);
 	}
 	
 	public void selectProtagonists() {
@@ -75,6 +85,7 @@ public class Game {
 	public void useItem(Item item) {
 		try {
 			item.use(this.inventory, this.protagonists, this.maze);
+			inventory.removeItem(item);
 		} catch (Exception e) {
 			report(e.getMessage());
 		}
@@ -83,10 +94,14 @@ public class Game {
 	public void beginEngagement(Party antagonists) {
 		Engagement engagement = new Engagement(this.protagonists, antagonists);
 		this.gameClient.openEngagement(engagement);
-		Item[] spoils = engagement.lootSpoils();
-		for (Item spoil : spoils) {
-			report("You received a " + spoil.toString());
-			this.inventory.addItem(spoil);
+		if (this.protagonists.isDefeated()) {
+			this.end();
+		} else {
+			Item[] spoils = engagement.lootSpoils();
+			for (Item spoil : spoils) {
+				report("You received a " + spoil.toString());
+				this.inventory.addItem(spoil);
+			}
 		}
 	}
 	
@@ -110,6 +125,5 @@ public class Game {
 		Game game = Game.getInstance();
 		game.registerGameClient(new ConsoleGameClient());
 		game.start();
-		game.end();
 	}
 }

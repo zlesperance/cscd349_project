@@ -187,6 +187,24 @@ public class Inventory
    
    //method separation
    
+   public void removeItem(Item item)
+   {
+	   if (item instanceof HealingItem)
+		   removeItem((HealingItem) item);
+	   else if (item instanceof UsableItem)
+		   removeItem((UsableItem) item);
+	   else if (item instanceof Shield)
+		   removeItem((Shield) item);
+	   else if (item instanceof Weapon)
+		   removeItem((Weapon) item);
+	   else if (item instanceof Etc)
+		   removeItem((Etc) item);
+	   else
+		   throw new IllegalArgumentException("Invalid Item");
+   }
+   
+   //method separation
+   
    public void addItem(LinkedList list, Item i)
    {
       if(findFirstInstance(list, i) > -1)

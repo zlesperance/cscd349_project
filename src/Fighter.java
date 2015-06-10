@@ -76,6 +76,23 @@ public class Fighter extends Protagonist {
 			throw new NotEnoughEnergyException();
 		
 		this.spendEnergy(getSpecialEnergy());
+		
+		this.game.report(toString() + " does a wide, mighty swing at the enemies...");
+		
+		for (Character foe : foes) {
+			int accuracy = ((getDexterity() * 45) + getLuck()) - ((foe.getAgility() * 20) + getLuck()); 
+			int hitChance = Math.min(100, Math.max(50, accuracy));
+			if (this.game.nextRandom() > (hitChance / 100)) {
+				this.game.report(toString() + "'s swing missed " + foe.toString() + "!");
+			} else {
+				int baseDmg = (int) ((getStrength() + this.weapon.getAtk()) * 2);
+				int damageRangeHigh = Math.min(10, getDexterity());
+				int damageRangeLow = -Math.max(0, foe.getAgility());
+				double roll = Math.max(0, Math.min(100, this.game.nextRandom() + (getLuck() / 100)));
+				int actualDamage = Math.max(0, baseDmg + (int) (damageRangeLow + ((damageRangeHigh - damageRangeLow) * roll)));
+				foe.receiveDamage(actualDamage);
+			}
+		}
 	}
 	
 	private void block() {
@@ -96,7 +113,7 @@ public class Fighter extends Protagonist {
 	}
 	
 	private int getSpecialEnergy() {
-		return Math.max(10 - (((this.getStrength() / 2) + (this.getDexterity() / 4) + (this.getVitality() / 4)) / 8), 4);
+		return Math.max(10 - (((this.getStrength() / 2) + (this.getDexterity() / 2) + (this.getVitality() / 4))), 4);
 	}
 	
 	public void receiveDamage(int damage) {

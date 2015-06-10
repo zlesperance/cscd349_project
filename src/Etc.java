@@ -25,9 +25,10 @@ public class Etc extends Item
    
    public void use(Inventory i, Party p, StartMaze sm) throws Exception
    {
-      if(this.getID() == 3022)//key
+      /*if(this.getID() == 3022)//key
       {
-         if(sm.getDirectionReference().getDirection("up").equals("up"))
+    	  String dir = sm.getDirection();
+         if(dir.equals("up"))
          {
             if((sm.getRowIndex() - 1) == 1)
             {
@@ -35,7 +36,7 @@ public class Etc extends Item
                sm.removeDoorFlag(sm.getRowIndex() - 1, sm.getColIndex());
             }
          }
-         else if(sm.getDirectionReference().getDirection("down").equals("up"))
+         else if(dir.equals("down"))
          {
             if((sm.getRowIndex() + 1) == 1)
             {
@@ -43,7 +44,7 @@ public class Etc extends Item
                sm.removeDoorFlag(sm.getRowIndex() + 1, sm.getColIndex());
             }
          }
-         else if(sm.getDirectionReference().getDirection("left").equals("up"))
+         else if(dir.equals("left"))
          {
             if((sm.getColIndex() - 1) == 1)
             {
@@ -61,8 +62,8 @@ public class Etc extends Item
          }
       }
       else
-      {
+      {*/
          throw new Exception("This item cannot be \"used\".");
-      }
+      //}
    }
 }

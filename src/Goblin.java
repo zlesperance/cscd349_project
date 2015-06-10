@@ -9,7 +9,7 @@ public class Goblin extends Antagonist {
 	private static ItemDrops defaultDropTable;
 
 	public Goblin() {
-		this("Anarchist");
+		this("Goblin");
 	}
 	
 	public Goblin(String name) {

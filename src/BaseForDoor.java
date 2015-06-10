@@ -2,13 +2,11 @@ public class BaseForDoor
 {
    private int row;
    private int col;
-   private boolean isLocked = true;
    
-   public BaseForDoor(int col, int row, boolean isLocked)
+   public BaseForDoor(int row, int col)
    {
-      this.col = col;
-      this.row = row;
-      this.isLocked = isLocked;
+     this.row = row;
+     this.col = col;
    }
    public int getRow()
    {  
@@ -18,8 +16,5 @@ public class BaseForDoor
    {
       return col;
    }
-   public boolean getLocked()
-   {
-      return isLocked;
-   }
+  
 }

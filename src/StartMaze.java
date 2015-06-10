@@ -18,12 +18,12 @@ public class StartMaze implements MoveMaze
    }
    public void createMaze()
    {
-        twoDMaze = new int[col][row];
-        twoDMaze[col - 1][row - 1] = 4; 
+        twoDMaze = new int[row][col];
+        twoDMaze[row - 1][col - 1] = 4; 
    }
    public void finishGame()
    {
-         if(twoDMaze[colIndex][rowIndex] == 4)
+         if(twoDMaze[rowIndex][colIndex] == 4)
          {
             System.out.println("You have reached the exit ");
             gameFinished = true;
@@ -38,7 +38,7 @@ public class StartMaze implements MoveMaze
        System.out.println("Enter the # of rows");
       row = scan.nextInt();
       
-      while(col <= 0 || row <= 0)
+      while(row <= 0 || col <= 0)
       {
          System.out.println("Invalid maze, enter again");
          enterDimensions();
@@ -70,11 +70,20 @@ public class StartMaze implements MoveMaze
          { 
             getDirection();
             getSpaces();
+            inventoryMaze();
             traverseMaze();
             key.checkMonstersDoors();
             finishGame();  
           
          }
+      
+   }
+   public void inventoryMaze()
+   {
+      System.out.println("Before you move would you like to change your inventory");
+      String askUserInventory = scan.nextLine();
+      
+      
       
    }
    public String getDirection()
@@ -97,26 +106,24 @@ public class StartMaze implements MoveMaze
       
       direction = new MoveDirection();
       System.out.println("Number of spaces will in the range from 1 to 6");
-      numSpaces = direction.getSpaces(userDirection, col, row);
-      int colFormula = ((col - 1) - colIndex);
+      numSpaces = direction.getSpaces(userDirection, row, col);
       int rowFormula = ((row - 1) - rowIndex);
+      int colFormula = ((col - 1) - colIndex);
       String UED = userDirection;
       
-      while(numSpaces > colFormula && UED.equals("up") || numSpaces > colFormula && UED.equals("down"))  
+      while(numSpaces > rowFormula && UED.equals("up") || numSpaces > rowFormula && UED.equals("down"))  
       {
-         numSpaces = direction.getSpaces(userDirection, col, row);
+         numSpaces = direction.getSpaces(userDirection, row, col);
       }
-      while(numSpaces > rowFormula && UED.equals("left") || numSpaces > rowFormula && UED.equals("right"))  
+      while(numSpaces > colFormula && UED.equals("left") || numSpaces > colFormula && UED.equals("right"))  
       {
-         numSpaces = direction.getSpaces(userDirection, col, row);
+         numSpaces = direction.getSpaces(userDirection, row, col);
       }
 
       System.out.println("Number of spaces : " + numSpaces);
       return numSpaces;
    }
- 
-   
-   
+    
  
    
    public void traverseMaze()
@@ -127,37 +134,38 @@ public class StartMaze implements MoveMaze
       try{   
          if(userDirection == "up")
          {
-            twoDMaze[colIndex][rowIndex] = 0;
-            referenceNumber = twoDMaze[colIndex-numSpaces][rowIndex];
-            colIndex = colIndex - numSpaces;
-            rowIndex = rowIndex;
+            twoDMaze[rowIndex][colIndex] = 0;
+            referenceNumber = twoDMaze[rowIndex-numSpaces][colIndex];
+            rowIndex = rowIndex - numSpaces;
+            colIndex = colIndex;
             
                if(key.checkDoor(doorArray) == true)
                {
-                    
+                    System.out.println("Door is locked");
                }
-               else
+               else if(key.checkDoor(doorArray) != true)
                {
-                     twoDMaze[colIndex][rowIndex] = 3; 
-                     System.out.println("Player currently at in maze: " + colIndex + "   " + rowIndex);  
+                     twoDMaze[rowIndex][colIndex] = 3; 
+                     System.out.println("Player currently at in maze: " + rowIndex + "   " + colIndex);  
                      valid = true; 
                }
          }
          else if(userDirection == "down")
          {
               
-               twoDMaze[colIndex][rowIndex] = 0;
-               referenceNumber = twoDMaze[colIndex+numSpaces][rowIndex];
-               colIndex = colIndex + numSpaces;
-               rowIndex = rowIndex;
+               twoDMaze[rowIndex][colIndex] = 0;
+               referenceNumber = twoDMaze[rowIndex+numSpaces][colIndex];
+               rowIndex = rowIndex + numSpaces;
+               colIndex = colIndex;
+               
                if(key.checkDoor(doorArray) == true)
                {
-                  twoDMaze[colIndex - numSpaces][rowIndex] = 3;  
+                  System.out.println("Door is locked");    
                }
-               else
+               else if(key.checkDoor(doorArray) != true)
                {
-                    twoDMaze[colIndex][rowIndex] = 3; 
-                     System.out.println("Player currently at in maze: " + colIndex + "   " + rowIndex);  
+                    twoDMaze[rowIndex][colIndex] = 3; 
+                     System.out.println("Player currently at in maze: " + rowIndex + "   " + colIndex);  
                      valid = true; 
                }
                      
@@ -165,18 +173,18 @@ public class StartMaze implements MoveMaze
          }
          else if(userDirection == "right")
          {
-            twoDMaze[colIndex][rowIndex] = 0;
-            referenceNumber = twoDMaze[colIndex][rowIndex + numSpaces];
-            colIndex = colIndex;
-            rowIndex = rowIndex + numSpaces;
+            twoDMaze[rowIndex][colIndex] = 0;
+            referenceNumber = twoDMaze[rowIndex][colIndex + numSpaces];
+            rowIndex = rowIndex;
+            colIndex = colIndex + numSpaces;
             if(key.checkDoor(doorArray) == true)
             {
-                    
+                System.out.println("Door is locked");    
             }
-            else
+            else if(key.checkDoor(doorArray) != true)
             {
-                    twoDMaze[colIndex][rowIndex] = 3; 
-                     System.out.println("Player currently at in maze: " + colIndex + "   " + rowIndex);  
+                    twoDMaze[rowIndex][colIndex] = 3; 
+                     System.out.println("Player currently at in maze: " + rowIndex + "   " + colIndex);  
                      valid = true; 
             }
 
@@ -184,18 +192,18 @@ public class StartMaze implements MoveMaze
          }
          else if(userDirection == "left")
          {
-            twoDMaze[colIndex][rowIndex] = 0;
-            referenceNumber = twoDMaze[colIndex][rowIndex-numSpaces];
-            colIndex = colIndex;
-            rowIndex = rowIndex - numSpaces;
+            twoDMaze[rowIndex][colIndex] = 0;
+            referenceNumber = twoDMaze[rowIndex][colIndex-numSpaces];
+            rowIndex = rowIndex;
+            colIndex = colIndex - numSpaces;
             if(key.checkDoor(doorArray) == true)
             {
-                    
+                 System.out.println("Door is locked");   
             }
-            else
+            else if(key.checkDoor(doorArray) != true)
             {
-                    twoDMaze[colIndex][rowIndex] = 3; 
-                     System.out.println("Player currently at in maze: " + colIndex + "   " + rowIndex);  
+                    twoDMaze[rowIndex][colIndex] = 3; 
+                     System.out.println("Player currently at in maze: " + rowIndex + "   " + colIndex);  
                      valid = true; 
             }
          }
@@ -231,14 +239,6 @@ public class StartMaze implements MoveMaze
    public int getRowIndex()
    {
       return rowIndex;
-   }
-   public void removeDoorFlag(int i, int j)
-   {
-      this.twoDMaze[i][j] = 0;
-   }
-   public Direction getDirectionReference()
-   {
-      return this.direction;
    }
    
 }

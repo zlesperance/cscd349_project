@@ -35,8 +35,12 @@ public class DoorsWithKeysMonsters implements DoorsWithKeysMonstersI,Iterable
    private StartMaze move;
    private int countDoors = 0, countMonsters = 0, q = 0, r = 0;
    private boolean isLocked = true, lockedDoor;
+   private Game game;
+   private Party party;
+   private Antagonist antagonist, antagonistTwo, antagonistThree;
+   private Character[] character;
+   private Random random;
    
-
    public DoorsWithKeysMonsters()
    {
       door = new ArrayList();
@@ -60,6 +64,32 @@ public class DoorsWithKeysMonsters implements DoorsWithKeysMonstersI,Iterable
          else if(move.getReferenceNumber() == 2)
          {
             System.out.println("Player encountered a monster");
+            System.out.println("Fighting the monster");
+            random = new Random();
+            int num = random.nextInt(1);
+            
+            if(num == 0)
+            {
+               antagonist = new Goblin();
+               //antagonistTwo = new Ghost();
+               character[0] = antagonist;
+               character[1] = antagonistTwo;
+               party = new Party(character);
+               game.beginEngagement(party);//methods to fight the monster
+            }
+            else if(num == 1)
+            {
+                antagonist = new Goblin();
+               //antagonistTwo = new Ghost();
+               //antagonistThree = new Slime();
+               character[0] = antagonist;
+               character[1] = antagonistTwo;
+               character[2] = antagonistThree;
+               party = new Party(character);
+               
+            }
+           
+            
          }
          
    }
@@ -79,40 +109,41 @@ public class DoorsWithKeysMonsters implements DoorsWithKeysMonstersI,Iterable
       int doors = 1,monsters = 2, qq = 0, rr = 0;
      
       
-      while(countDoors != 3)
+      while(countDoors != ((move.getRow() * move.getCol()) * 0.2))
       {
-         q = coll.nextInt((move.getCol() - 2)) +1;
-         r = roww.nextInt((move.getRow() - 2)) + 1;
+         q = roww.nextInt(move.getRow() - 1);
+         r = coll.nextInt(move.getCol() - 1);
          
               
-         if(move.stateTwoDMaze()[q][r] != 1)
+         if(move.stateTwoDMaze()[q][r] != 1 || move.stateTwoDMaze()[q][r] != 3)
          {
             move.stateTwoDMaze()[q][r] = 1;
-            addKeys(q,r,isLocked);
+            addKeys(q,r);
             countDoors++; 
          }   
       }
-      /*
-      while(countMonsters != 3)
+      
+      while(countMonsters != ((move.getRow() * move.getCol()) * 0.2))
       {
-           qq = coll.nextInt((move.getCol() - 2)) +1;
-           rr = roww.nextInt((move.getRow() - 2)) + 1;
+           qq = roww.nextInt(move.getRow() - 1);
+           rr = coll.nextInt(move.getCol() - 1);
             
-           int ref = move.stateTwoDMaze()[q][r]; 
+           int ref = move.stateTwoDMaze()[qq][rr]; 
             if(ref == 0)
             {
-               move.stateTwoDMaze()[q][r] = 2;
+               move.stateTwoDMaze()[qq][rr] = 2;
                countMonsters++;
             }
+            
            
       }
-      */
+      
       return door;
       
    }//end of placeMonstersDoorsMethod
-   public void addKeys(int q, int r, boolean locked)
+   public void addKeys(int qq, int rr)
    {
-      BaseForDoor base = new BaseForDoor(q, r, locked);
+      BaseForDoor base = new BaseForDoor(qq, rr);
       door.add(base);
       
      
@@ -126,7 +157,7 @@ public class DoorsWithKeysMonsters implements DoorsWithKeysMonstersI,Iterable
      {
          BaseForDoor base = (BaseForDoor)d;
                
-        if(move.getColIndex() == base.getCol() && move.getRowIndex() == base.getRow() && base.getLocked() == true)
+        if(move.getRowIndex() == base.getRow() && move.getColIndex() == base.getCol())
         {
             System.out.println("Door locked");
             lockedDoor = true;

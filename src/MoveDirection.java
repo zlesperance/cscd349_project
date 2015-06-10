@@ -35,26 +35,21 @@ public class MoveDirection implements Direction
       }
       return v;
    }
-   public int getSpaces(String v, int col, int row)
+   public int getSpaces(String v, int row, int col)
    {
       Random rand = new Random();
       int randomNumber = 0;
       
       if(v.equals("up") || v.equals("down"))
       {
-         randomNumber = rand.nextInt((col-2)) + 1;
+         randomNumber = rand.nextInt((row-2)) + 1;
       }
       else if(v.equals("right") || v.equals("left"))
       {
-         randomNumber = rand.nextInt((row-2)) + 1;
+         randomNumber = rand.nextInt((col-2)) + 1;
       }
       //System.out.println("Number: " + randomNumber);
       return randomNumber;
-   }
-   
-   public String getDirection()
-   {
-      return this.v;
    }
 
 }
